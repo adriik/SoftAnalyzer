@@ -1,0 +1,55 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ScoreServcieService WSDL service -->
+
+  <service name="ScoreServcie" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://pakiet"/>
+      <parameter name="wsdlServiceElement" value="ScoreServcieService"/>
+      <parameter name="schemaQualified" value="http://pakiet"/>
+      <parameter name="wsdlServicePort" value="ScoreServcie"/>
+      <parameter name="className" value="pakiet.ScoreServcieSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ScoreServcie"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="reset" qname="operNS:reset" xmlns:operNS="http://pakiet" soapAction="" >
+      </operation>
+      <operation name="getScore" qname="operNS:getScore" xmlns:operNS="http://pakiet" returnQName="retNS:getScoreReturn" xmlns:retNS="http://pakiet" returnType="rtns:Score" xmlns:rtns="http://pakiet" soapAction="" >
+      </operation>
+      <operation name="increaseTies" qname="operNS:increaseTies" xmlns:operNS="http://pakiet" returnQName="retNS:increaseTiesReturn" xmlns:retNS="http://pakiet" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getWins" qname="operNS:getWins" xmlns:operNS="http://pakiet" returnQName="retNS:getWinsReturn" xmlns:retNS="http://pakiet" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="updateScore" qname="operNS:updateScore" xmlns:operNS="http://pakiet" returnQName="retNS:updateScoreReturn" xmlns:retNS="http://pakiet" returnType="rtns:Score" xmlns:rtns="http://pakiet" soapAction="" >
+        <parameter qname="pns:wins" xmlns:pns="http://pakiet" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:losses" xmlns:pns="http://pakiet" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:ties" xmlns:pns="http://pakiet" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="increaseWins" qname="operNS:increaseWins" xmlns:operNS="http://pakiet" returnQName="retNS:increaseWinsReturn" xmlns:retNS="http://pakiet" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getLosses" qname="operNS:getLosses" xmlns:operNS="http://pakiet" returnQName="retNS:getLossesReturn" xmlns:retNS="http://pakiet" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="increaseLosses" qname="operNS:increaseLosses" xmlns:operNS="http://pakiet" returnQName="retNS:increaseLossesReturn" xmlns:retNS="http://pakiet" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getTies" qname="operNS:getTies" xmlns:operNS="http://pakiet" returnQName="retNS:getTiesReturn" xmlns:retNS="http://pakiet" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="increaseWins getLosses increaseLosses updateScore reset getWins getScore increaseTies getTies"/>
+
+      <typeMapping
+        xmlns:ns="http://pakiet"
+        qname="ns:Score"
+        type="java:pakiet.Score"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
