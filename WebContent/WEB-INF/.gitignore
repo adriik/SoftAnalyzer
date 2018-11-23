@@ -1,1 +1,6 @@
-/lib/
+!/lib/axis.jar
+!/lib/commons-discovery-0.2.jar
+!/lib/commons-logging.jar
+!/lib/jaxrpc.jar
+!/lib/saaj.jar
+!/lib/wsdl4j.jar
