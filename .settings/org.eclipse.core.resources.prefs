@@ -1,8 +1,3 @@
 eclipse.preferences.version=1
-encoding//WebContent/LoginPage.jsp=UTF-8
-encoding//WebContent/userLogged.jsp=UTF-8
-encoding//src/pakiet/Score.java=UTF-8
-encoding//src/pakiet/ScoreServcie.java=UTF-8
-encoding//src/pakiet/ScoreServcieService.java=UTF-8
-encoding//src/pakiet/ScoreServcieServiceLocator.java=UTF-8
-encoding//src/pakiet/ScoreServcieSoapBindingStub.java=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/main/webapp/userLogged.jsp=UTF-8
