@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapps"/>
+        <wb-resource deploy-path="/WEB-INF/web.xml" source-path="/web.xml"/>
         <property name="context-root" value="SoftAnalyzer"/>
         <property name="java-output-path" value="/SoftAnalyzer/build/classes"/>
     </wb-module>
