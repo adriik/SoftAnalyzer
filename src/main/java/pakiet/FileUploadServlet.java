@@ -38,6 +38,7 @@ public class FileUploadServlet extends HttpServlet {
             fileSaveDir.mkdirs();
         }
         System.out.println("Upload File Directory="+fileSaveDir.getAbsolutePath());
+        System.out.println("zapisuję pod: " + uploadFilePath);
         
         //Get all the parts from request and write it to the file on server
         for (Part part : request.getParts()) {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<jaxws:endpoint xmlns:tns="http://testCXF/"
+		id="helloservice" implementor="testCXF.HelloServiceImpl"
+		wsdlLocation="wsdl/helloserviceimpl.wsdl"
+		endpointName="tns:HelloServiceImplPort"
+		serviceName="tns:HelloServiceImplService"
+		address="/HelloServiceImplPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://webService/" id="servicesa"
+		implementor="webService.ServiceSA" wsdlLocation="wsdl/servicesa.wsdl"
+		endpointName="tns:ServiceSAPort"
+		serviceName="tns:ServiceSAService"
+		address="/servicesa">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+</beans>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://test" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://test" xmlns:intf="http://test" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://test" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getData">
+    <complexType>
+     <sequence>
+      <element name="input" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getObjectData">
+    <complexType>
+     <sequence>
+      <element name="myBean" type="impl:MyBean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MyBean">
+    <sequence>
+     <element name="id" type="xsd:int"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getObjectDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getObjectDataReturn" type="impl:MyBean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getObjectDataResponse">
+
+      <wsdl:part element="impl:getObjectDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getObjectDataRequest">
+
+      <wsdl:part element="impl:getObjectData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataRequest">
+
+      <wsdl:part element="impl:getData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataResponse">
+
+      <wsdl:part element="impl:getDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="MyService">
+
+      <wsdl:operation name="getData">
+
+         <wsdl:input message="impl:getDataRequest" name="getDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDataResponse" name="getDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getObjectData">
+
+         <wsdl:input message="impl:getObjectDataRequest" name="getObjectDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getObjectDataResponse" name="getObjectDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="MyServiceSoapBinding" type="impl:MyService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getObjectData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getObjectDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getObjectDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="MyServiceService">
+
+      <wsdl:port binding="impl:MyServiceSoapBinding" name="MyService">
+
+         <wsdlsoap:address location="http://localhost:8080/SoftAnalyzer/services/MyService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

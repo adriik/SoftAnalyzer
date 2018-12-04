@@ -1,0 +1,40 @@
+<xs:schema xmlns:tns="http://webService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://webService/" version="1.0">
+
+  <xs:element name="getRozmiaryPlikowKodow" type="tns:getRozmiaryPlikowKodow"/>
+
+  <xs:element name="getRozmiaryPlikowKodowResponse" type="tns:getRozmiaryPlikowKodowResponse"/>
+
+  <xs:element name="przeslijPlik" type="tns:przeslijPlik"/>
+
+  <xs:element name="przeslijPlikResponse" type="tns:przeslijPlikResponse"/>
+
+  <xs:complexType name="przeslijPlik">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="przeslijPlikResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getRozmiaryPlikowKodow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRozmiaryPlikowKodowResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ziomek"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ziomek">
+    <xs:sequence>
+      <xs:element name="wartosc" type="xs:int"/>
+      <xs:element minOccurs="0" name="imie" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

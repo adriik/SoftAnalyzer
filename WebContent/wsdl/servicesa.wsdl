@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ServiceSAService" targetNamespace="http://webService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://webService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://webService/" schemaLocation="servicesa_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="przeslijPlik">
+    <wsdl:part name="parameters" element="tns:przeslijPlik">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="przeslijPlikResponse">
+    <wsdl:part name="parameters" element="tns:przeslijPlikResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRozmiaryPlikowKodow">
+    <wsdl:part name="parameters" element="tns:getRozmiaryPlikowKodow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRozmiaryPlikowKodowResponse">
+    <wsdl:part name="parameters" element="tns:getRozmiaryPlikowKodowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSA">
+    <wsdl:operation name="przeslijPlik">
+      <wsdl:input name="przeslijPlik" message="tns:przeslijPlik" wsam:Action="urn:PrzeslijPlik" wsaw:Action="urn:PrzeslijPlik">
+    </wsdl:input>
+      <wsdl:output name="przeslijPlikResponse" message="tns:przeslijPlikResponse" wsam:Action="http://webService/ServiceSA/przeslijPlikResponse" wsaw:Action="http://webService/ServiceSA/przeslijPlikResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRozmiaryPlikowKodow">
+      <wsdl:input name="getRozmiaryPlikowKodow" message="tns:getRozmiaryPlikowKodow" wsam:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowRequest" wsaw:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowRequest">
+    </wsdl:input>
+      <wsdl:output name="getRozmiaryPlikowKodowResponse" message="tns:getRozmiaryPlikowKodowResponse" wsam:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse" wsaw:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSAServiceSoapBinding" type="tns:ServiceSA">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsaw:UsingAddressing wsdl:required="false" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+    <wsp:PolicyReference URI="#ServiceSAServiceSoapBinding_WSAM_Addressing_Policy"/>
+    <wsdl:operation name="przeslijPlik">
+      <soap12:operation soapAction="urn:PrzeslijPlik" style="document"/>
+      <wsdl:input name="przeslijPlik">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="przeslijPlikResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRozmiaryPlikowKodow">
+      <soap12:operation soapAction="" style="document"/>
+      <wsdl:input name="getRozmiaryPlikowKodow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRozmiaryPlikowKodowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceSAService">
+    <wsdl:port name="ServiceSAPort" binding="tns:ServiceSAServiceSoapBinding">
+      <soap12:address location="http://localhost:8080/SoftAnalyzer/services2"/>
+    </wsdl:port>
+  </wsdl:service>
+    <wsp:Policy wsu:Id="ServiceSAServiceSoapBinding_WSAM_Addressing_Policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsam:Addressing wsp:Optional="true"><wsp:Policy/></wsam:Addressing></wsp:Policy>
+</wsdl:definitions>

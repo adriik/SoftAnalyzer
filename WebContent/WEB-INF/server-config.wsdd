@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -48,30 +48,6 @@
   <ns1:parameter name="wsdlTargetNamespace" value="http://test"/>
   <ns1:parameter name="wsdlServiceElement" value="MyServiceService"/>
   <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns3:MyBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:test.MyBean" xmlns:ns3="http://test"/>
- </ns1:service>
- <ns1:service name="ScoreServcie" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="reset" qname="ns4:reset" soapAction="" xmlns:ns4="http://pakiet"/>
-  <ns1:operation name="getScore" qname="ns5:getScore" returnQName="ns5:getScoreReturn" returnType="ns5:Score" soapAction="" xmlns:ns5="http://pakiet"/>
-  <ns1:operation name="increaseTies" qname="ns6:increaseTies" returnQName="ns6:increaseTiesReturn" returnType="xsd:int" soapAction="" xmlns:ns6="http://pakiet" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="getWins" qname="ns7:getWins" returnQName="ns7:getWinsReturn" returnType="xsd:int" soapAction="" xmlns:ns7="http://pakiet" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="updateScore" qname="ns8:updateScore" returnQName="ns8:updateScoreReturn" returnType="ns8:Score" soapAction="" xmlns:ns8="http://pakiet">
-   <ns1:parameter qname="ns8:wins" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns8:losses" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns8:ties" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns1:operation>
-  <ns1:operation name="increaseWins" qname="ns9:increaseWins" returnQName="ns9:increaseWinsReturn" returnType="xsd:int" soapAction="" xmlns:ns9="http://pakiet" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="getLosses" qname="ns10:getLosses" returnQName="ns10:getLossesReturn" returnType="xsd:int" soapAction="" xmlns:ns10="http://pakiet" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="increaseLosses" qname="ns11:increaseLosses" returnQName="ns11:increaseLossesReturn" returnType="xsd:int" soapAction="" xmlns:ns11="http://pakiet" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="getTies" qname="ns12:getTies" returnQName="ns12:getTiesReturn" returnType="xsd:int" soapAction="" xmlns:ns12="http://pakiet" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:parameter name="allowedMethods" value="increaseWins getLosses increaseLosses updateScore reset getWins getScore increaseTies getTies"/>
-  <ns1:parameter name="wsdlPortType" value="ScoreServcie"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://pakiet"/>
-  <ns1:parameter name="wsdlServicePort" value="ScoreServcie"/>
-  <ns1:parameter name="className" value="pakiet.ScoreServcie"/>
-  <ns1:parameter name="wsdlTargetNamespace" value="http://pakiet"/>
-  <ns1:parameter name="wsdlServiceElement" value="ScoreServcieService"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Score" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:pakiet.Score" xmlns:ns13="http://pakiet"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>
