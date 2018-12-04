@@ -1,4 +1,4 @@
-<xs:schema xmlns:tns="http://webService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://webService/" version="1.0">
+<xs:schema xmlns:tns="http://webService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://webService/" version="1.0">
 
   <xs:element name="getRozmiaryPlikowKodow" type="tns:getRozmiaryPlikowKodow"/>
 

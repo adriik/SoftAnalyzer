@@ -1,25 +1,23 @@
 package webService;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.BindingType;
-import javax.xml.ws.RequestWrapper;
-import javax.xml.ws.ResponseWrapper;
 import javax.xml.ws.soap.Addressing;
-import javax.xml.ws.soap.SOAPBinding;
+
+import org.tempuri.PlagiatonWCF;
+
+import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
+import com.microsoft.schemas._2003._10.serialization.arrays.ObjectFactory;
 
 import box.Pack;
 import box.Project;
@@ -89,6 +87,23 @@ public class ServiceSA {
         lista.add(ziomek);
         //Response resp = new Response();
         //resp.setMapProperty(books);
+        
+		ObjectFactory factory = new ObjectFactory();
+		ArrayOfstring tablica = factory.createArrayOfstring();
+
+		
+		tablica.getString().add("liczbaZnakow");
+		tablica.getString().add("jezyk");
+		tablica.getString().add("jezykInterfejsu");
+		
+		
+		PlagiatonWCF nowiutka = new PlagiatonWCF();
+		
+	
+		String odpowiedz = nowiutka.getBasicHttpBindingIPlagiatonWCF().setAvailableMethods("nowy", tablica);
+		
+		System.out.println("Odpowiedz: " + odpowiedz);
+        
         return lista;
 	}
 	
