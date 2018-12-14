@@ -6,6 +6,7 @@ public class UserBean {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String role;
 	public boolean valid;
 
 	public String getFirstName() {
@@ -38,6 +39,14 @@ public class UserBean {
 
 	public void setUserName(String newUsername) {
 		username = newUsername;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String newRole) {
+		role = newRole;
 	}
 
 	public boolean isValid() {

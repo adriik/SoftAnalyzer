@@ -6,9 +6,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style/style.css">
+
 </head>
 <body>
-
+	<%@ include file="navbar.jsp" %>
 	<form action="LoginServlet">
 		<div class="imgcontainer">
 			<img alt="" src="img/logo.png" style="width: auto; height: 300px">

@@ -41,10 +41,12 @@ public class UserDAO {
 			else if (more) {
 				String firstName = rs.getString("Imie");
 				String lastName = rs.getString("Nazwisko");
+				String role = rs.getString("Rola");
 
 				System.out.println("Welcome " + firstName);
 				bean.setFirstName(firstName);
 				bean.setLastName(lastName);
+				bean.setRole(role);
 				bean.setValid(true);
 			}
 		}

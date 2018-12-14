@@ -11,14 +11,14 @@
 <head>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=windows-1256">
-<link rel="stylesheet" href="style/style.css">
+<link rel="stylesheet" href="../style/style.css">
 <script class="jsbin"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <title>Zalogowałeś się pomyślnie</title>
 </head>
 
 <body>
-
+	<%@ include file="../navbar.jsp" %>
 	<div class="imgcontainer">
 		<img alt="" src="img/logo.png" style="width: auto; height: 300px">
 	</div>

@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/main/webapps/index.jsp=UTF-8
-encoding//src/main/webapps/userLogged.jsp=UTF-8
+encoding//src/main/webapps/logged/userLogged.jsp=UTF-8
+encoding//src/main/webapps/navbar.jsp=UTF-8
