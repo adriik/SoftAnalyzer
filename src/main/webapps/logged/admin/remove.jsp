@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../../style/style.css">
 <script src="../../js/select.js"></script>
 <title>Usuń użytkownika</title>
+<link rel="shortcut icon" href="../../img/logo_icon.png" />
 </head>
 <body>
 	<%@ include file="../../navbar.jsp" %>

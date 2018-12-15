@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../../style/style.css">
 <script src="../../js/select.js"></script>
 <title>Zarządzaj użytkownikami</title>
+<link rel="shortcut icon" href="../../img/logo_icon.png" />
 </head>
 <body>
 

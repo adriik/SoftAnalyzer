@@ -15,6 +15,7 @@
 <script class="jsbin"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <title>Zalogowałeś się pomyślnie</title>
+<link rel="shortcut icon" href="../img/logo_icon.png" />
 </head>
 
 <body>
