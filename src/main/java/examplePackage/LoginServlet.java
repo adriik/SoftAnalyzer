@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 			else
-				response.sendRedirect("invalidLogin.jsp"); // error page
+				response.sendRedirect("indexFailure.jsp"); // error page
 		}
 
 		catch (Throwable theException) {

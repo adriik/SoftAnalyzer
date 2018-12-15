@@ -2,7 +2,9 @@ package pakiet;
  
 import java.io.File;
 import java.io.IOException;
- 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -42,13 +44,18 @@ public class FileUploadServlet extends HttpServlet {
         
         //Get all the parts from request and write it to the file on server
         for (Part part : request.getParts()) {
+        	
             String fileName = getFileName(part);
-            part.write(uploadFilePath + File.separator + fileName);
+
+            Path p = Paths.get(fileName);
+            String file = p.getFileName().toString();
+            part.write(uploadFilePath + File.separator + file);
         }
  
-        request.setAttribute("message", "File uploaded successfully!");
-        getServletContext().getRequestDispatcher("/response.jsp").forward(
-                request, response);
+        //request.setAttribute("message", "File uploaded successfully!");
+        //getServletContext().getRequestDispatcher("/response.jsp").forward(
+        //       request, response);
+        response.sendRedirect(request.getContextPath() + "/logged/userLoggedSuccess.jsp");
     }
  
     /**

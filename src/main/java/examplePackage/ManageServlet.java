@@ -52,15 +52,16 @@ public class ManageServlet extends HttpServlet {
 			pstmt.setString(5, role);
 			
 			try {
-				rs = pstmt.executeQuery();
-				if(rs != null) {
-					
-				}
+				Boolean wynik = pstmt.execute();
+				response.sendRedirect(request.getContextPath() + "/logged/admin/manageSuccess.jsp");
+
 			}catch(SQLServerException e) {
+				//e.printStackTrace();
 				System.out.println("Jest już taki użytkownik");
+				response.sendRedirect(request.getContextPath() + "/logged/admin/manageFailure.jsp");
 			}
 
-
+			
 		}
 
 		catch (Throwable theException) {

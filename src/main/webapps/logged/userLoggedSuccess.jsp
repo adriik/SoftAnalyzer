@@ -19,6 +19,12 @@
 
 <body>
 	<%@ include file="../navbar.jsp" %>
+	
+	<div class="alert success">
+		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+		 Zapisano nowy plik XMI.
+	</div>
+	
 	<div class="imgcontainer">
 		<img alt="" src="../img/logo_xmi.png" style="width: auto; height: 300px">
 	</div>
@@ -40,10 +46,7 @@
 		</form>
 	</div>
 	
-	
-	<div class="footer">
-  <p>©2018 MagicalSolution</p>
-</div>
+	<%@ include file="../footer.jsp" %>
 </body>
 
 </html>

@@ -11,11 +11,10 @@
 <body>
 	<%@ include file="navbar.jsp" %>
 	
-	
-		<% if (session != null && session.getAttribute("currentSessionUser") != null) { %>
-			<c:redirect url="logged/userLogged.jsp"/>      
-	    <% } %>
-	
+	<div class="alert failure">
+		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	 	Niepoprawne dane logowania.
+	</div>
 	
 	<form action="LoginServlet">
 		<div class="imgcontainer">

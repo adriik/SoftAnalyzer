@@ -11,7 +11,9 @@
 
 	<ul>
 
-
+	<li>
+		<img src="${pageContext.request.contextPath}/img/logo_title.png" id="logo"></li>
+	<li>
 
 	<c:choose>
 	    <c:when test="${empty currentSessionUser}">
