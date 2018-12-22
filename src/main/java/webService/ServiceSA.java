@@ -1,10 +1,12 @@
 package webService;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -19,9 +21,13 @@ import org.tempuri.PlagiatonWCF;
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import com.microsoft.schemas._2003._10.serialization.arrays.ObjectFactory;
 
+import box.Katalog;
 import box.Pack;
+import box.Plik;
 import box.Project;
 import box.Ziomek;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 
 
 @WebService(targetNamespace = "http://webService/", portName = "ServiceSAPort", serviceName = "ServiceSAService")
@@ -41,12 +47,22 @@ public class ServiceSA {
 			
 			URL website = new URL(link);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-			System.out.println("Zapisalem projekt pod sciezka:\n" + sciezka + "archiwum/" + wynik1[wynik1.length-1]);
+			System.out.println("Zapisalem projekt pod sciezka:\n" + sciezka + "archiwum/" + wynik1[wynik1.length-1]); //pelna sciezka
 			FileOutputStream fos = new FileOutputStream(sciezka + "archiwum/" + wynik1[wynik1.length-1]);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			fos.close();
 			
-			paczkaProjektow.addProject(new Project(wynik1[wynik1.length-1]));
+			paczkaProjektow.addProject(new Project(wynik1[wynik1.length-1],sciezka + "archiwum/" + wynik1[wynik1.length-1].substring(0,wynik1[wynik1.length-1].lastIndexOf('.')))); //projekt o nazwie XXXXX.zip
+			
+
+		    try {
+		        ZipFile zipFile = new ZipFile(sciezka + "archiwum/" + wynik1[wynik1.length-1]);
+		        zipFile.extractAll(sciezka + "archiwum"+"/"+wynik1[wynik1.length-1].substring(0,wynik1[wynik1.length-1].lastIndexOf('.')));
+		        
+		    } catch (ZipException e) {
+		        e.printStackTrace();
+		        System.out.println("Cos poszlo nie tak podczas wypakowania");
+		    }
 			
 			
 		} catch (IOException e) {
@@ -57,10 +73,10 @@ public class ServiceSA {
 	}
 	
 
-//	@WebMethod(operationName = "getLiczbaPlikow", action = "urn:GetLiczbaPlikow")
-//	public int getLiczbaPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikow;
-//	}
+	@WebMethod(operationName = "getLiczbaPlikow", action = "urn:GetLiczbaPlikow")
+	public int getLiczbaPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
+		return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikow;
+	}
 	
 
 
@@ -108,10 +124,23 @@ public class ServiceSA {
 	}
 	
 
-//	public ArrayList<String> getListaNazwPlikowKatalogow(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).listaNazwPlikow;
-//		
-//	}
+	public ArrayList<String> getListaNazwPlikow(String nazwaProjektu){
+		
+		ArrayList<String> listaNazwPlikow = new ArrayList<String>();
+		for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+			listaNazwPlikow.add(plik.nazwa);
+		}
+		return listaNazwPlikow;
+	}
+	
+	public ArrayList<String> getListaNazwKatalogow(String nazwaProjektu){
+		
+		ArrayList<String> listaNazwKatalogow = new ArrayList<String>();
+		for (Katalog katalog : paczkaProjektow.getProject(nazwaProjektu).listaKatalogow) {
+			listaNazwKatalogow.add(katalog.nazwa);
+		}
+		return listaNazwKatalogow;
+	}
 //	
 //
 //	public Map<String,Integer> getLiczbaPlikowDanegoRozszerzenia(String nazwaProjektu){
