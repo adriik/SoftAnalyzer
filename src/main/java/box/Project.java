@@ -36,6 +36,9 @@ public class Project {
 	public Boolean wczytywaniePlikow;
 	public String jezykInterfejsu;
 	
+	
+	public ArrayList<String> listaCech = new ArrayList<String>();
+	
 	public Project(String nazwa, String sciezka){
 		this.nazwa = nazwa;
 		this.sciezka = sciezka;
@@ -49,6 +52,7 @@ public class Project {
 	
 	private void setListaNazwPlikow(String sciezka) {
 		listaPlikow = new ArrayList<Plik>();
+		System.out.println("Sciezka zla: " + sciezka);
 		try (Stream<Path> paths = Files.walk(Paths.get(sciezka))) {
 			listaPlikow = (ArrayList<Plik>) paths
 		        .filter(Files::isRegularFile)

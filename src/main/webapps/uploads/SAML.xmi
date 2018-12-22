@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.4.1" xmlns:xmi="http://www.omg.org/spec/XMI/2.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://schema.omg.org/spec/UML/2.2" xsi:schemaLocation="http://schema.omg.org/spec/UML/2.2 http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_M-kgKwYFEem9QKLYZSURpQ" name="Diagram przykladu uzycia">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_M-kgLAYFEem9QKLYZSURpQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_M-kgLQYFEem9QKLYZSURpQ" name="Aktorzy">
+    <packagedElement xmi:type="uml:Actor" xmi:id="_M-kgLgYFEem9QKLYZSURpQ" name="Aplikacja"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_M-kgLwYFEem9QKLYZSURpQ" name="Przyklad">
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kgMAYFEem9QKLYZSURpQ" name="CechaPodobienstwa">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgMQYFEem9QKLYZSURpQ" source="uml2.extensions">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgMgYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgMwYFEem9QKLYZSURpQ" name="nazwa" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgNAYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgNQYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kgNgYFEem9QKLYZSURpQ" name="Lokalizacja">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgNwYFEem9QKLYZSURpQ" source="uml2.extensions">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgOAYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgOQYFEem9QKLYZSURpQ" name="adres" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgOgYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgOwYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kgPAYFEem9QKLYZSURpQ" name="Plik">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgPQYFEem9QKLYZSURpQ" source="uml2.extensions">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgPgYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgPwYFEem9QKLYZSURpQ" name="nazwa" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgQAYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgQQYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgQgYFEem9QKLYZSURpQ" name="rozszerzenie" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgQwYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgRAYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgRQYFEem9QKLYZSURpQ" name="rozmiar" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgRgYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgRwYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgSAYFEem9QKLYZSURpQ" name="typ" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgSQYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgSgYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgSwYFEem9QKLYZSURpQ" name="lokalizacjaPliku" visibility="public" aggregation="composite">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgTAYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgTQYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgTgYFEem9QKLYZSURpQ" name="lokalizacja" visibility="private" type="_M-kgNgYFEem9QKLYZSURpQ" aggregation="composite" association="_M-kgeAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgTwYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgUAYFEem9QKLYZSURpQ" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kgUQYFEem9QKLYZSURpQ" name="PrzedmiotZainteresowania">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgUgYFEem9QKLYZSURpQ" source="uml2.extensions">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgUwYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgVAYFEem9QKLYZSURpQ" name="nazwa" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgVQYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgVgYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgVwYFEem9QKLYZSURpQ" name="plikPrzedmiotuZainteresowania" visibility="public" aggregation="composite">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgWAYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgWQYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgWgYFEem9QKLYZSURpQ" name="plik" visibility="private" type="_M-kgPAYFEem9QKLYZSURpQ" aggregation="composite" association="_M-kgdAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgWwYFEem9QKLYZSURpQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgXAYFEem9QKLYZSURpQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgXQYFEem9QKLYZSURpQ" name="cechaPodobienstwa" visibility="private" type="_M-kgMAYFEem9QKLYZSURpQ" aggregation="composite" association="_M-kgfAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgXgYFEem9QKLYZSURpQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgXwYFEem9QKLYZSURpQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kgYAYFEem9QKLYZSURpQ" name="Uzytkownik">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgYQYFEem9QKLYZSURpQ" source="uml2.extensions">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgYgYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+        </eAnnotations>
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgYwYFEem9QKLYZSURpQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      </xmi:Extension>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgZAYFEem9QKLYZSURpQ" name="imie" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgZQYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgZgYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgZwYFEem9QKLYZSURpQ" name="nazwisko" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgaAYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgaQYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgagYFEem9QKLYZSURpQ" name="email" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgawYFEem9QKLYZSURpQ" source="uml2.extensions">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_M-kgbAYFEem9QKLYZSURpQ" key="addedInVersion" value="1"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgbQYFEem9QKLYZSURpQ" name="przedmiotZainteresowania" visibility="private" type="_M-kgUQYFEem9QKLYZSURpQ" aggregation="composite" association="_M-kgcAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgbgYFEem9QKLYZSURpQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgbwYFEem9QKLYZSURpQ"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_M-kgcAYFEem9QKLYZSURpQ" memberEnd="_M-kgbQYFEem9QKLYZSURpQ _M-kgcQYFEem9QKLYZSURpQ">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_M-kgcQYFEem9QKLYZSURpQ" name="" visibility="private" type="_M-kgYAYFEem9QKLYZSURpQ" association="_M-kgcAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgcgYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgcwYFEem9QKLYZSURpQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_M-kgdAYFEem9QKLYZSURpQ" memberEnd="_M-kgWgYFEem9QKLYZSURpQ _M-kgdQYFEem9QKLYZSURpQ">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_M-kgdQYFEem9QKLYZSURpQ" name="" visibility="private" type="_M-kgUQYFEem9QKLYZSURpQ" association="_M-kgdAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgdgYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgdwYFEem9QKLYZSURpQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_M-kgeAYFEem9QKLYZSURpQ" memberEnd="_M-kgTgYFEem9QKLYZSURpQ _M-kgeQYFEem9QKLYZSURpQ">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_M-kgeQYFEem9QKLYZSURpQ" name="" visibility="private" type="_M-kgPAYFEem9QKLYZSURpQ" association="_M-kgeAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgegYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgewYFEem9QKLYZSURpQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_M-kgfAYFEem9QKLYZSURpQ" memberEnd="_M-kgXQYFEem9QKLYZSURpQ _M-kgfQYFEem9QKLYZSURpQ">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_M-kgfQYFEem9QKLYZSURpQ" name="" visibility="private" type="_M-kgUQYFEem9QKLYZSURpQ" association="_M-kgfAYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgfgYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgfwYFEem9QKLYZSURpQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kggAYFEem9QKLYZSURpQ" name="Raport">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kggQYFEem9QKLYZSURpQ" name="portal" visibility="private" type="_M-kgjgYFEem9QKLYZSURpQ" association="_M-kgjwYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgggYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kggwYFEem9QKLYZSURpQ" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghAYFEem9QKLYZSURpQ" name="lendMe" visibility="private" type="_M-kgjAYFEem9QKLYZSURpQ" aggregation="composite" association="_M-kgkwYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kghQYFEem9QKLYZSURpQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kghgYFEem9QKLYZSURpQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghwYFEem9QKLYZSURpQ" name="MechanizmWielowatkowosciProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiAYFEem9QKLYZSURpQ" name="LiczbaPlikowProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiQYFEem9QKLYZSURpQ" name="LiczbaPlikowODanymRozszerzeniuProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgigYFEem9QKLYZSURpQ" name="RozmiaryPlikowKodowZrodlowychProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="JezykProgramowaniaProperty" visibility="private"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_M-kgjAYFEem9QKLYZSURpQ" name="LendMe">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgjQYFEem9QKLYZSURpQ" name="NazwaProperty" visibility="private"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_M-kgjgYFEem9QKLYZSURpQ" name="Portal"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_M-kgjwYFEem9QKLYZSURpQ" memberEnd="_M-kgkAYFEem9QKLYZSURpQ _M-kggQYFEem9QKLYZSURpQ" navigableOwnedEnd="_M-kgkAYFEem9QKLYZSURpQ">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_M-kgkAYFEem9QKLYZSURpQ" name="raport" visibility="private" type="_M-kggAYFEem9QKLYZSURpQ" association="_M-kgjwYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kgkQYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kgkgYFEem9QKLYZSURpQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_M-kgkwYFEem9QKLYZSURpQ" memberEnd="_M-kghAYFEem9QKLYZSURpQ _M-kglAYFEem9QKLYZSURpQ">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_M-kglAYFEem9QKLYZSURpQ" name="" visibility="private" type="_M-kggAYFEem9QKLYZSURpQ" association="_M-kgkwYFEem9QKLYZSURpQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M-kglQYFEem9QKLYZSURpQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M-kglgYFEem9QKLYZSURpQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_M-kglwYFEem9QKLYZSURpQ">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_M-kgmAYFEem9QKLYZSURpQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+  </profileApplication>
+</uml:Package>

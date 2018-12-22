@@ -5,12 +5,44 @@
   <import namespace="http://webService/" schemaLocation="servicesa_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="getListaNazwKatalogow">
+    <wsdl:part name="parameters" element="tns:getListaNazwKatalogow">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="przeslijPlik">
     <wsdl:part name="parameters" element="tns:przeslijPlik">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getLiczbaPlikow">
+    <wsdl:part name="parameters" element="tns:getLiczbaPlikow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListaNazwPlikow">
+    <wsdl:part name="parameters" element="tns:getListaNazwPlikow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLiczbaLiniiKoduResponse">
+    <wsdl:part name="parameters" element="tns:getLiczbaLiniiKoduResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="przeslijPlikResponse">
     <wsdl:part name="parameters" element="tns:przeslijPlikResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListaNazwPlikowResponse">
+    <wsdl:part name="parameters" element="tns:getListaNazwPlikowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListaNazwKatalogowResponse">
+    <wsdl:part name="parameters" element="tns:getListaNazwKatalogowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLiczbaLiniiKodu">
+    <wsdl:part name="parameters" element="tns:getLiczbaLiniiKodu">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLiczbaPlikowResponse">
+    <wsdl:part name="parameters" element="tns:getLiczbaPlikowResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getRozmiaryPlikowKodow">
@@ -22,14 +54,38 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ServiceSA">
+    <wsdl:operation name="getListaNazwKatalogow">
+      <wsdl:input name="getListaNazwKatalogow" message="tns:getListaNazwKatalogow" wsam:Action="urn:GetListaNazwKatalogow" wsaw:Action="urn:GetListaNazwKatalogow">
+    </wsdl:input>
+      <wsdl:output name="getListaNazwKatalogowResponse" message="tns:getListaNazwKatalogowResponse" wsam:Action="http://webService/ServiceSA/getListaNazwKatalogowResponse" wsaw:Action="http://webService/ServiceSA/getListaNazwKatalogowResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="przeslijPlik">
       <wsdl:input name="przeslijPlik" message="tns:przeslijPlik" wsam:Action="urn:PrzeslijPlik" wsaw:Action="urn:PrzeslijPlik">
     </wsdl:input>
       <wsdl:output name="przeslijPlikResponse" message="tns:przeslijPlikResponse" wsam:Action="http://webService/ServiceSA/przeslijPlikResponse" wsaw:Action="http://webService/ServiceSA/przeslijPlikResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getLiczbaPlikow">
+      <wsdl:input name="getLiczbaPlikow" message="tns:getLiczbaPlikow" wsam:Action="urn:GetLiczbaPlikow" wsaw:Action="urn:GetLiczbaPlikow">
+    </wsdl:input>
+      <wsdl:output name="getLiczbaPlikowResponse" message="tns:getLiczbaPlikowResponse" wsam:Action="http://webService/ServiceSA/getLiczbaPlikowResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaPlikowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListaNazwPlikow">
+      <wsdl:input name="getListaNazwPlikow" message="tns:getListaNazwPlikow" wsam:Action="urn:GetListaNazwPlikow" wsaw:Action="urn:GetListaNazwPlikow">
+    </wsdl:input>
+      <wsdl:output name="getListaNazwPlikowResponse" message="tns:getListaNazwPlikowResponse" wsam:Action="http://webService/ServiceSA/getListaNazwPlikowResponse" wsaw:Action="http://webService/ServiceSA/getListaNazwPlikowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaLiniiKodu">
+      <wsdl:input name="getLiczbaLiniiKodu" message="tns:getLiczbaLiniiKodu" wsam:Action="urn:GetLiczbaLiniiKodu" wsaw:Action="urn:GetLiczbaLiniiKodu">
+    </wsdl:input>
+      <wsdl:output name="getLiczbaLiniiKoduResponse" message="tns:getLiczbaLiniiKoduResponse" wsam:Action="http://webService/ServiceSA/getLiczbaLiniiKoduResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaLiniiKoduResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getRozmiaryPlikowKodow">
-      <wsdl:input name="getRozmiaryPlikowKodow" message="tns:getRozmiaryPlikowKodow" wsam:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowRequest" wsaw:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowRequest">
+      <wsdl:input name="getRozmiaryPlikowKodow" message="tns:getRozmiaryPlikowKodow" wsam:Action="urn:GetRozmiaryPlikowKodow" wsaw:Action="urn:GetRozmiaryPlikowKodow">
     </wsdl:input>
       <wsdl:output name="getRozmiaryPlikowKodowResponse" message="tns:getRozmiaryPlikowKodowResponse" wsam:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse" wsaw:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse">
     </wsdl:output>
@@ -39,6 +95,15 @@
     <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsaw:UsingAddressing wsdl:required="false" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
     <wsp:PolicyReference URI="#ServiceSAServiceSoapBinding_WSAM_Addressing_Policy"/>
+    <wsdl:operation name="getListaNazwKatalogow">
+      <soap12:operation soapAction="urn:GetListaNazwKatalogow" style="document"/>
+      <wsdl:input name="getListaNazwKatalogow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getListaNazwKatalogowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="przeslijPlik">
       <soap12:operation soapAction="urn:PrzeslijPlik" style="document"/>
       <wsdl:input name="przeslijPlik">
@@ -48,8 +113,35 @@
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getListaNazwPlikow">
+      <soap12:operation soapAction="urn:GetListaNazwPlikow" style="document"/>
+      <wsdl:input name="getListaNazwPlikow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getListaNazwPlikowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaPlikow">
+      <soap12:operation soapAction="urn:GetLiczbaPlikow" style="document"/>
+      <wsdl:input name="getLiczbaPlikow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLiczbaPlikowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaLiniiKodu">
+      <soap12:operation soapAction="urn:GetLiczbaLiniiKodu" style="document"/>
+      <wsdl:input name="getLiczbaLiniiKodu">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLiczbaLiniiKoduResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getRozmiaryPlikowKodow">
-      <soap12:operation soapAction="" style="document"/>
+      <soap12:operation soapAction="urn:GetRozmiaryPlikowKodow" style="document"/>
       <wsdl:input name="getRozmiaryPlikowKodow">
         <soap12:body use="literal"/>
       </wsdl:input>

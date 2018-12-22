@@ -48,8 +48,8 @@ public class FileUploadServlet extends HttpServlet {
             String fileName = getFileName(part);
 
             Path p = Paths.get(fileName);
-            String file = p.getFileName().toString();
-            part.write(uploadFilePath + File.separator + file);
+            //String file = p.getFileName().toString();
+            part.write(uploadFilePath + File.separator + "SAML.xmi");
         }
  
         //request.setAttribute("message", "File uploaded successfully!");

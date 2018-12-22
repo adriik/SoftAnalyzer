@@ -1,145 +1,167 @@
 package webService;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.soap.Addressing;
 
-import org.tempuri.PlagiatonWCF;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 
-import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
-import com.microsoft.schemas._2003._10.serialization.arrays.ObjectFactory;
-
+import box.Cechy;
 import box.Katalog;
 import box.Pack;
 import box.Plik;
 import box.Project;
-import box.Ziomek;
+import classUpload.LiczbaLiniiKodu;
+import classUpload.RozmiaryPlikow;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
-
 @WebService(targetNamespace = "http://webService/", portName = "ServiceSAPort", serviceName = "ServiceSAService")
-@Addressing(enabled=false, required=false)
+@Addressing(enabled = false, required = false)
 public class ServiceSA {
-	
+
 	Pack paczkaProjektow = new Pack();
-	
 
 	@WebMethod(operationName = "przeslijPlik", action = "urn:PrzeslijPlik")
 	public void przeslijPlik(@WebParam(name = "arg0") String link) {
 
 		try {
 			String[] wynik1 = link.split("/");
-			
-			String sciezka = this.getClass().getClassLoader().getResource("").getPath().split("WEB-INF")[0].substring(1);
-			
+
+			String sciezka = this.getClass().getClassLoader().getResource("").getPath().split("WEB-INF")[0]
+					.substring(1);
+
 			URL website = new URL(link);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-			System.out.println("Zapisalem projekt pod sciezka:\n" + sciezka + "archiwum/" + wynik1[wynik1.length-1]); //pelna sciezka
-			FileOutputStream fos = new FileOutputStream(sciezka + "archiwum/" + wynik1[wynik1.length-1]);
+			System.out.println("Zapisalem projekt pod sciezka:\n" + sciezka + "archiwum/" + wynik1[wynik1.length - 1]); // pelna
+																														// sciezka
+			FileOutputStream fos = new FileOutputStream(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			fos.close();
-			
-			paczkaProjektow.addProject(new Project(wynik1[wynik1.length-1],sciezka + "archiwum/" + wynik1[wynik1.length-1].substring(0,wynik1[wynik1.length-1].lastIndexOf('.')))); //projekt o nazwie XXXXX.zip
-			
 
-		    try {
-		        ZipFile zipFile = new ZipFile(sciezka + "archiwum/" + wynik1[wynik1.length-1]);
-		        zipFile.extractAll(sciezka + "archiwum"+"/"+wynik1[wynik1.length-1].substring(0,wynik1[wynik1.length-1].lastIndexOf('.')));
-		        
-		    } catch (ZipException e) {
-		        e.printStackTrace();
-		        System.out.println("Cos poszlo nie tak podczas wypakowania");
-		    }
+			try {
+				ZipFile zipFile = new ZipFile(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
+				zipFile.extractAll(sciezka + "archiwum" + "/"
+						+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
+
+			} catch (ZipException e) {
+				e.printStackTrace();
+				System.out.println("Cos poszlo nie tak podczas wypakowania!");
+			}
 			
-			
+			Project projekt = new Project(wynik1[wynik1.length - 1], sciezka + "archiwum/"
+					+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
+			paczkaProjektow.addProject(projekt); // projekt o nazwie XXXXX.zip
+
+			SAXReader reader = new SAXReader();
+			Document document = null;
+			try {
+				document = reader.read(sciezka + "uploads/SAML.xmi");
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			List<Node> nodeList = document.selectNodes("//*[name() = 'ownedAttribute']");
+
+			for (Node node : nodeList) {
+
+				Element element = (Element) node;
+				for (Cechy st : Cechy.values()) {
+					if (element.attributeValue("name").equals(st.name())) {
+						projekt.listaCech.add(st.name());
+						break;
+					}
+				}
+			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
-	
 
 	@WebMethod(operationName = "getLiczbaPlikow", action = "urn:GetLiczbaPlikow")
 	public int getLiczbaPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
 		return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikow;
 	}
-	
 
-
-	public LinkedList<Ziomek> getRozmiaryPlikowKodow(String nazwaProjektu){
-//		Response resp = new Response();
-//		Project projekt = new Project("nowy");
-//		projekt.rozmiaryPlikow.put("plik", 3);
-//		paczkaProjektow.addProject(projekt);
-//		
-//        resp.setMapProperty(paczkaProjektow.getProject(nazwaProjektu).rozmiaryPlikow);
-//        System.out.println("Byełem 3");
-//		return resp;
-		
-		Map<String, Integer> books = new HashMap<String, Integer>();
-
-        books.put("halo",1);
-        books.put("halo2",2);
-        
-        LinkedList<Ziomek> lista=new LinkedList<Ziomek>();
-        Ziomek ziomek = new Ziomek();
-        ziomek.imie = "Adrian";
-        ziomek.wartosc = 5;
-        
-        lista.add(ziomek);
-        //Response resp = new Response();
-        //resp.setMapProperty(books);
-        
-		ObjectFactory factory = new ObjectFactory();
-		ArrayOfstring tablica = factory.createArrayOfstring();
-
-		
-		tablica.getString().add("liczbaZnakow");
-		tablica.getString().add("jezyk");
-		tablica.getString().add("jezykInterfejsu");
-		
-		
-		PlagiatonWCF nowiutka = new PlagiatonWCF();
-		
-	
-		String odpowiedz = nowiutka.getBasicHttpBindingIPlagiatonWCF().setAvailableMethods("nowy", tablica);
-		
-		System.out.println("Odpowiedz: " + odpowiedz);
-        
-        return lista;
+	@WebMethod(operationName = "getRozmiaryPlikowKodow", action = "urn:GetRozmiaryPlikowKodow")
+	public LinkedList<RozmiaryPlikow> getRozmiaryPlikowKodow(@WebParam(name = "arg0") String nazwaProjektu) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<RozmiaryPlikow> lista = new LinkedList<RozmiaryPlikow>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				RozmiaryPlikow rp = new RozmiaryPlikow();
+				rp.nazwa = plik.nazwa;
+				rp.rozmiar = Math.toIntExact(plik.rozmiar);
+				lista.add(rp);
+			}
+			return lista;
+		}else {
+			return null;
+		}
 	}
-	
 
-	public ArrayList<String> getListaNazwPlikow(String nazwaProjektu){
-		
+	@WebMethod(operationName = "getListaNazwPlikow", action = "urn:GetListaNazwPlikow")
+	public ArrayList<String> getListaNazwPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
+
 		ArrayList<String> listaNazwPlikow = new ArrayList<String>();
-		for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
-			listaNazwPlikow.add(plik.nazwa);
+		if (paczkaProjektow.getProject(nazwaProjektu) != null) {
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				listaNazwPlikow.add(plik.nazwa);
+			}
+			return listaNazwPlikow;
+		} else {
+			return null;
 		}
-		return listaNazwPlikow;
+
+	}
+
+	@WebMethod(operationName = "getListaNazwKatalogow", action = "urn:GetListaNazwKatalogow")
+	public ArrayList<String> getListaNazwKatalogow(@WebParam(name = "arg0") String nazwaProjektu) {
+
+		ArrayList<String> listaNazwKatalogow = new ArrayList<String>();
+		if (paczkaProjektow.getProject(nazwaProjektu) != null) {
+			for (Katalog katalog : paczkaProjektow.getProject(nazwaProjektu).listaKatalogow) {
+				listaNazwKatalogow.add(katalog.nazwa);
+			}
+			return listaNazwKatalogow;
+		} else {
+			return null;
+		}
 	}
 	
-	public ArrayList<String> getListaNazwKatalogow(String nazwaProjektu){
-		
-		ArrayList<String> listaNazwKatalogow = new ArrayList<String>();
-		for (Katalog katalog : paczkaProjektow.getProject(nazwaProjektu).listaKatalogow) {
-			listaNazwKatalogow.add(katalog.nazwa);
+	@WebMethod(operationName = "getLiczbaLiniiKodu", action = "urn:GetLiczbaLiniiKodu")
+	public LinkedList<LiczbaLiniiKodu> getLiczbaLiniiKodu(@WebParam(name = "arg0") String nazwaProjektu){
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<LiczbaLiniiKodu> lista = new LinkedList<LiczbaLiniiKodu>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				LiczbaLiniiKodu ll = new LiczbaLiniiKodu();
+				ll.nazwa = plik.nazwa;
+				ll.liczbaLinii = Math.toIntExact(plik.liczbaLiniiKodu);
+				lista.add(ll);
+			}
+			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
 		}
-		return listaNazwKatalogow;
 	}
 //	
 //
