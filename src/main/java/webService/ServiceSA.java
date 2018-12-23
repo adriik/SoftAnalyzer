@@ -25,8 +25,13 @@ import box.Katalog;
 import box.Pack;
 import box.Plik;
 import box.Project;
+import classUpload.AtrybutyPlikow;
+import classUpload.HashePlikow;
 import classUpload.LiczbaLiniiKodu;
 import classUpload.RozmiaryPlikow;
+import classUpload.RozszerzeniaPlikow;
+import classUpload.TypyPlikow;
+import classUpload.TypyZmiennych;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
@@ -163,100 +168,112 @@ public class ServiceSA {
 			return null;
 		}
 	}
-//	
-//
-//	public Map<String,Integer> getLiczbaPlikowDanegoRozszerzenia(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoRozszerzenia;
-//		
-//	}
-//	
-//
-//	public int getLiczbaDanychWejsciowych(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaDanychWejsciowych;
-//		
-//	}
-//	
-//
-//	public Map<String,String> getSkrotyPlikow(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).skrotyPlikow;
-//		
-//	}
-//	
-//
-//	public Map<String,Integer> getLiczbaPlikowDanegoTypu(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoTypu;
-//		
-//	}
-//	
-//
-//	public int getLiczbaAtrybutow(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaAtrybutow;
-//		
-//	}
-//	
-//
-//	public int getLiczbaMetod(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaMetod;
-//		
-//	}
-//	
-//
-//	public Map<String,Integer> getLiczbaAtrybutowWKlasach(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaAtrybutowWKlasach;
-//		
-//	}
-//	
-//
-//	public ArrayList<String> getZbiorBibliotek(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).zbiorBibliotek;
-//		
-//	}
-//	
-//
-//	public int getLiczbaLiniiKodu(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaLiniiKodu;
-//		
-//	}
-//	
-//
-//	public String getJezyk(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).jezyk;
-//		
-//	}
-//	
-//
-//	public int getLiczbaZnakow(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaZnakow;
-//		
-//	}
-//	
-//
-//	public Map<String,Integer> getLiczbaZmiennychDanegoTypu(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).liczbaZmiennychDanegoTypu;
-//		
-//	}
-//	
-//
-//	public String getParadygmat(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).paradygmat;
-//		
-//	}
-//	
-//
-//	public Boolean getWykorzystanieWielowatkowosci(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc;
-//		
-//	}
-//	
-//
-//	public Boolean getMozliwosciWczytywaniaPlikow(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).wczytywaniePlikow;
-//		
-//	}
-//	
-//
-//	public String getJezykInterfejsu(String nazwaProjektu){
-//		return paczkaProjektow.getProject(nazwaProjektu).jezykInterfejsu;
-//		
-//	}
+	
+	@WebMethod(operationName = "getSkrotyPlikow", action = "urn:GetSkrotyPlikow")
+	public LinkedList<HashePlikow> getSkrotyPlikow(@WebParam(name = "arg0") String nazwaProjektu){
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<HashePlikow> lista = new LinkedList<HashePlikow>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				HashePlikow ll = new HashePlikow();
+				ll.nazwa = plik.nazwa;
+				ll.hash = plik.hash;
+				lista.add(ll);
+			}
+			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
+		}
+}
+	
+
+	@WebMethod(operationName = "getLiczbaPlikowDanegoRozszerzenia", action = "urn:GetLiczbaPlikowDanegoRozszerzenia")
+	public LinkedList<RozszerzeniaPlikow> getLiczbaPlikowDanegoRozszerzenia(@WebParam(name = "arg0") String nazwaProjektu){
+		return null;
+	}
+	
+
+	@WebMethod(operationName = "getLiczbaDanychWejsciowych", action = "urn:GetLiczbaDanychWejsciowych")
+	public int getLiczbaDanychWejsciowych(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).liczbaDanychWejsciowych;
+	}
+	
+
+
+	
+
+	@WebMethod(operationName = "getLiczbaPlikowDanegoTypu", action = "urn:GetLiczbaPlikowDanegoTypu")
+	public LinkedList<TypyPlikow> getLiczbaPlikowDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
+		return null;
+	}
+	
+
+	@WebMethod(operationName = "getLiczbaAtrybutow", action = "urn:GetLiczbaAtrybutow")
+	public int getLiczbaAtrybutow(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).liczbaAtrybutow;
+		
+	}
+	
+
+	@WebMethod(operationName = "getLiczbaMetod", action = "urn:GetLiczbaMetod")
+	public int getLiczbaMetod(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).liczbaMetod;
+		
+	}
+	
+
+	@WebMethod(operationName = "getLiczbaAtrybutowWKlasach", action = "urn:GetLiczbaAtrybutowWKlasach")
+	public LinkedList<AtrybutyPlikow> getLiczbaAtrybutowWKlasach(@WebParam(name = "arg0") String nazwaProjektu){
+		return null;
+	}
+	
+
+	@WebMethod(operationName = "getZbiorBibliotek", action = "urn:GetZbiorBibliotek")
+	public ArrayList<String> getZbiorBibliotek(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).zbiorBibliotek;
+	}
+	
+
+	@WebMethod(operationName = "getJezykProgramowania", action = "urn:GetJezykProgramowania")
+	public String getJezykProgramowania(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).jezyk;
+	}
+	
+
+	@WebMethod(operationName = "getLiczbaZnakow", action = "urn:GetLiczbaZnakow")
+	public int getLiczbaZnakow(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).liczbaZnakow;
+		
+	}
+	
+
+	@WebMethod(operationName = "getLiczbaZmiennychDanegoTypu", action = "urn:GetLiczbaZmiennychDanegoTypu")
+	public LinkedList<TypyZmiennych> getLiczbaZmiennychDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
+		return null;
+	}
+	
+
+	@WebMethod(operationName = "getParadygmat", action = "urn:GetParadygmat")
+	public String getParadygmat(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).paradygmat;
+	}
+	
+
+	@WebMethod(operationName = "getWykorzystanieWielowatkowosci", action = "urn:GetWykorzystanieWielowatkowosci")
+	public Boolean getWykorzystanieWielowatkowosci(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc;
+	}
+	
+
+	@WebMethod(operationName = "getMozliwosciWczytywaniaPlikow", action = "urn:GetMozliwosciWczytywaniaPlikow")
+	public Boolean getMozliwosciWczytywaniaPlikow(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).wczytywaniePlikow;
+	}
+	
+
+	@WebMethod(operationName = "getJezykInterfejsu", action = "urn:GetJezykInterfejsu")
+	public String getJezykInterfejsu(@WebParam(name = "arg0") String nazwaProjektu){
+		return paczkaProjektow.getProject(nazwaProjektu).jezykInterfejsu;
+	}
 }
