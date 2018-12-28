@@ -39,6 +39,9 @@ import net.lingala.zip4j.exception.ZipException;
 @Addressing(enabled = false, required = false)
 public class ServiceSA {
 
+	//https://plagiaton.blob.core.windows.net/blob-projects/cWPZPVBstlPozJwC3SW4bt9nPmU51YZD6OlNTh37s5ulyML7oJX05fiTWBjCbGBEvlrUxTSVZZMf8XYcLWQra9I1FB0s7B5VEZ0n.zip
+	//https://repo.gentics.com/artifactory/lan.releases/com/gentics/mesh/mesh-demo/0.6.18/mesh-demo-0.6.18-dump.zip
+	
 	Pack paczkaProjektow = new Pack();
 
 	@WebMethod(operationName = "przeslijPlik", action = "urn:PrzeslijPlik")
