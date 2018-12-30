@@ -11,20 +11,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.velocity.shaded.commons.io.FilenameUtils;
 
 public class Plik extends Katalog{
 
 	public long rozmiar;
 	public long liczbaLiniiKodu;
 	public String hash;
+	public String rozszerzenie;
 	public boolean wczytywaniePlikow = false;
 	public ArrayList<String> zbiorBibliotek = new ArrayList<String>();
+
 	
 	public Plik(String nazwa, String sciezka) {
 		super(nazwa, sciezka);
 		this.setRozmiar();
 		this.setLiczbaLiniiKodu();
 		this.setHash();
+		this.setRozszerzenie();
 		this.setWczytywaniePlikow();
 		this.setZbiorBibliotek();
 		
@@ -59,6 +63,11 @@ public class Plik extends Katalog{
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy wyliczaniu Hash");
 		}
+	}
+	
+	private void setRozszerzenie() {
+		System.out.println(nazwa);
+		rozszerzenie = FilenameUtils.getExtension(nazwa);
 	}
 	
 	private void setWczytywaniePlikow() {
