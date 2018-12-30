@@ -234,7 +234,21 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getZbiorBibliotek", action = "urn:GetZbiorBibliotek")
 	public ArrayList<String> getZbiorBibliotek(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).zbiorBibliotek;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			ArrayList<String> lista = new ArrayList<String>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				for(String s : plik.zbiorBibliotek)
+		        {
+					if (!lista.contains(s)) 
+						lista.add(s);
+		        }
+			}
+			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
+		}
 	}
 	
 
@@ -271,7 +285,20 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getMozliwosciWczytywaniaPlikow", action = "urn:GetMozliwosciWczytywaniaPlikow")
 	public Boolean getMozliwosciWczytywaniaPlikow(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).wczytywaniePlikow;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			boolean wczytywaniePlikow = false;
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				if(plik.wczytywaniePlikow == true)
+					wczytywaniePlikow = true;
+					System.out.println(plik.sciezka);
+					break;
+			}
+			System.out.println("Udalo sie");
+			return wczytywaniePlikow;
+		}else {
+			return null;
+		}
 	}
 	
 
