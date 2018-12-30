@@ -1,6 +1,9 @@
 package webService;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -41,6 +44,7 @@ public class ServiceSA {
 
 	//https://plagiaton.blob.core.windows.net/blob-projects/cWPZPVBstlPozJwC3SW4bt9nPmU51YZD6OlNTh37s5ulyML7oJX05fiTWBjCbGBEvlrUxTSVZZMf8XYcLWQra9I1FB0s7B5VEZ0n.zip
 	//https://repo.gentics.com/artifactory/lan.releases/com/gentics/mesh/mesh-demo/0.6.18/mesh-demo-0.6.18-dump.zip
+	//https://github.com/jorgeacetozi/java-threads-examples/archive/master.zip
 	
 	Pack paczkaProjektow = new Pack();
 
@@ -256,15 +260,181 @@ public class ServiceSA {
 		return null;
 	}
 	
-
+	//Adam
 	@WebMethod(operationName = "getParadygmat", action = "urn:GetParadygmat")
 	public String getParadygmat(@WebParam(name = "arg0") String nazwaProjektu){
+
+		
 		return paczkaProjektow.getProject(nazwaProjektu).paradygmat;
 	}
 	
-
+	//Adam
 	@WebMethod(operationName = "getWykorzystanieWielowatkowosci", action = "urn:GetWykorzystanieWielowatkowosci")
 	public Boolean getWykorzystanieWielowatkowosci(@WebParam(name = "arg0") String nazwaProjektu){
+		
+		/*
+		String[] cRozszerzeniaPlikow = {"c", "h"};
+		String[] cppRozszerzeniaPlikow = {"cpp", "cxx", "hxx"};
+		String[] csRozszerzeniaPlikow = {"cs"};
+		String[] javaRozszerzeniaPlikow = {"java"};
+		
+		String[] cStringThreads = {"pthread_t", "pthread_create", "pthread_cancel", "pthread_join"};
+		String[] cppStringThreads = {"std::thread", "thread(", "thread ("};
+		String[] csStringThreads = {"using System.Threading"};
+		String[] javaStringThreads = {"new Thread(", "new Thread (", "extends Thread", ""};
+		
+		long multiWatkowosc = 0;
+		
+		for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+			
+			boolean isMultiWatkowosc = false;
+			boolean isRozpoznaneRozszerzenie = false;
+			
+			//Dla C:
+			for(String rozszerzenie : cRozszerzeniaPlikow) {
+				
+				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+					
+					isRozpoznaneRozszerzenie = true;
+					try {
+						BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+						String linia = reader.readLine();
+						while (linia != null && !isMultiWatkowosc) {
+							for(String cString : cStringThreads) {
+								if(linia.contains(cString)) {
+									//JEST MULTIWATKOWOSC
+									multiWatkowosc++;
+									isMultiWatkowosc = true;
+									break;
+								}
+							}
+							
+							linia = reader.readLine();
+						}
+						if(!isMultiWatkowosc) {
+							multiWatkowosc--;
+						}
+						
+					} catch (IOException e) {
+						System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C");
+						e.printStackTrace();
+					}
+					
+				}
+			}
+			
+			//Dla C++:
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : cppRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isMultiWatkowosc) {
+								for(String cppString : cppStringThreads) {
+									if(linia.contains(cppString)) {
+										//JEST MULTIWATKOWOSC
+										multiWatkowosc++;
+										isMultiWatkowosc = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							if(!isMultiWatkowosc) {
+								multiWatkowosc--;
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C++");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+			
+			//Dla C#:
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : csRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isMultiWatkowosc) {
+								for(String csString : csStringThreads) {
+									if(linia.contains(csString)) {
+										//JEST MULTIWATKOWOSC
+										multiWatkowosc++;
+										isMultiWatkowosc = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							if(!isMultiWatkowosc) {
+								multiWatkowosc--;
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C#");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+			
+			//Dla Java:
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : javaRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isMultiWatkowosc) {
+								for(String javaString : javaStringThreads) {
+									if(linia.contains(javaString)) {
+										//JEST MULTIWATKOWOSC
+										multiWatkowosc++;
+										isMultiWatkowosc = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							if(!isMultiWatkowosc) {
+								multiWatkowosc--;
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku Java");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+			
+			
+			System.out.println("Wielowatkowosc = "+multiWatkowosc);
+			if(multiWatkowosc > 0) {
+				paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc = true;
+			} else {
+				paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc = false;
+			}
+		}
+		*/
+		
 		return paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc;
 	}
 	

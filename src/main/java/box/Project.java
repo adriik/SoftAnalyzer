@@ -1,5 +1,7 @@
 package box;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,6 +48,8 @@ public class Project {
 		this.setListaNazwPlikow(sciezka);
 		this.setListaNazwKatalogow(sciezka);
 		this.setLiczbaPlikow();
+		this.setWieloWatkowosc();
+		this.setParadygmat();
 		
 		
 	}
@@ -94,6 +98,252 @@ public class Project {
 		this.nazwa = nazwa;
 	}
 
+	public void setWieloWatkowosc() {
+		String[] cRozszerzeniaPlikow = {"c", "h"};
+		String[] cppRozszerzeniaPlikow = {"cpp", "cxx", "hxx"};
+		String[] csRozszerzeniaPlikow = {"cs"};
+		String[] javaRozszerzeniaPlikow = {"java"};
+		
+		String[] cStringThreads = {"pthread_t", "pthread_create", "pthread_cancel", "pthread_join"};
+		String[] cppStringThreads = {"std::thread", "thread(", "thread ("};
+		String[] csStringThreads = {"using System.Threading"};
+		String[] javaStringThreads = {"new Thread(", "new Thread (", "extends Thread", ""};
+		
+		long multiWatkowosc = 0;
+		
+		for (Plik plik : listaPlikow) {
+			
+			boolean isMultiWatkowosc = false;
+			boolean isRozpoznaneRozszerzenie = false;
+			
+			//Dla C:
+			for(String rozszerzenie : cRozszerzeniaPlikow) {
+				
+				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+					
+					isRozpoznaneRozszerzenie = true;
+					try {
+						BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+						String linia = reader.readLine();
+						while (linia != null && !isMultiWatkowosc) {
+							for(String cString : cStringThreads) {
+								if(linia.contains(cString)) {
+									//JEST MULTIWATKOWOSC
+									multiWatkowosc++;
+									isMultiWatkowosc = true;
+									break;
+								}
+							}
+							
+							linia = reader.readLine();
+						}
+						reader.close();
+						if(!isMultiWatkowosc) {
+							multiWatkowosc--;
+						}
+						
+					} catch (IOException e) {
+						System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C");
+						e.printStackTrace();
+					}
+					
+				}
+			}
+			
+			//Dla C++:
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : cppRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isMultiWatkowosc) {
+								for(String cppString : cppStringThreads) {
+									if(linia.contains(cppString)) {
+										//JEST MULTIWATKOWOSC
+										multiWatkowosc++;
+										isMultiWatkowosc = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							reader.close();
+							if(!isMultiWatkowosc) {
+								multiWatkowosc--;
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C++");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+			
+			//Dla C#:
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : csRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isMultiWatkowosc) {
+								for(String csString : csStringThreads) {
+									if(linia.contains(csString)) {
+										//JEST MULTIWATKOWOSC
+										multiWatkowosc++;
+										isMultiWatkowosc = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							reader.close();
+							if(!isMultiWatkowosc) {
+								multiWatkowosc--;
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C#");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+			
+			//Dla Java:
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : javaRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isMultiWatkowosc) {
+								for(String javaString : javaStringThreads) {
+									if(linia.contains(javaString)) {
+										//JEST MULTIWATKOWOSC
+										multiWatkowosc++;
+										isMultiWatkowosc = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							reader.close();
+							if(!isMultiWatkowosc) {
+								multiWatkowosc--;
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku Java");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+		}
+		
+		System.out.println("Wielowatkowosc = "+multiWatkowosc);
+		if(multiWatkowosc > 0) {
+			wielowatkowosc = true;
+		} else {
+			wielowatkowosc = false;
+		}
+	}
+	
+	public boolean getWieloWatkowosc() {
+		return wielowatkowosc;
+	}
 	
 	
+	public void setParadygmat() {
+		
+		long liczbaParadygmat = 0;
+		
+		String[] cRozszerzeniaPlikow = {"c", "h"};
+		String[] otherRozszerzeniaPlikow = {"cpp", "cxx", "hxx", "cs", "java"};
+		
+		String[] classStrings = {"class"};
+		
+		
+		for (Plik plik : listaPlikow) {
+		
+			boolean isParadygmat = false;
+			boolean isRozpoznaneRozszerzenie = false;
+			
+			//Dla C:
+			for(String rozszerzenie : cRozszerzeniaPlikow) {
+				
+				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+					
+					//Rozpoznano jêzyk C, który nie jest obiektowy
+					isRozpoznaneRozszerzenie = true;
+					liczbaParadygmat--;
+					System.out.println("C obiektowoœæ-- = "+liczbaParadygmat);
+				}
+			}
+			
+			if(!isRozpoznaneRozszerzenie) {
+				//Dla C++, C#, Java:
+				for(String rozszerzenie : otherRozszerzeniaPlikow) {
+					
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						
+						isRozpoznaneRozszerzenie = true;
+						try {
+							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+							String linia = reader.readLine();
+							while (linia != null && !isParadygmat) {
+								for(String classString : classStrings) {
+									if(linia.contains(classString)) {
+										//Jest obiektowoœæ
+										liczbaParadygmat++;
+										System.out.println("obiektowoœæ++ = "+liczbaParadygmat);
+										isParadygmat = true;
+										break;
+									}
+								}
+								
+								linia = reader.readLine();
+							}
+							reader.close();
+							if(!isParadygmat) {
+								liczbaParadygmat--;
+								System.out.println("obiektowoœæ-- = "+liczbaParadygmat);
+							}
+							
+						} catch (IOException e) {
+							System.out.println("Problem w odczycie pliku do badania paradygmatu w jêzyku C");
+							e.printStackTrace();
+						}
+						
+					}
+				}
+			}
+		}
+		
+		System.out.println("Paradygmat: "+liczbaParadygmat);
+		if(liczbaParadygmat > 0) {
+			paradygmat = "obiektowy";
+		} else {
+			paradygmat = "strukturalny";
+		}
+	}
+	
+	String getParadygmat() {
+		return paradygmat;
+	}
 }
