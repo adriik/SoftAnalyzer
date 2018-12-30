@@ -50,6 +50,7 @@ public class Project {
 		this.setLiczbaPlikow();
 		this.setWieloWatkowosc();
 		this.setParadygmat();
+		this.setLiczbaAtrybutow();
 		
 		
 	}
@@ -345,5 +346,17 @@ public class Project {
 	
 	String getParadygmat() {
 		return paradygmat;
+	}
+	
+	public void setLiczbaAtrybutow() {
+		liczbaAtrybutow = 0;
+		
+		for (Plik plik : listaPlikow) {
+			liczbaAtrybutow=liczbaAtrybutow+plik.liczbaAtrybutow;
+		}
+	}
+	
+	public int getLiczbaAtrybutow() {
+		return liczbaAtrybutow;
 	}
 }
