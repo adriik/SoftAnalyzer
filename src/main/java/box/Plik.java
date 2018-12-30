@@ -21,6 +21,7 @@ public class Plik extends Katalog{
 	public String rozszerzenie;
 	public boolean wczytywaniePlikow = false;
 	public ArrayList<String> zbiorBibliotek = new ArrayList<String>();
+	public int liczbaAtrybutow;
 
 	
 	public Plik(String nazwa, String sciezka) {
@@ -31,6 +32,7 @@ public class Plik extends Katalog{
 		this.setRozszerzenie();
 		this.setWczytywaniePlikow();
 		this.setZbiorBibliotek();
+		this.setLiczbaAtrybutow();
 		
 		System.out.println("Hash: " + hash + " nazwa pliku: " + nazwa);
 	}
@@ -156,5 +158,45 @@ public class Plik extends Katalog{
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy sprawdzaniu zbioru bibliotek");
 		}
+	}
+	
+private void setLiczbaAtrybutow() {
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+			
+			ArrayList<String> keywords_infile = new ArrayList<String>();
+			keywords_infile.add("byte");
+			keywords_infile.add("short");
+			keywords_infile.add("int");
+			keywords_infile.add("long");
+			keywords_infile.add("double");
+			keywords_infile.add("float");
+			keywords_infile.add("string");
+			keywords_infile.add("boolean");
+			keywords_infile.add("bool");
+			keywords_infile.add("char");
+			keywords_infile.add("decimal");
+
+			while ((line=reader.readLine())!=null){
+				for(String a : keywords_infile)
+		        {
+					line=line.toUpperCase();
+					a=a.toUpperCase();
+		
+					Pattern pattern = Pattern.compile("("+a+"\\s\\D+(;|,|=| =))");
+		    	    Matcher matcher = pattern.matcher(line);
+		    	    while(matcher.find()) 
+		    	    	liczbaAtrybutow++;
+				}
+			   }                           
+			reader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy wyliczaniu liczby atrybutow");
+		}
+		
 	}
 }
