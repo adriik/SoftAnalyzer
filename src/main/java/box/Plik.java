@@ -105,7 +105,7 @@ public class Plik extends Katalog{
 		
 	}
 	
-private void setZbiorBibliotek() {
+	private void setZbiorBibliotek() {
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
@@ -156,6 +156,5 @@ private void setZbiorBibliotek() {
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy sprawdzaniu zbioru bibliotek");
 		}
-		
 	}
 }
