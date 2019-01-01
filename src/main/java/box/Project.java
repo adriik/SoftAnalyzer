@@ -50,7 +50,8 @@ public class Project {
 		this.setLiczbaPlikow();
 		this.setWieloWatkowosc();
 		this.setParadygmat();
-		
+		this.setLiczbaPlikowDanegoTypu();
+		this.setJezykProgramowania();
 		
 	}
 	
@@ -79,6 +80,157 @@ public class Project {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void setLiczbaPlikowDanegoTypu() {
+		//zmienne do przechowywania liczby plików danego typu 
+		int liczbaPlikowTekstowych =0 , liczbaPlikowMultimedialnych = 0, liczbaPlikowWykonywalnych = 0, liczbaPlikowPozostalych = 0;
+		
+		//tablice do przechowywania rozszerzen plikow danego typu
+		String[] tekstoweRozszerzeniePlikow = 		{"1st","602","_doc","_docx","abw","act","adoc","aim","ans","apkg","apt","asc","ascii","ase","aty","awp","awt","aww",
+													 "bad","bbs","bdp","bdr","bean","bib","bibtex","bml","bna","boc","brx","btd","bzabw","calca","charset","chart","chord",
+													 "cnm","cod","crwl","cws","cyi","dca","dfti","dgs","diz","dne","doc","docm","docx","docxml","docz","dox","dropbox","dsc",
+													 "dvi","dwd","dx","dxb","dxp","eio","eit","emf","emlx","epp","err","etf","etx","euc","faq","fbl","fcf","fdf","fdr","fds",
+													 "fdt","fdx","fdxt","fft","fgs","flr","fodt","fountain","fpt","frt","fwdn","gmd","gpd","gpn","gsd","gthr","gv","hbk","hht",
+													 "hs","hwp","hz","idx","iil","ipf","ipsport","jarvis","jis","jnp","joe","jp1","jrtf","jtd","kes","klg","knt","kon","kwd",
+													 "latex","lbt","lis","lnt","log","lp2","lst","lst","ltr","ltx","lue","luf","lwp","lxfml","lyt","lyx","man","mbox","mcw",
+													 "me","mell","mellel","min","mnt","msg","mw","mwd","mwp","nb","ndoc","nfo","ngloss","njx","note","notes","now","nwctxt",
+													 "nwm","nwp","ocr","odif","odm","odo","odt","ofl","opeico","openbsd","ort","ott","p7s","pages","pages-tef","pdpcmd","pfx",
+													 "pjt","plain","plantuml","pmo","prt","psw","psw","pu","pvj","pvm","pwd","pwdp","pwdpl","pwi","pwr","qdl","qpf","rad","readme",
+													 "rft","ris","rpt","rst","rtd","rtf","rtfd","rtx","run","rvf","rzk","rzn","saf","safetext","sam","save","scc","scm","scriv",
+													 "scrivx","sct","scw","sdm","sdoc","sdw","se","session","sgm","sig","skcard","sla","smf","sms","ssa","story","strings","stw",
+													 "sty","sxg","sxw","tab","tdf","template","tex","text","textclipping","thp","tlb","tm","tmd","tmdx","tmv","tmvx","tpc","trelby",
+													 "tvj","txt","u3i","unauth","unx","uof","uot","upd","utf8","utxt","vct","vnt","vw","wbk","webdoc","wn","wp","wp4","wp5","wp6",
+													 "wp7","wpa","wpd","wpl","wps","wpt","wpw","wri","wsd","wtt","wtx","xbdoc","xbplate","xdl","xwp","xy","xy3","xyp","xyw","zabw",
+													 "zrtf","zw"};
+		String[] multimedialneeRozszerzeniePlikow = {"jpeg","jpg","jpe","jif","jfif","jfi","jp2","jpx","jmp","mj2","tif","tiff","png","gif","bmp","dib","svg","svgz",
+													 "eps", "3gp","aa","aac","aax","act","aiff","amr","ape","au","awb","dct","dss","dvf","flac","gsm","iklax","ivs",
+													 "m4a","m4b","m4p","mmf","mp3","mpc","msv","nsf","ogg","oga","mogg","opus","ra","rm","raw","sln","tta","vox","wav",
+													 "wma","wv","webm","8svx", "3gp","asf","avi","dvr-ms","flv","f4v","f4p","f4a","f4b","iff","mkv","mj2","mov","qt","mpg",
+													 "mpeg","m2p","ps","ts","tsv","tsa","mp4","m4a","m4p","m4b","m4r","m4v","ogg","ogv","oga","ogx","ogm","ogm","spx","opus",
+													 "rm"};
+		String[] wykonywalneRozszerzeniePlikow = 	{"0xe","73k","89k","8ck","a6p","a7r","ac","acc","acr","actc","action","actm","ahk","air","apk","app","applescript","arscript",
+													 "asb","azw2","ba_","bat","beam","bin","btm","caction","cel","celx","cgi","cmd","cof","coffee","com","command","csh","cyw","dek",
+													 "dld","dmc","ds","dxl","e_e","ear","ebm","ebs","ebs2","ecf","eham","elf","epk","epk","es","esh","ex4","ex5","ex_","exe","exe1",
+													 "exopc","ezs","ezt","fas","fky","fpi","frs","fxp","gadget","gpe","gs","ham","hms","hpf","hta","icd","iim","ipa","ipf","isu",
+													 "ita","jar","js","jse","jsf","jsx","kix","ksh","kx","lo","ls","m3g","mac","mam","mcr","mel","mem","mio","mlx","mm","mpx","mrc",
+													 "mrp","ms","msl","mxe","n","nexe","ore","osx","otm","out","paf","pex","phar","pif","plsc","plx","prc","prg","ps1","pvd","pwc",
+													 "pyc","pyo","qit","qpx","rbf","rbx","rfu","rgs","rox","rpj","run","rxe","s2a","sbs","sca","scar","scb","scpt","scptd","scr",
+													 "script","sct","seed","server","shb","smm","spr","tcp","thm","tiapp","tms","u3p","udf","upx","vbe","vbs","vbscript","vdo",
+													 "vexe","vlx","vmp","vxp","wcm","widget","wiz","workflow","wpk","wpm","ws","wsf","wsh","x86","xap","xbap","xlm","xqt","xqt",
+													 "xys","zl9"};
+		
+		for (Plik plik : listaPlikow) {
+		
+			//flaga
+			boolean isRozpoznaneRozszerzenie = false;
+			
+			//dla plików tekstowych
+			for(String rozszerzenie : tekstoweRozszerzeniePlikow) {
+				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+					liczbaPlikowTekstowych++;
+					isRozpoznaneRozszerzenie = true;
+				}
+				
+			}
+			//dla plików graficznych
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : multimedialneeRozszerzeniePlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						liczbaPlikowMultimedialnych++;
+						isRozpoznaneRozszerzenie = true;
+					}
+					
+				}
+			}
+			//dla plików dŸwiêkowych
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : wykonywalneRozszerzeniePlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						liczbaPlikowWykonywalnych++;
+						isRozpoznaneRozszerzenie = true;
+					}
+					
+				}
+			}
+			//dla plików filmowych
+			if(!isRozpoznaneRozszerzenie) {
+						liczbaPlikowPozostalych++;
+						isRozpoznaneRozszerzenie = true;
+					}
+			
+		}
+		
+		System.out.println("Liczba plików tekstowych: "    + liczbaPlikowTekstowych +
+						   "\nLiczba plików multimedialnych: " + liczbaPlikowMultimedialnych +
+						   "\nLiczba plików dzwiêkowych: " + liczbaPlikowWykonywalnych +
+						   "\nLiczba pozosta³ych plików: "   + liczbaPlikowPozostalych);
+		
+		liczbaPlikowDanegoTypu.put("Liczba plików tekstowych: ", liczbaPlikowTekstowych);
+		liczbaPlikowDanegoTypu.put("Liczba plików multimedialnych: ", liczbaPlikowMultimedialnych);
+		liczbaPlikowDanegoTypu.put("Liczba plików wykonywalnych: ", liczbaPlikowWykonywalnych);
+		liczbaPlikowDanegoTypu.put("Liczba pozosta³ych plików: ", liczbaPlikowPozostalych);
+		
+		
+	}
+	
+	private void setJezykProgramowania() {
+		String[] cRozszerzeniaPlikow = {"c", "h"};
+		String[] cppRozszerzeniaPlikow = {"cpp", "cxx", "hxx"};
+		String[] csRozszerzeniaPlikow = {"cs"};
+		String[] javaRozszerzeniaPlikow = {"java"};
+		
+		for (Plik plik : listaPlikow) {
+			boolean isRozpoznaneRozszerzenie = false;
+			
+			for(String rozszerzenie : cRozszerzeniaPlikow) {
+				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+					isRozpoznaneRozszerzenie = true;
+					jezyk = "C";
+				}
+				
+			}
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : cppRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						isRozpoznaneRozszerzenie = true;
+						jezyk = "C++";
+					}
+					
+				}
+			}
+			
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : csRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						isRozpoznaneRozszerzenie = true;
+						jezyk = "C#";
+					}
+					
+				}
+			}
+			
+			if(!isRozpoznaneRozszerzenie) {
+				for(String rozszerzenie : javaRozszerzeniaPlikow) {
+					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+						isRozpoznaneRozszerzenie = true;
+						jezyk = "Java";
+					}
+					
+				}
+			}
+			
+			if(!isRozpoznaneRozszerzenie) {
+				isRozpoznaneRozszerzenie = true;
+				jezyk = "Inny";
+			}
+			
+			
+		}
+	}
+	
+	private String getJezykProgramowania() {
+		return jezyk;
 	}
 	
 	private void setLiczbaPlikow() {
