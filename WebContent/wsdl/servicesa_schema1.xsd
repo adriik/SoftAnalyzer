@@ -329,7 +329,7 @@
   <xs:complexType name="typyPlikow">
     <xs:sequence>
       <xs:element minOccurs="0" name="typ" type="xs:string"/>
-      <xs:element minOccurs="0" name="liczba" type="xs:string"/>
+      <xs:element minOccurs="0" name="liczba" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
