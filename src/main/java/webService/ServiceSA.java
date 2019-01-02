@@ -233,7 +233,6 @@ public class ServiceSA {
 	@WebMethod(operationName = "getLiczbaAtrybutow", action = "urn:GetLiczbaAtrybutow")
 	public int getLiczbaAtrybutow(@WebParam(name = "arg0") String nazwaProjektu){
 		return paczkaProjektow.getProject(nazwaProjektu).liczbaAtrybutow;
-		
 	}
 	
 
@@ -246,7 +245,20 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaAtrybutowWKlasach", action = "urn:GetLiczbaAtrybutowWKlasach")
 	public LinkedList<AtrybutyPlikow> getLiczbaAtrybutowWKlasach(@WebParam(name = "arg0") String nazwaProjektu){
-		return null;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<AtrybutyPlikow> lista = new LinkedList<AtrybutyPlikow>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				AtrybutyPlikow ap = new AtrybutyPlikow();
+				ap.nazwa = plik.nazwa;
+				ap.liczba = plik.liczbaAtrybutow;
+				lista.add(ap);
+			}
+			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
+		}
 	}
 	
 

@@ -52,6 +52,7 @@ public class Project {
 		this.setParadygmat();
 		this.setLiczbaPlikowDanegoTypu();
 		this.setJezykProgramowania();
+		this.setLiczbaAtrybutow();
 		
 	}
 	
@@ -83,7 +84,7 @@ public class Project {
 	}
 	
 	private void setLiczbaPlikowDanegoTypu() {
-		//zmienne do przechowywania liczby plik體 danego typu 
+		//zmienne do przechowywania liczby plik贸w danego typu 
 		int liczbaPlikowTekstowych =0 , liczbaPlikowMultimedialnych = 0, liczbaPlikowWykonywalnych = 0, liczbaPlikowPozostalych = 0;
 		
 		//tablice do przechowywania rozszerzen plikow danego typu
@@ -125,7 +126,7 @@ public class Project {
 			//flaga
 			boolean isRozpoznaneRozszerzenie = false;
 			
-			//dla plik體 tekstowych
+			//dla plik贸w tekstowych
 			for(String rozszerzenie : tekstoweRozszerzeniePlikow) {
 				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
 					liczbaPlikowTekstowych++;
@@ -133,7 +134,7 @@ public class Project {
 				}
 				
 			}
-			//dla plik體 graficznych
+			//dla plik贸w graficznych
 			if(!isRozpoznaneRozszerzenie) {
 				for(String rozszerzenie : multimedialneeRozszerzeniePlikow) {
 					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
@@ -143,7 +144,7 @@ public class Project {
 					
 				}
 			}
-			//dla plik體 d焪i阫owych
+			//dla plik贸w d鸥wi锚kowych
 			if(!isRozpoznaneRozszerzenie) {
 				for(String rozszerzenie : wykonywalneRozszerzeniePlikow) {
 					if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
@@ -153,7 +154,7 @@ public class Project {
 					
 				}
 			}
-			//dla plik體 filmowych
+			//dla plik贸w filmowych
 			if(!isRozpoznaneRozszerzenie) {
 						liczbaPlikowPozostalych++;
 						isRozpoznaneRozszerzenie = true;
@@ -161,15 +162,15 @@ public class Project {
 			
 		}
 		
-		System.out.println("Liczba plik體 tekstowych: "    + liczbaPlikowTekstowych +
-						   "\nLiczba plik體 multimedialnych: " + liczbaPlikowMultimedialnych +
-						   "\nLiczba plik體 dzwi阫owych: " + liczbaPlikowWykonywalnych +
-						   "\nLiczba pozosta硑ch plik體: "   + liczbaPlikowPozostalych);
+		System.out.println("Liczba plik贸w tekstowych: "    + liczbaPlikowTekstowych +
+						   "\nLiczba plik贸w multimedialnych: " + liczbaPlikowMultimedialnych +
+						   "\nLiczba plik贸w dzwi锚kowych: " + liczbaPlikowWykonywalnych +
+						   "\nLiczba pozosta鲁ych plik贸w: "   + liczbaPlikowPozostalych);
 		
-		liczbaPlikowDanegoTypu.put("Liczba plik體 tekstowych: ", liczbaPlikowTekstowych);
-		liczbaPlikowDanegoTypu.put("Liczba plik體 multimedialnych: ", liczbaPlikowMultimedialnych);
-		liczbaPlikowDanegoTypu.put("Liczba plik體 wykonywalnych: ", liczbaPlikowWykonywalnych);
-		liczbaPlikowDanegoTypu.put("Liczba pozosta硑ch plik體: ", liczbaPlikowPozostalych);
+		liczbaPlikowDanegoTypu.put("Liczba plik贸w tekstowych: ", liczbaPlikowTekstowych);
+		liczbaPlikowDanegoTypu.put("Liczba plik贸w multimedialnych: ", liczbaPlikowMultimedialnych);
+		liczbaPlikowDanegoTypu.put("Liczba plik贸w wykonywalnych: ", liczbaPlikowWykonywalnych);
+		liczbaPlikowDanegoTypu.put("Liczba pozosta鲁ych plik贸w: ", liczbaPlikowPozostalych);
 		
 		
 	}
@@ -295,7 +296,7 @@ public class Project {
 						}
 						
 					} catch (IOException e) {
-						System.out.println("Problem w odczycie pliku do badania wielow箃kowo渃i w j陑yku C");
+						System.out.println("Problem w odczycie pliku do badania wielow鹿tkowo艙ci w j锚zyku C");
 						e.printStackTrace();
 					}
 					
@@ -329,7 +330,7 @@ public class Project {
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielow箃kowo渃i w j陑yku C++");
+							System.out.println("Problem w odczycie pliku do badania wielow鹿tkowo艙ci w j锚zyku C++");
 							e.printStackTrace();
 						}
 						
@@ -364,7 +365,7 @@ public class Project {
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielow箃kowo渃i w j陑yku C#");
+							System.out.println("Problem w odczycie pliku do badania wielow鹿tkowo艙ci w j锚zyku C#");
 							e.printStackTrace();
 						}
 						
@@ -399,7 +400,7 @@ public class Project {
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielow箃kowo渃i w j陑yku Java");
+							System.out.println("Problem w odczycie pliku do badania wielow鹿tkowo艙ci w j锚zyku Java");
 							e.printStackTrace();
 						}
 						
@@ -441,10 +442,10 @@ public class Project {
 				
 				if(plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
 					
-					//Rozpoznano j陑yk C, kt髍y nie jest obiektowy
+					//Rozpoznano j锚zyk C, kt贸ry nie jest obiektowy
 					isRozpoznaneRozszerzenie = true;
 					liczbaParadygmat--;
-					System.out.println("C obiektowo滄-- = "+liczbaParadygmat);
+					System.out.println("C obiektowo艙忙-- = "+liczbaParadygmat);
 				}
 			}
 			
@@ -461,9 +462,9 @@ public class Project {
 							while (linia != null && !isParadygmat) {
 								for(String classString : classStrings) {
 									if(linia.contains(classString)) {
-										//Jest obiektowo滄
+										//Jest obiektowo艙忙
 										liczbaParadygmat++;
-										System.out.println("obiektowo滄++ = "+liczbaParadygmat);
+										System.out.println("obiektowo艙忙++ = "+liczbaParadygmat);
 										isParadygmat = true;
 										break;
 									}
@@ -474,11 +475,11 @@ public class Project {
 							reader.close();
 							if(!isParadygmat) {
 								liczbaParadygmat--;
-								System.out.println("obiektowo滄-- = "+liczbaParadygmat);
+								System.out.println("obiektowo艙忙-- = "+liczbaParadygmat);
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania paradygmatu w j陑yku C");
+							System.out.println("Problem w odczycie pliku do badania paradygmatu w j锚zyku C");
 							e.printStackTrace();
 						}
 						
@@ -497,5 +498,17 @@ public class Project {
 	
 	String getParadygmat() {
 		return paradygmat;
+	}
+	
+	public void setLiczbaAtrybutow() {
+		liczbaAtrybutow = 0;
+		
+		for (Plik plik : listaPlikow) {
+			liczbaAtrybutow=liczbaAtrybutow+plik.liczbaAtrybutow;
+		}
+	}
+	
+	public int getLiczbaAtrybutow() {
+		return liczbaAtrybutow;
 	}
 }
