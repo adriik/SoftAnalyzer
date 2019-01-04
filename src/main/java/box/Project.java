@@ -7,8 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,6 +55,8 @@ public class Project {
 		this.setLiczbaPlikowDanegoTypu();
 		this.setJezykProgramowania();
 		this.setLiczbaAtrybutow();
+		this.setLiczbaZnakow();
+		this.setJezykInterfejsu();
 		
 	}
 	
@@ -511,4 +515,44 @@ public class Project {
 	public int getLiczbaAtrybutow() {
 		return liczbaAtrybutow;
 	}
+	
+	public void setLiczbaZnakow() {
+		liczbaZnakow = 0;
+		
+		for (Plik plik : listaPlikow) {
+			liczbaZnakow = liczbaZnakow + plik.liczbaZnakow;
+		}
+	}
+	
+	public int getLiczbaZnakow() {
+		return liczbaZnakow;
+	}
+	
+	public void setJezykInterfejsu() {
+		jezykInterfejsu = "";
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		
+		//Rozpoznanie jezyka w kazdym pliku i dodanie go do mapy wraz z krotnoscia
+		for (Plik plik : listaPlikow) {
+			String lng = plik.jezykInterfejsu;
+	    	 if (map.containsKey(lng))
+	    		 map.put(lng, map.get(lng) + 1);
+	    	 else
+	    		 map.put(lng, 1); 
+		}
+		
+		//Wyszukanie najczestszego jezyka
+		int max = Collections.max(map.values());			
+		for (Entry<String, Integer> entry : map.entrySet()) {
+		    if (entry.getValue()==max) {
+		        jezykInterfejsu = entry.getKey();
+		    }
+		}
+		
+	}
+	
+	public String getJezykInterfejsu() {
+		return jezykInterfejsu;
+	}
+	
 }
