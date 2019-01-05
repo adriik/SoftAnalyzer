@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Project {
 
@@ -57,7 +59,7 @@ public class Project {
 		this.setLiczbaAtrybutow();
 		this.setLiczbaZnakow();
 		this.setJezykInterfejsu();
-		
+    this.setLiczbaMetod();	
 	}
 	
 	private void setListaNazwPlikow(String sciezka) {
@@ -549,6 +551,52 @@ public class Project {
 		    }
 		}
 		
+	}
+  
+  	public void setLiczbaMetod() {
+
+      for (Plik plik : listaPlikow) {
+        try {
+          BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+          String line;
+          ArrayList<String> keywords_infile = new ArrayList<String>();
+          keywords_infile.add("byte");
+          keywords_infile.add("short");
+          keywords_infile.add("int");
+          keywords_infile.add("long");
+          keywords_infile.add("double");
+          keywords_infile.add("float");
+          keywords_infile.add("string");
+          keywords_infile.add("boolean");
+          keywords_infile.add("bool");
+          keywords_infile.add("char");
+          keywords_infile.add("decimal");
+          keywords_infile.add("void");
+
+          while ((line=reader.readLine())!=null){
+            for(String a : keywords_infile)
+                {
+              line=line.toUpperCase();
+              a=a.toUpperCase();
+
+              Pattern pattern1 = Pattern.compile("\\A"+a+"\\s.*\\(.*\\)");
+                  Matcher matcher1 = pattern1.matcher(line);
+                  while(matcher1.find()) 
+                    liczbaMetod++;
+
+                  Pattern pattern2 = Pattern.compile("\\A\\D+"+a+"\\s.*\\(.*\\)");
+                  Matcher matcher2 = pattern2.matcher(line);
+                  while(matcher2.find()) 
+                    liczbaMetod++;
+            }
+             }                           
+          reader.close();
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+          System.out.println("Cos nie tak przy wyliczaniu liczby metod");
+        }
+      }				 
 	}
 	
 	public String getJezykInterfejsu() {

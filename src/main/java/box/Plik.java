@@ -202,7 +202,7 @@ public class Plik extends Katalog{
 				{
 			      if(line.contains(keywords_lib.get(i)))
 			    	  if (i==0) {
-			    		  Pattern pattern = Pattern.compile("(import\\s(.*?\\D+)\\;)");
+			    		  Pattern pattern = Pattern.compile("(import\\s(.*?\\.*)\\;)");
 			    	      Matcher matcher = pattern.matcher(line);
 			    	      while(matcher.find())
 			    	        {
@@ -211,7 +211,7 @@ public class Plik extends Katalog{
 			    	        }
 			    	  }
 			    	  else if (i==1) {
-			    		  Pattern pattern = Pattern.compile("(#include\\s\\<(.*?\\D+)\\>)");
+			    		  Pattern pattern = Pattern.compile("(#include\\s\\<(.*?\\.*)\\>)");
 			    	      Matcher matcher = pattern.matcher(line);
 			    	      while(matcher.find())
 			    	        {
@@ -220,7 +220,7 @@ public class Plik extends Katalog{
 			    	        }
 			    	  }
 			    	  else {
-			    		  Pattern pattern = Pattern.compile("(using\\s(.*?\\D+)\\;)");
+			    		  Pattern pattern = Pattern.compile("(using\\s(.*?\\.*)\\;)");
 			    	      Matcher matcher = pattern.matcher(line);
 			    	      while(matcher.find())
 			    	        {
@@ -263,7 +263,7 @@ public class Plik extends Katalog{
 					line=line.toUpperCase();
 					a=a.toUpperCase();
 		
-					Pattern pattern = Pattern.compile("("+a+"\\s\\D+(;|,|=| =))");
+					Pattern pattern = Pattern.compile("("+a+"\\s\\S+(;|,|=| =))");
 		    	    Matcher matcher = pattern.matcher(line);
 		    	    while(matcher.find()) 
 		    	    	liczbaAtrybutow++;
