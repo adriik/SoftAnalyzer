@@ -168,15 +168,15 @@ public class Project {
 			
 		}
 		
-		System.out.println("Liczba plików tekstowych: "    + liczbaPlikowTekstowych +
-						   "\nLiczba plików multimedialnych: " + liczbaPlikowMultimedialnych +
-						   "\nLiczba plików dzwiêkowych: " + liczbaPlikowWykonywalnych +
-						   "\nLiczba pozosta³ych plików: "   + liczbaPlikowPozostalych);
+		System.out.println("Liczba plikow tekstowych: "    + liczbaPlikowTekstowych +
+						   "\nLiczba plikow multimedialnych: " + liczbaPlikowMultimedialnych +
+						   "\nLiczba plikow dzwiekowych: " + liczbaPlikowWykonywalnych +
+						   "\nLiczba pozostalych plikow: "   + liczbaPlikowPozostalych);
 		
-		liczbaPlikowDanegoTypu.put("Liczba plików tekstowych: ", liczbaPlikowTekstowych);
-		liczbaPlikowDanegoTypu.put("Liczba plików multimedialnych: ", liczbaPlikowMultimedialnych);
-		liczbaPlikowDanegoTypu.put("Liczba plików wykonywalnych: ", liczbaPlikowWykonywalnych);
-		liczbaPlikowDanegoTypu.put("Liczba pozosta³ych plików: ", liczbaPlikowPozostalych);
+		liczbaPlikowDanegoTypu.put("Liczba plikow tekstowych: ", liczbaPlikowTekstowych);
+		liczbaPlikowDanegoTypu.put("Liczba plikow multimedialnych: ", liczbaPlikowMultimedialnych);
+		liczbaPlikowDanegoTypu.put("Liczba plikow wykonywalnych: ", liczbaPlikowWykonywalnych);
+		liczbaPlikowDanegoTypu.put("Liczba pozostalych plikow: ", liczbaPlikowPozostalych);
 		
 		
 	}
@@ -302,7 +302,7 @@ public class Project {
 						}
 						
 					} catch (IOException e) {
-						System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C");
+						System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku C");
 						e.printStackTrace();
 					}
 					
@@ -336,7 +336,7 @@ public class Project {
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C++");
+							System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku C++");
 							e.printStackTrace();
 						}
 						
@@ -371,7 +371,7 @@ public class Project {
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku C#");
+							System.out.println("Problem w odczycie pliku do badania wielowatkowsci w jezyku C#");
 							e.printStackTrace();
 						}
 						
@@ -406,7 +406,7 @@ public class Project {
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielow¹tkowoœci w jêzyku Java");
+							System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku Java");
 							e.printStackTrace();
 						}
 						
@@ -451,7 +451,7 @@ public class Project {
 					//Rozpoznano jêzyk C, który nie jest obiektowy
 					isRozpoznaneRozszerzenie = true;
 					liczbaParadygmat--;
-					System.out.println("C obiektowoœæ-- = "+liczbaParadygmat);
+					System.out.println("C obiektowsc-- = "+liczbaParadygmat);
 				}
 			}
 			
@@ -470,7 +470,7 @@ public class Project {
 									if(linia.contains(classString)) {
 										//Jest obiektowoœæ
 										liczbaParadygmat++;
-										System.out.println("obiektowoœæ++ = "+liczbaParadygmat);
+										System.out.println("obiektowosc++ = "+liczbaParadygmat);
 										isParadygmat = true;
 										break;
 									}
@@ -481,11 +481,11 @@ public class Project {
 							reader.close();
 							if(!isParadygmat) {
 								liczbaParadygmat--;
-								System.out.println("obiektowoœæ-- = "+liczbaParadygmat);
+								System.out.println("obiektowosc-- = "+liczbaParadygmat);
 							}
 							
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania paradygmatu w jêzyku C");
+							System.out.println("Problem w odczycie pliku do badania paradygmatu w jezyku C");
 							e.printStackTrace();
 						}
 						
