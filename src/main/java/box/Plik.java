@@ -1,17 +1,24 @@
 package box;
 
 import java.io.BufferedReader;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.tika.langdetect.OptimaizeLangDetector;
+import org.apache.tika.language.detect.LanguageDetector;
+import org.apache.tika.language.detect.LanguageResult;
 import org.apache.velocity.shaded.commons.io.FilenameUtils;
+
+
 
 public class Plik extends Katalog{
 
@@ -22,6 +29,8 @@ public class Plik extends Katalog{
 	public boolean wczytywaniePlikow = false;
 	public ArrayList<String> zbiorBibliotek = new ArrayList<String>();
 	public int liczbaAtrybutow;
+	public int liczbaZnakow;
+	public String jezykInterfejsu;
 
 	
 	public Plik(String nazwa, String sciezka) {
@@ -33,6 +42,8 @@ public class Plik extends Katalog{
 		this.setWczytywaniePlikow();
 		this.setZbiorBibliotek();
 		this.setLiczbaAtrybutow();
+		this.setLiczbaZnakow();
+		this.setJezykInterfejsu();
 		
 		System.out.println("Hash: " + hash + " nazwa pliku: " + nazwa);
 	}
@@ -56,6 +67,73 @@ public class Plik extends Katalog{
 		}
 		
 	}
+	
+	private void setLiczbaZnakow() {
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+			liczbaZnakow = 0;
+			
+			while ((line = reader.readLine()) != null) {
+				liczbaZnakow += line.toString().length();
+			}
+			reader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy liczeniu liczby znakow");
+		}
+		
+	}
+	
+	
+	private void setJezykInterfejsu() {
+		try {
+			
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+			HashMap<String,Integer> map = new HashMap<String,Integer>();
+			LanguageDetector langDetector = new OptimaizeLangDetector().loadModels();
+	        			
+			
+			//Rozpoznanie jezyka w kazdym (" ... ") i dodanie go do mapy wraz z krotnoscia
+			while ((line = reader.readLine()) != null) {
+			     Matcher m = Pattern.compile("\\(\"([^\"]*)\"\\)").matcher(line);
+			     while(m.find()) {
+			    	 LanguageResult lang = langDetector.detect(m.group(1).toString());
+			    	 //System.out.println(m.group(1).toString() + " " + lang.getLanguage());
+				     String lng = lang.getLanguage();
+			    	 if (map.containsKey(lng))
+			    		 map.put(lng, map.get(lng) + 1);
+			    	 else
+			    		 map.put(lng, 1); 
+			     }
+			}
+			reader.close();
+			
+			//Wyszukanie najczestszego jezyka
+			if (!map.isEmpty()) {
+				int max = Collections.max(map.values());			
+				for (Entry<String, Integer> entry : map.entrySet()) {
+				    if (entry.getValue()==max) {
+				        jezykInterfejsu = entry.getKey();
+				    }
+				}
+			}
+			else
+			{
+				jezykInterfejsu = "brak";
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy wyznaczaniu jezyka interfejsu");
+		}
+	}
+	
 	
 	private void setHash() {
 		try {
@@ -160,7 +238,7 @@ public class Plik extends Katalog{
 		}
 	}
 	
-private void setLiczbaAtrybutow() {
+	private void setLiczbaAtrybutow() {
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(sciezka));

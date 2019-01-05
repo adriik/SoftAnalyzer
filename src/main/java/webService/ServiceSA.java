@@ -11,6 +11,8 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -55,7 +57,7 @@ public class ServiceSA {
 			String[] wynik1 = link.split("/");
 
 			String sciezka = this.getClass().getClassLoader().getResource("").getPath().split("WEB-INF")[0]
-					.substring(1);
+					.substring(1).replace("%20", " ");
 
 			URL website = new URL(link);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
@@ -212,7 +214,19 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaPlikowDanegoTypu", action = "urn:GetLiczbaPlikowDanegoTypu")
 	public LinkedList<TypyPlikow> getLiczbaPlikowDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
-		return null;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<TypyPlikow> lista = new LinkedList<TypyPlikow>();
+			
+			paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoTypu.forEach((k,v)->{
+			TypyPlikow tp = new TypyPlikow();
+			tp.typ = k;
+			tp.liczba = v;
+			lista.add(tp);}
+			);
+			return lista;
+		}else {
+			return null;
+		}
 	}
 	
 

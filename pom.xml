@@ -87,5 +87,10 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.11</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.tika</groupId>
+    		<artifactId>tika-langdetect</artifactId>
+    		<version>1.20</version>
+		</dependency>
 	</dependencies>
 </project>
