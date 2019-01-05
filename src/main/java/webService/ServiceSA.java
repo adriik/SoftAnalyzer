@@ -1,9 +1,6 @@
 package webService;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -11,8 +8,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -50,8 +45,9 @@ public class ServiceSA {
 	
 	Pack paczkaProjektow = new Pack();
 
+
 	@WebMethod(operationName = "przeslijPlik", action = "urn:PrzeslijPlik")
-	public void przeslijPlik(@WebParam(name = "arg0") String link) {
+	public ArrayList<String> przeslijPlik(@WebParam(name = "arg0") String link) {
 
 		try {
 			String[] wynik1 = link.split("/");
@@ -81,32 +77,35 @@ public class ServiceSA {
 					+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
 			paczkaProjektow.addProject(projekt); // projekt o nazwie XXXXX.zip
 
-//			SAXReader reader = new SAXReader();
-//			Document document = null;
-//			try {
-//				document = reader.read(sciezka + "uploads/SAML.xmi");
-//			} catch (DocumentException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//			List<Node> nodeList = document.selectNodes("//*[name() = 'ownedAttribute']");
-//
-//			for (Node node : nodeList) {
-//
-//				Element element = (Element) node;
-//				for (Cechy st : Cechy.values()) {
-//					if (element.attributeValue("name").equals(st.name())) {
-//						projekt.listaCech.add(st.name());
-//						break;
-//					}
-//				}
-//			}
+			SAXReader reader = new SAXReader();
+			Document document = null;
+			try {
+				document = reader.read(sciezka + "uploads/SAML.xmi");
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			List<Node> nodeList = document.selectNodes("//*[name() = 'ownedAttribute']");
+
+			for (Node node : nodeList) {
+
+				Element element = (Element) node;
+				for (Cechy st : Cechy.values()) {
+					if (element.attributeValue("name").equals(st.name())) {
+						projekt.listaCech.add(st.name());
+						System.out.println(st.name());
+						break;
+					}
+				}
+			}
+			return projekt.listaCech;
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@WebMethod(operationName = "getLiczbaPlikow", action = "urn:GetLiczbaPlikow")

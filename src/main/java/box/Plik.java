@@ -45,7 +45,6 @@ public class Plik extends Katalog{
 		this.setLiczbaZnakow();
 		this.setJezykInterfejsu();
 		
-		System.out.println("Hash: " + hash + " nazwa pliku: " + nazwa);
 	}
 
 	private void setRozmiar() {
@@ -146,7 +145,7 @@ public class Plik extends Katalog{
 	}
 	
 	private void setRozszerzenie() {
-		System.out.println(nazwa);
+		//System.out.println(nazwa);
 		rozszerzenie = FilenameUtils.getExtension(nazwa);
 	}
 	
@@ -207,7 +206,7 @@ public class Plik extends Katalog{
 			    	      while(matcher.find())
 			    	        {
 			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(0,matcher.group().split(" ")[1].length()-1));
-			    	    	  	System.out.println(matcher.group());
+			    	    	  	//System.out.println(matcher.group());
 			    	        }
 			    	  }
 			    	  else if (i==1) {
@@ -216,7 +215,7 @@ public class Plik extends Katalog{
 			    	      while(matcher.find())
 			    	        {
 			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(1,matcher.group().split(" ")[1].length()-1));
-			    	    	  	System.out.println(matcher.group());
+			    	    	  	//System.out.println(matcher.group());
 			    	        }
 			    	  }
 			    	  else {
@@ -225,7 +224,7 @@ public class Plik extends Katalog{
 			    	      while(matcher.find())
 			    	        {
 			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(0,matcher.group().split(" ")[1].length()-1));
-			    	    	  	System.out.println(matcher.group());
+			    	    	  	//System.out.println(matcher.group());
 			    	        }
 			    	  }
 				}

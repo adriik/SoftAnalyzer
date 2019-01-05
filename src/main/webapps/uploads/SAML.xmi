@@ -191,6 +191,21 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiQYFEem9QKLYZSURpQ" name="LiczbaPlikowODanymRozszerzeniuProperty" visibility="private"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgigYFEem9QKLYZSURpQ" name="RozmiaryPlikowKodowZrodlowychProperty" visibility="private"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="JezykProgramowaniaProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghwYFEem9QKLYZSURpQ" name="LiczbaAtrybutowProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiAYFEem9QKLYZSURpQ" name="LiczbaMetodProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiQYFEem9QKLYZSURpQ" name="LiczbaAtrybutowWKlasach" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgigYFEem9QKLYZSURpQ" name="ZbiorBibliotekProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="LiczbaLiniiKoduProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghwYFEem9QKLYZSURpQ" name="LiczbaZnakowProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiAYFEem9QKLYZSURpQ" name="ListaNazwPlikowProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiQYFEem9QKLYZSURpQ" name="ListaNazwKatalogowProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgigYFEem9QKLYZSURpQ" name="LiczbaPlikowDanegoTypuProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="MozliwoscWczytaniaPlikowProperty" visibility="private"/>      
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghwYFEem9QKLYZSURpQ" name="LiczbaDanychWejsciowychProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiAYFEem9QKLYZSURpQ" name="JezykInterfejsuProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiQYFEem9QKLYZSURpQ" name="LiczbaZmiennychDanegoTypuProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgigYFEem9QKLYZSURpQ" name="SkrotyPlikowProperty" visibility="private"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="ParadygmatProperty" visibility="private"/>  
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_M-kgjAYFEem9QKLYZSURpQ" name="LendMe">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgjQYFEem9QKLYZSURpQ" name="NazwaProperty" visibility="private"/>
