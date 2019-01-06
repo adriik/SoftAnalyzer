@@ -198,7 +198,20 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaPlikowDanegoRozszerzenia", action = "urn:GetLiczbaPlikowDanegoRozszerzenia")
 	public LinkedList<RozszerzeniaPlikow> getLiczbaPlikowDanegoRozszerzenia(@WebParam(name = "arg0") String nazwaProjektu){
-		return null;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<RozszerzeniaPlikow> lista = new LinkedList<RozszerzeniaPlikow>();
+			
+			paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoRozszerzenia.forEach((k,v)->{
+				RozszerzeniaPlikow rp = new RozszerzeniaPlikow();
+				rp.rozszerzenie = k;
+				rp.liczba = v;
+				lista.add(rp);}
+			);
+			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
+		}
 	}
 	
 
@@ -296,7 +309,20 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaZmiennychDanegoTypu", action = "urn:GetLiczbaZmiennychDanegoTypu")
 	public LinkedList<TypyZmiennych> getLiczbaZmiennychDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
-		return null;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			LinkedList<TypyZmiennych> lista = new LinkedList<TypyZmiennych>();
+			
+			paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoRozszerzenia.forEach((k,v)->{
+				TypyZmiennych tz = new TypyZmiennych();
+				tz.typ = k;
+				tz.liczba = v;
+				lista.add(tz);}
+			);
+			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
+		}
 	}
 	
 	//Adam
