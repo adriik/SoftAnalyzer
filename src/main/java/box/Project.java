@@ -15,6 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Set;
+import java.util.Collection;
 
 public class Project {
 
@@ -59,6 +61,8 @@ public class Project {
 		this.setLiczbaZnakow();
 		this.setJezykInterfejsu();
 		this.setLiczbaMetod();
+		this.setliczbaPlikowDanegoRozszerzenia();
+		this.setliczbaZmiennychDanegoTypu();
 	}
 
 	private void setListaNazwPlikow(String sciezka) {
@@ -248,6 +252,90 @@ public class Project {
 
 	private void setLiczbaPlikow() {
 		this.liczbaPlikow = listaPlikow.size();
+	}
+	
+	private void setliczbaPlikowDanegoRozszerzenia() {
+		//public Map<String, Integer> liczbaPlikowDanegoRozszerzenia = new HashMap<String, Integer>();
+		
+		for (Plik plik : listaPlikow) {
+			String roz = plik.rozszerzenie;
+			if (liczbaPlikowDanegoRozszerzenia.containsKey(roz))
+				liczbaPlikowDanegoRozszerzenia.put(roz, liczbaPlikowDanegoRozszerzenia.get(roz) + 1);
+			else
+				liczbaPlikowDanegoRozszerzenia.put(roz, 1);
+		}
+		
+		System.out.println("liczba rozszerzen: " + liczbaPlikowDanegoRozszerzenia.size());
+		
+		Set<String> keySet = liczbaPlikowDanegoRozszerzenia.keySet();
+		System.out.println("Klucze:\n" + keySet);
+		Collection<Integer> values = liczbaPlikowDanegoRozszerzenia.values();
+		System.out.println("Wartosci:\n" + values);
+		
+		Set<Entry<String,Integer>> entrySet = liczbaPlikowDanegoRozszerzenia.entrySet();
+		for(Entry<String, Integer> entry: entrySet) {
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+	}
+	
+	private void setliczbaZmiennychDanegoTypu() {
+		//public Map<String, Integer> liczbaZmiennychDanegoTypu = new HashMap<String, Integer>();
+
+		String[] typyZmiennych = { "BYTE", "SHORT", "INT", "LONG", "DOUBLE", "FLOAT", "STRING", "BOOLEAN", "BOOL", "CHAR", "DECIMAL" };
+		int[] liczbaZmiennych =   {     0,       0,     0,      0,        0,       0,        0,         0,      0,      0,         0 };
+		int i = 0;
+		
+		for (Plik plik : listaPlikow)
+		{
+			i = 0;
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+				String line;
+				
+				while ((line=reader.readLine())!=null){
+					for(String a : typyZmiennych)
+			        {
+						line=line.toUpperCase();
+						a=a.toUpperCase();
+			
+						Pattern pattern = Pattern.compile("("+a+"\\s\\S+(;|,|=| =))");
+			    	    Matcher matcher = pattern.matcher(line);
+			    	    while(matcher.find()) 
+			    	    	liczbaZmiennych[i]++;
+			    	    
+			    	    i++;
+					}
+				   }                           
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Cos nie tak przy wyliczaniu liczby zmiennych danego typu");
+			}
+		}
+		liczbaZmiennychDanegoTypu.put("BYTE: ",liczbaZmiennych[0] );
+		liczbaZmiennychDanegoTypu.put("SHORT: ",liczbaZmiennych[1] );
+		liczbaZmiennychDanegoTypu.put("INT: ",liczbaZmiennych[2] );
+		liczbaZmiennychDanegoTypu.put("LONG: ",liczbaZmiennych[3] );
+		liczbaZmiennychDanegoTypu.put("DOUBLE: ",liczbaZmiennych[4] );
+		liczbaZmiennychDanegoTypu.put("FLOAT: ",liczbaZmiennych[5] );
+		liczbaZmiennychDanegoTypu.put("STRING: ",liczbaZmiennych[6] );
+		liczbaZmiennychDanegoTypu.put("BOOLEAN: ",liczbaZmiennych[7] );
+		liczbaZmiennychDanegoTypu.put("BOOL: ",liczbaZmiennych[8] );
+		liczbaZmiennychDanegoTypu.put("CHAR: ",liczbaZmiennych[9] );
+		liczbaZmiennychDanegoTypu.put("DECIMAL: ",liczbaZmiennych[10] );
+		
+		System.out.println("liczba rozwzanych zmiennych: " + liczbaZmiennychDanegoTypu.size());
+		
+		Set<String> keySet = liczbaZmiennychDanegoTypu.keySet();
+		System.out.println("Klucze:\n" + keySet);
+		Collection<Integer> values = liczbaZmiennychDanegoTypu.values();
+		System.out.println("Wartosci:\n" + values);
+		
+		Set<Entry<String,Integer>> entrySet = liczbaZmiennychDanegoTypu.entrySet();
+		for(Entry<String, Integer> entry: entrySet) {
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
 	}
 
 	public String getSciezka() {
