@@ -1,5 +1,6 @@
 package webService;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.soap.Addressing;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -99,6 +101,20 @@ public class ServiceSA {
 					}
 				}
 			}
+			new Thread(new Runnable() {
+	            @Override
+	            public void run() {
+	            	try {
+						FileUtils.forceDelete(new File(projekt.getSciezka()));
+						FileUtils.forceDelete(new File(sciezka + "archiwum/" + wynik1[wynik1.length - 1]));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						System.out.println("Błąd podczas wyrzucania projektu");
+					}
+	            }
+	        }).start();
+			
 			return projekt.listaCech;
 
 		} catch (IOException e) {
@@ -110,12 +126,16 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaPlikow", action = "urn:GetLiczbaPlikow")
 	public int getLiczbaPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
-		return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikow;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaPlikowProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).liczbaPlikow;
+		}else {
+			return 0;
+		}
 	}
 
 	@WebMethod(operationName = "getRozmiaryPlikowKodow", action = "urn:GetRozmiaryPlikowKodow")
 	public LinkedList<RozmiaryPlikow> getRozmiaryPlikowKodow(@WebParam(name = "arg0") String nazwaProjektu) {
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.RozmiaryPlikowKodowZrodlowychProperty.name())) {
 			LinkedList<RozmiaryPlikow> lista = new LinkedList<RozmiaryPlikow>();
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
@@ -132,9 +152,8 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getListaNazwPlikow", action = "urn:GetListaNazwPlikow")
 	public ArrayList<String> getListaNazwPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
-
-		ArrayList<String> listaNazwPlikow = new ArrayList<String>();
-		if (paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwPlikowProperty.name())) {
+			ArrayList<String> listaNazwPlikow = new ArrayList<String>();
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
 				listaNazwPlikow.add(plik.nazwa);
 			}
@@ -142,14 +161,12 @@ public class ServiceSA {
 		} else {
 			return null;
 		}
-
 	}
 
 	@WebMethod(operationName = "getListaNazwKatalogow", action = "urn:GetListaNazwKatalogow")
 	public ArrayList<String> getListaNazwKatalogow(@WebParam(name = "arg0") String nazwaProjektu) {
-
-		ArrayList<String> listaNazwKatalogow = new ArrayList<String>();
-		if (paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwKatalogowProperty.name())) {
+			ArrayList<String> listaNazwKatalogow = new ArrayList<String>();
 			for (Katalog katalog : paczkaProjektow.getProject(nazwaProjektu).listaKatalogow) {
 				listaNazwKatalogow.add(katalog.nazwa);
 			}
@@ -161,7 +178,7 @@ public class ServiceSA {
 	
 	@WebMethod(operationName = "getLiczbaLiniiKodu", action = "urn:GetLiczbaLiniiKodu")
 	public LinkedList<LiczbaLiniiKodu> getLiczbaLiniiKodu(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaLiniiKoduProperty.name())) {
 			LinkedList<LiczbaLiniiKodu> lista = new LinkedList<LiczbaLiniiKodu>();
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
@@ -179,7 +196,7 @@ public class ServiceSA {
 	
 	@WebMethod(operationName = "getSkrotyPlikow", action = "urn:GetSkrotyPlikow")
 	public LinkedList<HashePlikow> getSkrotyPlikow(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.SkrotyPlikowProperty.name())) {
 			LinkedList<HashePlikow> lista = new LinkedList<HashePlikow>();
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
@@ -198,7 +215,7 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaPlikowDanegoRozszerzenia", action = "urn:GetLiczbaPlikowDanegoRozszerzenia")
 	public LinkedList<RozszerzeniaPlikow> getLiczbaPlikowDanegoRozszerzenia(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaPlikowODanymRozszerzeniuProperty.name())) {
 			LinkedList<RozszerzeniaPlikow> lista = new LinkedList<RozszerzeniaPlikow>();
 			
 			paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoRozszerzenia.forEach((k,v)->{
@@ -217,7 +234,11 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaDanychWejsciowych", action = "urn:GetLiczbaDanychWejsciowych")
 	public int getLiczbaDanychWejsciowych(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).liczbaDanychWejsciowych;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaDanychWejsciowychProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).liczbaDanychWejsciowych;
+		}else {
+			return 0;
+		}
 	}
 	
 
@@ -226,7 +247,7 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaPlikowDanegoTypu", action = "urn:GetLiczbaPlikowDanegoTypu")
 	public LinkedList<TypyPlikow> getLiczbaPlikowDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaPlikowDanegoTypuProperty.name())) {
 			LinkedList<TypyPlikow> lista = new LinkedList<TypyPlikow>();
 			
 			paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoTypu.forEach((k,v)->{
@@ -244,20 +265,28 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getLiczbaAtrybutow", action = "urn:GetLiczbaAtrybutow")
 	public int getLiczbaAtrybutow(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).liczbaAtrybutow;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaAtrybutowProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).liczbaAtrybutow;
+		}else{
+			return 0;
+		}
 	}
 	
 
 	@WebMethod(operationName = "getLiczbaMetod", action = "urn:GetLiczbaMetod")
 	public int getLiczbaMetod(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).liczbaMetod;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaMetodProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).liczbaMetod;
+		}else {
+			return 0;
+		}
 		
 	}
 	
 
 	@WebMethod(operationName = "getLiczbaAtrybutowWKlasach", action = "urn:GetLiczbaAtrybutowWKlasach")
 	public LinkedList<AtrybutyPlikow> getLiczbaAtrybutowWKlasach(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaAtrybutowWKlasach.name())) {
 			LinkedList<AtrybutyPlikow> lista = new LinkedList<AtrybutyPlikow>();
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
@@ -276,7 +305,7 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getZbiorBibliotek", action = "urn:GetZbiorBibliotek")
 	public ArrayList<String> getZbiorBibliotek(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ZbiorBibliotekProperty.name())) {
 			ArrayList<String> lista = new ArrayList<String>();
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
@@ -296,23 +325,30 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getJezykProgramowania", action = "urn:GetJezykProgramowania")
 	public String getJezykProgramowania(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).jezyk;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.JezykProgramowaniaProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).jezyk;
+		}else {
+			return null;
+		}
 	}
 	
 
 	@WebMethod(operationName = "getLiczbaZnakow", action = "urn:GetLiczbaZnakow")
 	public int getLiczbaZnakow(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).liczbaZnakow;
-		
+		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+			return paczkaProjektow.getProject(nazwaProjektu).liczbaZnakow;
+		}else {
+			return 0;
+		}
 	}
 	
 
 	@WebMethod(operationName = "getLiczbaZmiennychDanegoTypu", action = "urn:GetLiczbaZmiennychDanegoTypu")
 	public LinkedList<TypyZmiennych> getLiczbaZmiennychDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaZmiennychDanegoTypuProperty.name())) {
 			LinkedList<TypyZmiennych> lista = new LinkedList<TypyZmiennych>();
 			
-			paczkaProjektow.getProject(nazwaProjektu).liczbaPlikowDanegoRozszerzenia.forEach((k,v)->{
+			paczkaProjektow.getProject(nazwaProjektu).liczbaZmiennychDanegoTypu.forEach((k,v)->{
 				TypyZmiennych tz = new TypyZmiennych();
 				tz.typ = k;
 				tz.liczba = v;
@@ -328,21 +364,27 @@ public class ServiceSA {
 	//Adam
 	@WebMethod(operationName = "getParadygmat", action = "urn:GetParadygmat")
 	public String getParadygmat(@WebParam(name = "arg0") String nazwaProjektu){
-
-		
-		return paczkaProjektow.getProject(nazwaProjektu).paradygmat;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ParadygmatProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).paradygmat;
+		}else {
+			return null;
+		}
 	}
 	
 	//Adam
 	@WebMethod(operationName = "getWykorzystanieWielowatkowosci", action = "urn:GetWykorzystanieWielowatkowosci")
 	public Boolean getWykorzystanieWielowatkowosci(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.MechanizmWielowatkowosciProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).wielowatkowosc;
+		}else {
+			return null;
+		}
 	}
 	
 
 	@WebMethod(operationName = "getMozliwosciWczytywaniaPlikow", action = "urn:GetMozliwosciWczytywaniaPlikow")
 	public Boolean getMozliwosciWczytywaniaPlikow(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.MozliwoscWczytaniaPlikowProperty.name())) {
 			boolean wczytywaniePlikow = false;
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
@@ -361,6 +403,10 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getJezykInterfejsu", action = "urn:GetJezykInterfejsu")
 	public String getJezykInterfejsu(@WebParam(name = "arg0") String nazwaProjektu){
-		return paczkaProjektow.getProject(nazwaProjektu).jezykInterfejsu;
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.JezykInterfejsuProperty.name())) {
+			return paczkaProjektow.getProject(nazwaProjektu).jezykInterfejsu;
+		}else {
+			return null;
+		}
 	}
 }

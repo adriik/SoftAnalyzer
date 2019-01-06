@@ -31,6 +31,7 @@ public class Plik extends Katalog{
 	public int liczbaAtrybutow;
 	public int liczbaZnakow;
 	public String jezykInterfejsu;
+	public int liczbaDanychWejsciowych;
 
 	
 	public Plik(String nazwa, String sciezka) {
@@ -44,7 +45,7 @@ public class Plik extends Katalog{
 		this.setLiczbaAtrybutow();
 		this.setLiczbaZnakow();
 		this.setJezykInterfejsu();
-		
+		this.setLiczbaDanychWejsciowych();
 	}
 
 	private void setRozmiar() {
@@ -180,6 +181,43 @@ public class Plik extends Katalog{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy sprawdzaniu wczytywania plikow");
+		}
+		
+	}
+	
+	private void setLiczbaDanychWejsciowych() {
+
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+			
+			ArrayList<String> keywords_infile = new ArrayList<String>();
+			keywords_infile.add("File ");
+			keywords_infile.add("fopen");
+			keywords_infile.add("ifstream");
+			keywords_infile.add("fstream");
+			keywords_infile.add("FileStream");
+			keywords_infile.add("InputStream");
+			keywords_infile.add("FileInputStream");
+			keywords_infile.add("read");
+			keywords_infile.add("get");
+			keywords_infile.add("argv");
+			
+
+			while ((line=reader.readLine())!=null){
+				for(String a : keywords_infile)
+		        {
+					line = line.toUpperCase();
+					a = a.toUpperCase();
+			      if(line.contains(a))
+			    	  this.liczbaDanychWejsciowych++;
+				}
+			   }                           
+			reader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy sprawdzaniu wczytywania danych wejsciowych");
 		}
 		
 	}

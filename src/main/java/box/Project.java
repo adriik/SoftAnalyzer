@@ -24,24 +24,18 @@ public class Project {
 	private String nazwa;
 
 	public int liczbaPlikow;
-	public Map<String, Integer> rozmiaryPlikow = new HashMap<String, Integer>();
 	public ArrayList<Plik> listaPlikow;
 	public ArrayList<Katalog> listaKatalogow;
 	public Map<String, Integer> liczbaPlikowDanegoRozszerzenia = new HashMap<String, Integer>();
 	public int liczbaDanychWejsciowych;
-	public Map<String, String> skrotyPlikow = new HashMap<String, String>();
 	public Map<String, Integer> liczbaPlikowDanegoTypu = new HashMap<String, Integer>();
 	public int liczbaAtrybutow;
 	public int liczbaMetod;
-	public Map<String, Integer> liczbaAtrybutowWKlasach = new HashMap<String, Integer>();
-	public ArrayList<String> zbiorBibliotek;
-	public int liczbaLiniiKodu;
 	public String jezyk;
 	public int liczbaZnakow;
 	public Map<String, Integer> liczbaZmiennychDanegoTypu = new HashMap<String, Integer>();
 	public String paradygmat;
 	public Boolean wielowatkowosc;
-	public Boolean wczytywaniePlikow;
 	public String jezykInterfejsu;
 
 	public ArrayList<String> listaCech = new ArrayList<String>();
@@ -63,6 +57,13 @@ public class Project {
 		this.setLiczbaMetod();
 		this.setliczbaPlikowDanegoRozszerzenia();
 		this.setliczbaZmiennychDanegoTypu();
+		this.setLiczbaDanychWejsciowych();
+	}
+
+	private void setLiczbaDanychWejsciowych() {
+		for (Plik plik : listaPlikow) {
+			this.liczbaDanychWejsciowych += plik.liczbaDanychWejsciowych;
+		}
 	}
 
 	private void setListaNazwPlikow(String sciezka) {
@@ -287,12 +288,13 @@ public class Project {
 		
 		for (Plik plik : listaPlikow)
 		{
-			i = 0;
+			
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
 				String line;
 				
 				while ((line=reader.readLine())!=null){
+					i = 0;
 					for(String a : typyZmiennych)
 			        {
 						line=line.toUpperCase();
@@ -646,7 +648,7 @@ public class Project {
 	public void setLiczbaMetod() {
 
 		Pattern pattern1 = Pattern.compile(
-				"^\\s?\\{? *\\)[a-zA-Z0-9<>\\[\\]._?, \\n\\*]*\\( *([a-zA-Z0-9<>._?,\\*]+){1} +([a-zA-Z0-9_\\*]+){1} +(CITATS|LANIF|TCARTSBA|DEZINORHCNYS|CILBUP|ETAVIRP|DETCETORP){0,1} *(CITATS|LANIF|TCARTSBA|DEZINORHCNYS|CILBUP|ETAVIRP|DETCETORP){0,1}\\s*$");
+				"^\\s?\\{? *\\)[a-zA-Z0-9<>\\[\\]._?, \\n\\*]*\\( *([a-zA-Z0-9<>._?,\\*]+){1} +([a-zA-Z0-9_\\*]+){1} *(CITATS|LANIF|TCARTSBA|DEZINORHCNYS|CILBUP|ETAVIRP|DETCETORP){0,1} *(CITATS|LANIF|TCARTSBA|DEZINORHCNYS|CILBUP|ETAVIRP|DETCETORP){0,1}\\s*$");
 		for (Plik plik : listaPlikow) {
 			try {
 				if (plik.rozszerzenie.equals("java") || plik.rozszerzenie.equals("c") || plik.rozszerzenie.equals("cpp")

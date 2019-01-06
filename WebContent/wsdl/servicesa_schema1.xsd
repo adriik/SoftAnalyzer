@@ -134,8 +134,8 @@
 
   <xs:complexType name="typyZmiennych">
     <xs:sequence>
-      <xs:element name="liczba" type="xs:int"/>
       <xs:element minOccurs="0" name="typ" type="xs:string"/>
+      <xs:element name="liczba" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
