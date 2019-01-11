@@ -152,7 +152,7 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getListaNazwPlikow", action = "urn:GetListaNazwPlikow")
 	public ArrayList<String> getListaNazwPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
-		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwPlikowProperty.name())) {
+		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwPlikowIKatalogow.name())) {
 			ArrayList<String> listaNazwPlikow = new ArrayList<String>();
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
 				listaNazwPlikow.add(plik.nazwa);
@@ -165,7 +165,7 @@ public class ServiceSA {
 
 	@WebMethod(operationName = "getListaNazwKatalogow", action = "urn:GetListaNazwKatalogow")
 	public ArrayList<String> getListaNazwKatalogow(@WebParam(name = "arg0") String nazwaProjektu) {
-		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwKatalogowProperty.name())) {
+		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwPlikowIKatalogow.name())) {
 			ArrayList<String> listaNazwKatalogow = new ArrayList<String>();
 			for (Katalog katalog : paczkaProjektow.getProject(nazwaProjektu).listaKatalogow) {
 				listaNazwKatalogow.add(katalog.nazwa);
