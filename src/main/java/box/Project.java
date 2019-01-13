@@ -203,52 +203,46 @@ public class Project {
 		String[] csRozszerzeniaPlikow = { "cs" };
 		String[] javaRozszerzeniaPlikow = { "java" };
 
+		int plikiC = 0;
+		int plikiJava = 0;
+		int plikiCpp = 0;
+		int plikiCsharp = 0;
+		
 		for (Plik plik : listaPlikow) {
-			boolean isRozpoznaneRozszerzenie = false;
-
 			for (String rozszerzenie : cRozszerzeniaPlikow) {
-				if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-					isRozpoznaneRozszerzenie = true;
-					jezyk = "C";
-				}
-
-			}
-			if (!isRozpoznaneRozszerzenie) {
-				for (String rozszerzenie : cppRozszerzeniaPlikow) {
-					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-						isRozpoznaneRozszerzenie = true;
-						jezyk = "C++";
-					}
-
+				if(plik.rozszerzenie.equals(rozszerzenie)) {
+					plikiC++;
+					break;
 				}
 			}
-
-			if (!isRozpoznaneRozszerzenie) {
-				for (String rozszerzenie : csRozszerzeniaPlikow) {
-					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-						isRozpoznaneRozszerzenie = true;
-						jezyk = "C#";
-					}
-
+			for (String rozszerzenie : cppRozszerzeniaPlikow) {
+				if(plik.rozszerzenie.equals(rozszerzenie)) {
+					plikiCpp++;
+					break;
 				}
 			}
-
-			if (!isRozpoznaneRozszerzenie) {
-				for (String rozszerzenie : javaRozszerzeniaPlikow) {
-					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-						isRozpoznaneRozszerzenie = true;
-						jezyk = "Java";
-					}
-
+			for (String rozszerzenie : csRozszerzeniaPlikow) {
+				if(plik.rozszerzenie.equals(rozszerzenie)) {
+					plikiCsharp++;
+					break;
 				}
 			}
-
-			if (!isRozpoznaneRozszerzenie) {
-				isRozpoznaneRozszerzenie = true;
-				jezyk = "Inny";
+			for (String rozszerzenie : javaRozszerzeniaPlikow) {
+				if(plik.rozszerzenie.equals(rozszerzenie)) {
+					plikiJava++;
+					break;
+				}
 			}
-
 		}
+		
+		if(plikiC >= plikiJava && plikiC >= plikiCpp && plikiC >= plikiCsharp)
+			jezyk = "C";
+		else if(plikiJava >= plikiC && plikiJava >= plikiCpp && plikiJava >= plikiCsharp)
+			jezyk = "Java";
+		else if(plikiCpp >= plikiC && plikiCpp >= plikiJava && plikiCpp >= plikiCsharp)
+			jezyk = "C++";
+		else if(plikiCsharp >= plikiC && plikiCsharp >= plikiJava && plikiCsharp >= plikiCpp)
+			jezyk = "C#";
 	}
 
 	private void setLiczbaPlikow() {

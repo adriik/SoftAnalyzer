@@ -104,14 +104,24 @@ public class ServiceSA {
 			new Thread(new Runnable() {
 	            @Override
 	            public void run() {
-	            	try {
-						FileUtils.forceDelete(new File(projekt.getSciezka()));
-						FileUtils.forceDelete(new File(sciezka + "archiwum/" + wynik1[wynik1.length - 1]));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						System.out.println("Błąd podczas wyrzucania projektu");
-					}
+	            	Boolean flaga = false;
+	            	while(!flaga) {
+		            	try {
+							FileUtils.forceDelete(new File(projekt.getSciezka()));
+							FileUtils.forceDelete(new File(sciezka + "archiwum/" + wynik1[wynik1.length - 1]));
+							flaga = true;
+							Thread.sleep(1000);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							//e.printStackTrace();
+							//System.out.println("Błąd podczas wyrzucania projektu");
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							System.out.println("Błąd podczas sleepa");
+						}
+	            	}
+	            	System.out.println("Udało się usunąć");
 	            }
 	        }).start();
 			
