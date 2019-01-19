@@ -16,6 +16,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Klasa odzwierciedlajaca pobrany projekt od klienta, jej atrybuty przedstawiaja poszczegolne cechy(globalne) dla calego projektu
+ */
 public class Project {
 
 	private String sciezka;
@@ -38,6 +41,11 @@ public class Project {
 
 	public ArrayList<String> listaCech = new ArrayList<String>();
 
+	/**
+	 * Konstruktor klasy Project
+	 * @param nazwa - nazwa projektu
+	 * @param sciezka - lokalizacja projektu
+	 */
 	public Project(String nazwa, String sciezka) {
 		this.nazwa = nazwa;
 		this.sciezka = sciezka;
@@ -58,12 +66,21 @@ public class Project {
 		this.setLiczbaDanychWejsciowych();
 	}
 
+	/**
+	 * Metoda setLiczbaDanychWejsciowych() odpowiada za ustawienie wartosci zmiennej liczbaDanychWejsciowych - globalnej dla projektu,
+	 * jako zliczonej ze wszystkich plikow liczby odwolan do instrukcji, ktore sa uzywane do wprowadzania danych
+	 */
 	private void setLiczbaDanychWejsciowych() {
 		for (Plik plik : listaPlikow) {
 			this.liczbaDanychWejsciowych += plik.liczbaDanychWejsciowych;
 		}
 	}
-
+	
+	/**
+	 * Metoda setListaNazwPlikow() odpowiada za ustawienie wartosci listy listaPlikow - globalnej dla projektu,
+	 * jako listy nazw plikow w calym projekcie
+	 * @param sciezka - lokalizacja projektu
+	 */
 	private void setListaNazwPlikow(String sciezka) {
 		listaPlikow = new ArrayList<Plik>();
 		System.out.println("Sciezka zla: " + sciezka);
@@ -78,6 +95,11 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda setListaNazwKatalogow() odpowiada za ustawienie wartosci listy listaKatalogow - globalnej dla projektu,
+	 * jako listy nazw katalogow w calym projekcie
+	 * @param sciezka - lokalizacja projektu
+	 */
 	private void setListaNazwKatalogow(String sciezka) {
 		listaKatalogow = new ArrayList<Katalog>();
 		try (Stream<Path> paths = Files.walk(Paths.get(sciezka))) {
@@ -91,6 +113,10 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda setLiczbaPlikowDanegoTypu() odpowiada za ustawienie wartosci zmiennej liczbaPlikowDanegoTypu - globalnej dla projektu,
+	 * jako liczbe plikow takiego typu dla danego projektu
+	 */
 	private void setLiczbaPlikowDanegoTypu() {
 		// zmienne do przechowywania liczby plik√≥w danego typu
 		int liczbaPlikowTekstowych = 0, liczbaPlikowMultimedialnych = 0, liczbaPlikowWykonywalnych = 0,
@@ -189,6 +215,10 @@ public class Project {
 
 	}
 
+	/**
+	 * Metoda setJezykProgramowania() odpowiada za ustawienie wartosci zmiennej jezyk - globalnej dla projektu,
+	 * jako nazwe jezyka programowania(Java, C, C#, C++) dla projektu
+	 */
 	private void setJezykProgramowania() {
 		String[] cRozszerzeniaPlikow = { "c", "h" };
 		String[] cppRozszerzeniaPlikow = { "cpp", "cxx", "hxx" };
@@ -237,10 +267,18 @@ public class Project {
 			jezyk = "C#";
 	}
 
+	/**
+	 * Metoda setLiczbaPlikow() odpowiada za ustawienie wartosci zmiennej liczbaPlikow - globalnej dla projektu,
+	 * jako liczby plikow w calym projekcie
+	 */
 	private void setLiczbaPlikow() {
 		this.liczbaPlikow = listaPlikow.size();
 	}
 	
+	/**
+	 * Metoda setliczbaPlikowDanegoRozszerzenia() odpowiada za ustawienie wartosci zmiennej liczbaPlikowDanegoRozszerzenia - globalnej dla projektu,
+	 * jako liczbe plikow o takim rozszerzeniu dla projektu
+	 */
 	private void setliczbaPlikowDanegoRozszerzenia() {
 		for (Plik plik : listaPlikow) {
 			String roz = plik.rozszerzenie;
@@ -251,6 +289,10 @@ public class Project {
 		}
 	}
 	
+	/**
+	 * Metoda setliczbaZmiennychDanegoTypu() odpowiada za ustawienie wartosci zmiennej liczbaZmiennychDanegoTypu - lokalnej dla kaødego pliku,
+	 * jako liczbe zmiennych takiego typu dla danego pliku
+	 */
 	private void setliczbaZmiennychDanegoTypu() {
 		String[] typyZmiennych = { "BYTE", "SHORT", "INT", "LONG", "DOUBLE", "FLOAT", "STRING", "BOOLEAN", "BOOL", "CHAR", "DECIMAL" };
 		int[] liczbaZmiennych =   {     0,       0,     0,      0,        0,       0,        0,         0,      0,      0,         0 };
@@ -298,22 +340,42 @@ public class Project {
 		liczbaZmiennychDanegoTypu.put("DECIMAL: ",liczbaZmiennych[10] );
 	}
 
+	/**
+	 * Metoda getSciezka() odpowiada za mozliwosc pobrania wartosci zmiennej sciezka - reprezentujacej lokalizacje projektu
+	 * @retunr metoda zwraca sciezke projektu
+	 */
 	public String getSciezka() {
 		return sciezka;
 	}
-
+	
+	/**
+	 * Metoda setSciezka() odpowiada ustawienie wartosci zmiennej sciezka - reprezentujacej lokalizacje projektu
+	 * @param sciezka - lokalizacja projektu
+	 */
 	public void setSciezka(String sciezka) {
 		this.sciezka = sciezka;
 	}
 
+	/**
+	 * Metoda getNazwa() odpowiada za mozliwosc pobrania wartosci zmiennej nazwa - reprezentujacej nazwe projektu
+	 * @return metoda zwraca nazwe projektu
+	 */
 	public String getNazwa() {
 		return nazwa;
 	}
 
+	/**
+	 * Metoda setNazwa() odpowiada ustawienie wartosci zmiennej nazwa - reprezentujacej nazwe projektu
+	 * @param nazwa - nazwa projektu
+	 */
 	public void setNazwa(String nazwa) {
 		this.nazwa = nazwa;
 	}
 
+	/**
+	 * Metoda setWieloWatkowosc() odpowiada za ustawienie wartosci zmiennej wielowatkowosc - globalnej dla projektu,
+	 * jako informacji(true, false) czy w calym projekcie wystapilo wykorzystanie wielowatkowosci
+	 */
 	public void setWieloWatkowosc() {
 		String[] cRozszerzeniaPlikow = { "c", "h" };
 		String[] cppRozszerzeniaPlikow = { "cpp", "cxx", "hxx" };
@@ -481,10 +543,18 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda getWieloWatkowosc() odpowiada za mozliwosc pobrania wartosci zmiennej wielowatkowsc
+	 * @return metoda zwraca informacje(true, false) czy w calym projekcie wystapilo wykorzystanie wielowatkowosci
+	 */
 	public boolean getWieloWatkowosc() {
 		return wielowatkowosc;
 	}
 
+	/**
+	 * Metoda setParadygmat() odpowiada za ustawienie wartosci zmiennej paradygmat - globalnej dla projektu,
+	 * jako nazwy paradygmatu programowania(obiektowy, strukturalny) przewazajacego w calym projekcie
+	 */
 	public void setParadygmat() {
 
 		long liczbaParadygmat = 0;
@@ -554,10 +624,18 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda getParadygmat() odpowiada za mozliwosc pobrania wartosci zmiennej paradygmat,
+	 * @return metoda zwraca nazwe paradygmatu programowania(obiektowy, strukturalny) przewazajacego w calym projekcie
+	 */
 	String getParadygmat() {
 		return paradygmat;
 	}
 
+	/**
+	 * Metoda setLiczbaAtrybutow() odpowiada za ustawienie wartosci zmiennej liczbaAtrybutow - globalnej dla projektu,
+	 * jako liczby atrybutow w calym projekcie
+	 */
 	public void setLiczbaAtrybutow() {
 		liczbaAtrybutow = 0;
 
@@ -566,10 +644,18 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda getLiczbaAtrybutow() odpowiada za mozliwosc pobrania wartosci zmiennej liczbaAtrybutow,
+	 * @return metoda zwraca liczbe atrybutow w calym projekcie
+	 */
 	public int getLiczbaAtrybutow() {
 		return liczbaAtrybutow;
 	}
 
+	/**
+	 * Metoda setLiczbaZnakow() odpowiada za ustawienie wartosci zmiennej liczbaZnakow - globalnej dla projektu,
+	 * jako liczby znakow w calym projekcie
+	 */
 	public void setLiczbaZnakow() {
 		liczbaZnakow = 0;
 
@@ -578,10 +664,18 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda getLiczbaZnakow() odpowiada za mozliwosc pobrania wartosci zmiennej liczbaZnakow,
+	 * @return metoda zwraca liczbe znakow w calym projekcie
+	 */
 	public int getLiczbaZnakow() {
 		return liczbaZnakow;
 	}
 
+	/**
+	 * Metoda setJezykInterfejsu() odpowiada za ustawienie wartosci zmiennej jezykInterfejsu - globalnej dla projektu,
+	 * jako prefiks jezyka interfejsu(wedlug standardu ISO 639-1, np. pl, en) przewazajacego w calym projekcie
+	 */
 	public void setJezykInterfejsu() {
 		jezykInterfejsu = "";
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -607,6 +701,10 @@ public class Project {
 
 	}
 
+	/**
+	 * Metoda setLiczbaMetod() odpowiada za ustawienie wartosci zmiennej liczbaMetod - globalnej dla projektu,
+	 * jako liczby metod w calym projekcie
+	 */
 	public void setLiczbaMetod() {
 
 		Pattern pattern1 = Pattern.compile(
@@ -640,6 +738,10 @@ public class Project {
 		}
 	}
 
+	/**
+	 * Metoda getJezykInterfejsu() odpowiada za mozliwosc pobrania wartosci zmiennej jezykInterfejsu,
+	 * @return metoda zwraca prefiks jezyka interfejsu(wedlug standardu ISO 639-1, np. pl, en) przewazajacego w calym projekcie
+	 */
 	public String getJezykInterfejsu() {
 		return jezykInterfejsu;
 	}
