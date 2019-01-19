@@ -15,8 +15,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.Set;
-import java.util.Collection;
 
 public class Project {
 
@@ -76,7 +74,6 @@ public class Project {
 							p.toString()))
 					.collect(Collectors.toList());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -90,7 +87,6 @@ public class Project {
 							p.toString()))
 					.collect(Collectors.toList());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -186,10 +182,6 @@ public class Project {
 
 		}
 
-		System.out.println("Liczba plikow tekstowych: " + liczbaPlikowTekstowych + "\nLiczba plikow multimedialnych: "
-				+ liczbaPlikowMultimedialnych + "\nLiczba plikow dzwiekowych: " + liczbaPlikowWykonywalnych
-				+ "\nLiczba pozostalych plikow: " + liczbaPlikowPozostalych);
-
 		liczbaPlikowDanegoTypu.put("Liczba plikow tekstowych: ", liczbaPlikowTekstowych);
 		liczbaPlikowDanegoTypu.put("Liczba plikow multimedialnych: ", liczbaPlikowMultimedialnych);
 		liczbaPlikowDanegoTypu.put("Liczba plikow wykonywalnych: ", liczbaPlikowWykonywalnych);
@@ -250,8 +242,6 @@ public class Project {
 	}
 	
 	private void setliczbaPlikowDanegoRozszerzenia() {
-		//public Map<String, Integer> liczbaPlikowDanegoRozszerzenia = new HashMap<String, Integer>();
-		
 		for (Plik plik : listaPlikow) {
 			String roz = plik.rozszerzenie;
 			if (liczbaPlikowDanegoRozszerzenia.containsKey(roz))
@@ -259,54 +249,40 @@ public class Project {
 			else
 				liczbaPlikowDanegoRozszerzenia.put(roz, 1);
 		}
-		
-		System.out.println("liczba rozszerzen: " + liczbaPlikowDanegoRozszerzenia.size());
-		
-		Set<String> keySet = liczbaPlikowDanegoRozszerzenia.keySet();
-		System.out.println("Klucze:\n" + keySet);
-		Collection<Integer> values = liczbaPlikowDanegoRozszerzenia.values();
-		System.out.println("Wartosci:\n" + values);
-		
-		Set<Entry<String,Integer>> entrySet = liczbaPlikowDanegoRozszerzenia.entrySet();
-		for(Entry<String, Integer> entry: entrySet) {
-			System.out.println(entry.getKey() + " : " + entry.getValue());
-		}
 	}
 	
 	private void setliczbaZmiennychDanegoTypu() {
-		//public Map<String, Integer> liczbaZmiennychDanegoTypu = new HashMap<String, Integer>();
-
 		String[] typyZmiennych = { "BYTE", "SHORT", "INT", "LONG", "DOUBLE", "FLOAT", "STRING", "BOOLEAN", "BOOL", "CHAR", "DECIMAL" };
 		int[] liczbaZmiennych =   {     0,       0,     0,      0,        0,       0,        0,         0,      0,      0,         0 };
 		int i = 0;
 		
 		for (Plik plik : listaPlikow)
 		{
-			
-			try {
-				BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
-				String line;
+			if(!plik.typeMIME.equals("application/octet-stream")) {
+				try {
+					BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+					String line;
+					
+					while ((line=reader.readLine())!=null){
+						i = 0;
+						for(String a : typyZmiennych)
+				        {
+							line=line.toUpperCase();
+							a=a.toUpperCase();
 				
-				while ((line=reader.readLine())!=null){
-					i = 0;
-					for(String a : typyZmiennych)
-			        {
-						line=line.toUpperCase();
-						a=a.toUpperCase();
-			
-						Pattern pattern = Pattern.compile("("+a+"\\s\\S+(;|,|=| =))");
-			    	    Matcher matcher = pattern.matcher(line);
-			    	    while(matcher.find()) 
-			    	    	liczbaZmiennych[i]++;
-			    	    
-			    	    i++;
-					}
-				   }                           
-				reader.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("Cos nie tak przy wyliczaniu liczby zmiennych danego typu");
+							Pattern pattern = Pattern.compile("("+a+"\\s\\S+(;|,|=| =))");
+				    	    Matcher matcher = pattern.matcher(line);
+				    	    while(matcher.find()) 
+				    	    	liczbaZmiennych[i]++;
+				    	    
+				    	    i++;
+						}
+					   }                           
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Cos nie tak przy wyliczaniu liczby zmiennych danego typu");
+				}
 			}
 		}
 		liczbaZmiennychDanegoTypu.put("BYTE: ",liczbaZmiennych[0] );
@@ -320,18 +296,6 @@ public class Project {
 		liczbaZmiennychDanegoTypu.put("BOOL: ",liczbaZmiennych[8] );
 		liczbaZmiennychDanegoTypu.put("CHAR: ",liczbaZmiennych[9] );
 		liczbaZmiennychDanegoTypu.put("DECIMAL: ",liczbaZmiennych[10] );
-		
-		System.out.println("liczba rozwzanych zmiennych: " + liczbaZmiennychDanegoTypu.size());
-		
-		Set<String> keySet = liczbaZmiennychDanegoTypu.keySet();
-		System.out.println("Klucze:\n" + keySet);
-		Collection<Integer> values = liczbaZmiennychDanegoTypu.values();
-		System.out.println("Wartosci:\n" + values);
-		
-		Set<Entry<String,Integer>> entrySet = liczbaZmiennychDanegoTypu.entrySet();
-		for(Entry<String, Integer> entry: entrySet) {
-			System.out.println(entry.getKey() + " : " + entry.getValue());
-		}
 	}
 
 	public String getSciezka() {
@@ -364,154 +328,156 @@ public class Project {
 		long multiWatkowosc = 0;
 
 		for (Plik plik : listaPlikow) {
-
-			boolean isMultiWatkowosc = false;
-			boolean isRozpoznaneRozszerzenie = false;
-
-			// Dla C:
-			for (String rozszerzenie : cRozszerzeniaPlikow) {
-
-				if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-
-					isRozpoznaneRozszerzenie = true;
-					try {
-						BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
-						String linia = reader.readLine();
-						while (linia != null && !isMultiWatkowosc) {
-							for (String cString : cStringThreads) {
-								if (linia.contains(cString)) {
-									// JEST MULTIWATKOWOSC
-									multiWatkowosc++;
-									isMultiWatkowosc = true;
-									break;
-								}
-							}
-
-							linia = reader.readLine();
-						}
-						reader.close();
-						if (!isMultiWatkowosc) {
-							multiWatkowosc--;
-						}
-
-					} catch (IOException e) {
-						System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku C");
-						e.printStackTrace();
-					}
-
-				}
-			}
-
-			// Dla C++:
-			if (!isRozpoznaneRozszerzenie) {
-				for (String rozszerzenie : cppRozszerzeniaPlikow) {
+			if(!plik.typeMIME.equals("application/octet-stream")) {
+				boolean isMultiWatkowosc = false;
+				boolean isRozpoznaneRozszerzenie = false;
+	
+				// Dla C:
+				for (String rozszerzenie : cRozszerzeniaPlikow) {
+	
 					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-
+	
 						isRozpoznaneRozszerzenie = true;
 						try {
 							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
 							String linia = reader.readLine();
 							while (linia != null && !isMultiWatkowosc) {
-								for (String cppString : cppStringThreads) {
-									if (linia.contains(cppString)) {
+								for (String cString : cStringThreads) {
+									if (linia.contains(cString)) {
 										// JEST MULTIWATKOWOSC
 										multiWatkowosc++;
 										isMultiWatkowosc = true;
 										break;
 									}
 								}
-
+	
 								linia = reader.readLine();
 							}
 							reader.close();
 							if (!isMultiWatkowosc) {
 								multiWatkowosc--;
 							}
-
+	
 						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku C++");
+							System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku C");
 							e.printStackTrace();
 						}
-
+	
 					}
+					
 				}
-			}
-
-			// Dla C#:
-			if (!isRozpoznaneRozszerzenie) {
-				for (String rozszerzenie : csRozszerzeniaPlikow) {
-					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-
-						isRozpoznaneRozszerzenie = true;
-						try {
-							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
-							String linia = reader.readLine();
-							while (linia != null && !isMultiWatkowosc) {
-								for (String csString : csStringThreads) {
-									if (linia.contains(csString)) {
-										// JEST MULTIWATKOWOSC
-										multiWatkowosc++;
-										isMultiWatkowosc = true;
-										break;
+	
+				// Dla C++:
+				if (!isRozpoznaneRozszerzenie) {
+					for (String rozszerzenie : cppRozszerzeniaPlikow) {
+						if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+	
+							isRozpoznaneRozszerzenie = true;
+							try {
+								BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+								String linia = reader.readLine();
+								while (linia != null && !isMultiWatkowosc) {
+									for (String cppString : cppStringThreads) {
+										if (linia.contains(cppString)) {
+											// JEST MULTIWATKOWOSC
+											multiWatkowosc++;
+											isMultiWatkowosc = true;
+											break;
+										}
 									}
+	
+									linia = reader.readLine();
 								}
-
-								linia = reader.readLine();
+								reader.close();
+								if (!isMultiWatkowosc) {
+									multiWatkowosc--;
+								}
+	
+							} catch (IOException e) {
+								System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku C++");
+								e.printStackTrace();
 							}
-							reader.close();
-							if (!isMultiWatkowosc) {
-								multiWatkowosc--;
-							}
-
-						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielowatkowsci w jezyku C#");
-							e.printStackTrace();
+	
 						}
-
 					}
 				}
-			}
-
-			// Dla Java:
-			if (!isRozpoznaneRozszerzenie) {
-				for (String rozszerzenie : javaRozszerzeniaPlikow) {
-					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-
-						isRozpoznaneRozszerzenie = true;
-						try {
-							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
-							String linia = reader.readLine();
-							while (linia != null && !isMultiWatkowosc) {
-								for (String javaString : javaStringThreads) {
-									if (linia.contains(javaString)) {
-										// JEST MULTIWATKOWOSC
-										multiWatkowosc++;
-										isMultiWatkowosc = true;
-										break;
+	
+				// Dla C#:
+				if (!isRozpoznaneRozszerzenie) {
+					for (String rozszerzenie : csRozszerzeniaPlikow) {
+						if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+	
+							isRozpoznaneRozszerzenie = true;
+							try {
+								BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+								String linia = reader.readLine();
+								while (linia != null && !isMultiWatkowosc) {
+									for (String csString : csStringThreads) {
+										if (linia.contains(csString)) {
+											// JEST MULTIWATKOWOSC
+											multiWatkowosc++;
+											isMultiWatkowosc = true;
+											break;
+										}
 									}
+	
+									linia = reader.readLine();
 								}
-
-								linia = reader.readLine();
+								reader.close();
+								if (!isMultiWatkowosc) {
+									multiWatkowosc--;
+								}
+	
+							} catch (IOException e) {
+								System.out.println("Problem w odczycie pliku do badania wielowatkowsci w jezyku C#");
+								e.printStackTrace();
 							}
-							reader.close();
-							if (!isMultiWatkowosc) {
-								multiWatkowosc--;
-							}
-
-						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku Java");
-							e.printStackTrace();
+	
 						}
-
+					}
+				}
+	
+				// Dla Java:
+				if (!isRozpoznaneRozszerzenie) {
+					for (String rozszerzenie : javaRozszerzeniaPlikow) {
+						if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+	
+							isRozpoznaneRozszerzenie = true;
+							try {
+								BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+								String linia = reader.readLine();
+								while (linia != null && !isMultiWatkowosc) {
+									for (String javaString : javaStringThreads) {
+										if (linia.contains(javaString)) {
+											// JEST MULTIWATKOWOSC
+											multiWatkowosc++;
+											isMultiWatkowosc = true;
+											break;
+										}
+									}
+	
+									linia = reader.readLine();
+								}
+								reader.close();
+								if (!isMultiWatkowosc) {
+									multiWatkowosc--;
+								}
+	
+							} catch (IOException e) {
+								System.out.println("Problem w odczycie pliku do badania wielowatkowosci w jezyku Java");
+								e.printStackTrace();
+							}
+	
+						}
 					}
 				}
 			}
-		}
-
-		if (multiWatkowosc > 0) {
-			wielowatkowosc = true;
-		} else {
-			wielowatkowosc = false;
+	
+			if (multiWatkowosc > 0) {
+				wielowatkowosc = true;
+			} else {
+				wielowatkowosc = false;
+			}
 		}
 	}
 
@@ -529,62 +495,62 @@ public class Project {
 		String[] classStrings = { "class" };
 
 		for (Plik plik : listaPlikow) {
-
-			boolean isParadygmat = false;
-			boolean isRozpoznaneRozszerzenie = false;
-
-			// Dla C:
-			for (String rozszerzenie : cRozszerzeniaPlikow) {
-
-				if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-					// Rozpoznano jêzyk C, który nie jest obiektowy
-					isRozpoznaneRozszerzenie = true;
-					liczbaParadygmat--;
-				}
-			}
-
-			if (!isRozpoznaneRozszerzenie) {
-				// Dla C++, C#, Java:
-				for (String rozszerzenie : otherRozszerzeniaPlikow) {
-
+			if(!plik.typeMIME.equals("application/octet-stream")) {
+				boolean isParadygmat = false;
+				boolean isRozpoznaneRozszerzenie = false;
+	
+				// Dla C:
+				for (String rozszerzenie : cRozszerzeniaPlikow) {
+	
 					if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
-
+						// Rozpoznano jêzyk C, który nie jest obiektowy
 						isRozpoznaneRozszerzenie = true;
-						try {
-							BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
-							String linia = reader.readLine();
-							while (linia != null && !isParadygmat) {
-								for (String classString : classStrings) {
-									if (linia.contains(classString)) {
-										// Jest obiektowosc
-										liczbaParadygmat++;
-										isParadygmat = true;
-										break;
+						liczbaParadygmat--;
+					}
+				}
+	
+				if (!isRozpoznaneRozszerzenie) {
+					// Dla C++, C#, Java:
+					for (String rozszerzenie : otherRozszerzeniaPlikow) {
+	
+						if (plik.rozszerzenie.toLowerCase().equals(rozszerzenie)) {
+	
+							isRozpoznaneRozszerzenie = true;
+							try {
+								BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+								String linia = reader.readLine();
+								while (linia != null && !isParadygmat) {
+									for (String classString : classStrings) {
+										if (linia.contains(classString)) {
+											// Jest obiektowosc
+											liczbaParadygmat++;
+											isParadygmat = true;
+											break;
+										}
 									}
+	
+									linia = reader.readLine();
 								}
-
-								linia = reader.readLine();
+								reader.close();
+								if (!isParadygmat) {
+									liczbaParadygmat--;
+								}
+	
+							} catch (IOException e) {
+								System.out.println("Problem w odczycie pliku do badania paradygmatu w jezyku C");
+								e.printStackTrace();
 							}
-							reader.close();
-							if (!isParadygmat) {
-								liczbaParadygmat--;
-							}
-
-						} catch (IOException e) {
-							System.out.println("Problem w odczycie pliku do badania paradygmatu w jezyku C");
-							e.printStackTrace();
+	
 						}
-
 					}
 				}
 			}
-		}
 
-		System.out.println("Paradygmat: " + liczbaParadygmat);
-		if (liczbaParadygmat > 0) {
-			paradygmat = "obiektowy";
-		} else {
-			paradygmat = "strukturalny";
+			if (liczbaParadygmat > 0) {
+				paradygmat = "obiektowy";
+			} else {
+				paradygmat = "strukturalny";
+			}
 		}
 	}
 
@@ -622,11 +588,13 @@ public class Project {
 
 		// Rozpoznanie jezyka w kazdym pliku i dodanie go do mapy wraz z krotnoscia
 		for (Plik plik : listaPlikow) {
-			String lng = plik.jezykInterfejsu;
-			if (map.containsKey(lng))
-				map.put(lng, map.get(lng) + 1);
-			else
-				map.put(lng, 1);
+			if(!plik.jezykInterfejsu.equals("")) {
+				String lng = plik.jezykInterfejsu;
+				if (map.containsKey(lng))
+					map.put(lng, map.get(lng) + 1);
+				else
+					map.put(lng, 1);
+			}
 		}
 
 		// Wyszukanie najczestszego jezyka
@@ -644,29 +612,30 @@ public class Project {
 		Pattern pattern1 = Pattern.compile(
 				"^\\s?\\{? *\\)[a-zA-Z0-9<>\\[\\]._?, \\n\\*]*\\( *([a-zA-Z0-9<>._?,\\*]+){1} +([a-zA-Z0-9_\\*]+){1} *(CITATS|LANIF|TCARTSBA|DEZINORHCNYS|CILBUP|ETAVIRP|DETCETORP){0,1} *(CITATS|LANIF|TCARTSBA|DEZINORHCNYS|CILBUP|ETAVIRP|DETCETORP){0,1}\\s*$");
 		for (Plik plik : listaPlikow) {
-			try {
-				if (plik.rozszerzenie.equals("java") || plik.rozszerzenie.equals("c") || plik.rozszerzenie.equals("cpp")
-						|| plik.rozszerzenie.equals("cs")) {
-
-					BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
-					String line;
-
-					while ((line = reader.readLine()) != null) {
-
-						line = new StringBuilder().append(line.toUpperCase()).reverse().toString();
-
-						Matcher matcher1 = pattern1.matcher(line);
-
-						if (!line.contains("NRUTER") && !line.contains("GNISU") && matcher1.find()) {
-							liczbaMetod++;
+			if(!plik.typeMIME.equals("application/octet-stream")) {
+				try {
+					if (plik.rozszerzenie.equals("java") || plik.rozszerzenie.equals("c") || plik.rozszerzenie.equals("cpp")
+							|| plik.rozszerzenie.equals("cs")) {
+	
+						BufferedReader reader = new BufferedReader(new FileReader(plik.sciezka));
+						String line;
+	
+						while ((line = reader.readLine()) != null) {
+	
+							line = new StringBuilder().append(line.toUpperCase()).reverse().toString();
+	
+							Matcher matcher1 = pattern1.matcher(line);
+	
+							if (!line.contains("NRUTER") && !line.contains("GNISU") && matcher1.find()) {
+								liczbaMetod++;
+							}
 						}
+						reader.close();
 					}
-					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Cos nie tak przy wyliczaniu liczby metod");
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("Cos nie tak przy wyliczaniu liczby metod");
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.tika.Tika;
 import org.apache.tika.langdetect.OptimaizeLangDetector;
 import org.apache.tika.language.detect.LanguageDetector;
 import org.apache.tika.language.detect.LanguageResult;
@@ -23,29 +24,44 @@ import org.apache.velocity.shaded.commons.io.FilenameUtils;
 public class Plik extends Katalog{
 
 	public long rozmiar;
-	public long liczbaLiniiKodu;
+	public long liczbaLiniiKodu = 0;
 	public String hash;
 	public String rozszerzenie;
 	public boolean wczytywaniePlikow = false;
 	public ArrayList<String> zbiorBibliotek = new ArrayList<String>();
-	public int liczbaAtrybutow;
-	public int liczbaZnakow;
-	public String jezykInterfejsu;
-	public int liczbaDanychWejsciowych;
-
+	public int liczbaAtrybutow = 0;
+	public int liczbaZnakow = 0;
+	public String jezykInterfejsu = "";
+	public int liczbaDanychWejsciowych = 0;
+	private Tika tika;
+	public String typeMIME;
 	
 	public Plik(String nazwa, String sciezka) {
 		super(nazwa, sciezka);
-		this.setRozmiar();
-		this.setLiczbaLiniiKodu();
+		this.setMIMEType();		
+		this.setRozmiar();		
 		this.setHash();
 		this.setRozszerzenie();
-		this.setWczytywaniePlikow();
-		this.setZbiorBibliotek();
-		this.setLiczbaAtrybutow();
-		this.setLiczbaZnakow();
-		this.setJezykInterfejsu();
-		this.setLiczbaDanychWejsciowych();
+		
+		if(!typeMIME.equals("application/octet-stream")) {
+			this.setLiczbaLiniiKodu();
+			this.setWczytywaniePlikow();
+			this.setZbiorBibliotek();
+			this.setLiczbaAtrybutow();
+			this.setLiczbaZnakow();
+			this.setJezykInterfejsu();
+			this.setLiczbaDanychWejsciowych();
+		}
+	}
+	
+	private void setMIMEType() {
+		tika = TikaDetector.getInstance();
+		try {
+			typeMIME = tika.detect(new File(this.sciezka));
+			
+		} catch (IOException e) {
+			System.out.println("Błąd przy rozpoznawaniu typu pliku - binarki");
+		}
 	}
 
 	private void setRozmiar() {
@@ -61,7 +77,6 @@ public class Plik extends Katalog{
 			}
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy liczeniu linii kodu");
 		}
@@ -80,7 +95,6 @@ public class Plik extends Katalog{
 			}
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy liczeniu liczby znakow");
 		}
@@ -128,7 +142,6 @@ public class Plik extends Katalog{
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy wyznaczaniu jezyka interfejsu");
 		}
@@ -139,14 +152,12 @@ public class Plik extends Katalog{
 		try {
 			this.hash = DigestUtils.sha256Hex(new FileInputStream(this.sciezka));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy wyliczaniu Hash");
 		}
 	}
 	
 	private void setRozszerzenie() {
-		//System.out.println(nazwa);
 		rozszerzenie = FilenameUtils.getExtension(nazwa);
 	}
 	
@@ -178,7 +189,6 @@ public class Plik extends Katalog{
 			   }                           
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy sprawdzaniu wczytywania plikow");
 		}
@@ -215,7 +225,6 @@ public class Plik extends Katalog{
 			   }                           
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy sprawdzaniu wczytywania danych wejsciowych");
 		}
@@ -244,7 +253,6 @@ public class Plik extends Katalog{
 			    	      while(matcher.find())
 			    	        {
 			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(0,matcher.group().split(" ")[1].length()-1));
-			    	    	  	//System.out.println(matcher.group());
 			    	        }
 			    	  }
 			    	  else if (i==1) {
@@ -253,7 +261,6 @@ public class Plik extends Katalog{
 			    	      while(matcher.find())
 			    	        {
 			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(1,matcher.group().split(" ")[1].length()-1));
-			    	    	  	//System.out.println(matcher.group());
 			    	        }
 			    	  }
 			    	  else {
@@ -262,14 +269,12 @@ public class Plik extends Katalog{
 			    	      while(matcher.find())
 			    	        {
 			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(0,matcher.group().split(" ")[1].length()-1));
-			    	    	  	//System.out.println(matcher.group());
 			    	        }
 			    	  }
 				}
 			   }                           
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy sprawdzaniu zbioru bibliotek");
 		}
@@ -308,7 +313,6 @@ public class Plik extends Katalog{
 			   }                           
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Cos nie tak przy wyliczaniu liczby atrybutow");
 		}

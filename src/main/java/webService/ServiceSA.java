@@ -40,13 +40,8 @@ import net.lingala.zip4j.exception.ZipException;
 @WebService(targetNamespace = "http://webService/", portName = "ServiceSAPort", serviceName = "ServiceSAService")
 @Addressing(enabled = false, required = false)
 public class ServiceSA {
-
-	//https://plagiaton.blob.core.windows.net/blob-projects/cWPZPVBstlPozJwC3SW4bt9nPmU51YZD6OlNTh37s5ulyML7oJX05fiTWBjCbGBEvlrUxTSVZZMf8XYcLWQra9I1FB0s7B5VEZ0n.zip
-	//https://repo.gentics.com/artifactory/lan.releases/com/gentics/mesh/mesh-demo/0.6.18/mesh-demo-0.6.18-dump.zip
-	//https://github.com/jorgeacetozi/java-threads-examples/archive/master.zip
 	
 	Pack paczkaProjektow = new Pack();
-
 
 	@WebMethod(operationName = "przeslijPlik", action = "urn:PrzeslijPlik")
 	public ArrayList<String> przeslijPlik(@WebParam(name = "arg0") String link) {
@@ -84,7 +79,7 @@ public class ServiceSA {
 			try {
 				document = reader.read(sciezka + "uploads/SAML.xmi");
 			} catch (DocumentException e) {
-				// TODO Auto-generated catch block
+				System.out.println("Błąd podczas wczytywania pliku XMI");
 				e.printStackTrace();
 			}
 
@@ -112,11 +107,9 @@ public class ServiceSA {
 							flaga = true;
 							Thread.sleep(1000);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							//e.printStackTrace();
-							//System.out.println("Błąd podczas wyrzucania projektu");
+							e.printStackTrace();
+							System.out.println("Blad podczas Thread");
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							System.out.println("Błąd podczas sleepa");
 						}
@@ -128,7 +121,6 @@ public class ServiceSA {
 			return projekt.listaCech;
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -416,6 +408,7 @@ public class ServiceSA {
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.JezykInterfejsuProperty.name())) {
 			return paczkaProjektow.getProject(nazwaProjektu).jezykInterfejsu;
 		}else {
+			System.out.println("Zwrocilem null przy jezykach");
 			return null;
 		}
 	}
