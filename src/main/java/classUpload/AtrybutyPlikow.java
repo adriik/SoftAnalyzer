@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje liczbe atrybutow w plikach projektu
- *
+ * @author Mateusz Stolarski
  */
 public class AtrybutyPlikow {
 	

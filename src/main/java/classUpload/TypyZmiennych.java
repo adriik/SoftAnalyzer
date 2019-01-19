@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje typy zmiennych w projekcie
- *
+ * @author Mateusz Stolarski
  */
 public class TypyZmiennych {
 

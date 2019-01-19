@@ -39,6 +39,11 @@ import net.lingala.zip4j.exception.ZipException;
 
 /**
  * Glowna klasa przedstawiajaca interfejsy wystawiane w WebService
+ * @author Adrian Plichta
+ * @author Maciej Wyszyński
+ * @author Mateusz Stolarski
+ * @author Daniel Laskowski
+ * @author Michał Pruchniewski
  */
 @WebService(targetNamespace = "http://webService/", portName = "ServiceSAPort", serviceName = "ServiceSAService")
 @Addressing(enabled = false, required = false)
@@ -108,13 +113,12 @@ public class ServiceSA {
 			new Thread(new Runnable() {
 	            @Override
 	            public void run() {
-	            	Boolean flaga = false;
-	            	while(!flaga) {
+	            	while(!projekt.czyWyczyszczony) {
 		            	try {
+		            		Thread.sleep(100000);
 							FileUtils.forceDelete(new File(projekt.getSciezka()));
 							FileUtils.forceDelete(new File(sciezka + "archiwum/" + wynik1[wynik1.length - 1]));
-							flaga = true;
-							Thread.sleep(1000);
+							projekt.czyWyczyszczony = true;
 						} catch (IOException e) {
 							e.printStackTrace();
 							System.out.println("Blad podczas Thread");

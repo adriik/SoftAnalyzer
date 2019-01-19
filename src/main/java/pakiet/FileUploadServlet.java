@@ -60,6 +60,8 @@ public class FileUploadServlet extends HttpServlet {
  
     /**
      * Utility method to get file name from HTTP header content-disposition
+     * @param part Parametr zawierający obiekt param
+     * @return Zwraca nazwę pliku
      */
     private String getFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");

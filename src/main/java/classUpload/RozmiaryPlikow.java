@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje rozmiary plikow w projekcie
- *
+ * @author Mateusz Stolarski
  */
 public class RozmiaryPlikow {
 	

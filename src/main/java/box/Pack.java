@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Klasa enkapsulujacam, zawierajaca w sobie zbior wszystkich przeslanych projektow
+ * @author Adrian Plichta
  */
 
 public class Pack {
@@ -12,7 +13,7 @@ public class Pack {
 	
 	/**
 	 * Metoda getProject() pozwala na pobranie projektu ze zbioru wszystkich przeslanych projektow
-	 * @param nazwa - parametrem wejœciowym jest nazwa danego projektu
+	 * @param nazwa - parametrem wejï¿½ciowym jest nazwa danego projektu
 	 * @return metoda zwraca obiekt typu Projekt
 	 */
 	public Project getProject(String nazwa) {

@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje liczbe linii kodu w plikach projektu
- *
+ * @author Mateusz Stolarski
  */
 public class LiczbaLiniiKodu {
 	

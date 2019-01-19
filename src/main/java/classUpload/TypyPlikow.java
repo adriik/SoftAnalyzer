@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje typy plikow w projekcie
- *
+ * @author Mateusz Stolarski
  */
 public class TypyPlikow {
 

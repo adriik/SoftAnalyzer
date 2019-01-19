@@ -20,7 +20,12 @@ import org.apache.tika.language.detect.LanguageResult;
 import org.apache.velocity.shaded.commons.io.FilenameUtils;
 
 /**
- * Klasa Plik s³u¿y do przechowywania i uzyskiwania informacji o cechach danego pliku
+ * Klasa Plik sÅ‚uÅ¼y do przechowywania i uzyskiwania informacji o cechach danego pliku
+ * @author Adrian Plichta
+ * @author Maciej WyszyÅ„ski
+ * @author Mateusz Stolarski
+ * @author Daniel Laskowski
+ * @author MichaÅ‚ Pruchniewski
  */
 
 public class Plik extends Katalog{
@@ -56,7 +61,7 @@ public class Plik extends Katalog{
 		}
 	}
 	/*
-	 * Metoda setMIMEType() s³u¿y do ustawienia identyfikatora MIME dla danego pliku
+	 * Metoda setMIMEType() sï¿½uï¿½y do ustawienia identyfikatora MIME dla danego pliku
 	 */
 	private void setMIMEType() {
 		tika = TikaDetector.getInstance();
@@ -69,14 +74,14 @@ public class Plik extends Katalog{
 	}
 
 	/**
-	 * Metoda setRozmiar() s³u¿y do ustawienia informacji o rozmiarze danego pliku
+	 * Metoda setRozmiar() sï¿½uï¿½y do ustawienia informacji o rozmiarze danego pliku
 	 */
 	private void setRozmiar() {
 		this.rozmiar = new File(this.sciezka).length();
 	}
 	
 	/**
-	 * Metoda setLiczbaLiniiKodu() s³uzy do ustawienia informacji o liczbie linii kodu wystêpuj¹cych w danym pliku
+	 * Metoda setLiczbaLiniiKodu() sï¿½uzy do ustawienia informacji o liczbie linii kodu wystï¿½pujï¿½cych w danym pliku
 	 */
 	private void setLiczbaLiniiKodu() {
 	
@@ -93,7 +98,7 @@ public class Plik extends Katalog{
 		
 	}
 	/**
-	 * Metoda setLiczbaZnakow() s³uzy do ustawienia informacji o liczbie znakow wystêpujacych w danym pliku
+	 * Metoda setLiczbaZnakow() sï¿½uzy do ustawienia informacji o liczbie znakow wystï¿½pujacych w danym pliku
 	 */
 	private void setLiczbaZnakow() {
 		
@@ -163,7 +168,7 @@ public class Plik extends Katalog{
 	}
 	
 	/**
-	 * Metoda setHash() s³uzy do ustawienia informacji o hashu danego pliku
+	 * Metoda setHash() sï¿½uzy do ustawienia informacji o hashu danego pliku
 	 */
 	
 	private void setHash() {
@@ -175,7 +180,7 @@ public class Plik extends Katalog{
 		}
 	}
 	/**
-	 * Metoda setRozszerzenie() s³uzy do ustawienia informacji o rozszerzeniu danego pliku
+	 * Metoda setRozszerzenie() sï¿½uzy do ustawienia informacji o rozszerzeniu danego pliku
 	 */
 	private void setRozszerzenie() {
 		rozszerzenie = FilenameUtils.getExtension(nazwa);

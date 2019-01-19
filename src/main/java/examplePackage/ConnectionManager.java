@@ -3,11 +3,20 @@ package examplePackage;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Menadżer zarządzania połączeniem z bazą danych
+ * @author Adrian Plichta
+ *
+ */
 public class ConnectionManager {
 
 	static Connection con;
 	static String url;
 
+	/**
+	 * Zwraca połączenie z bazą danych
+	 * @return Connection połączenie z bazą danych
+	 */
 	public static Connection getConnection() {
 
 		try {

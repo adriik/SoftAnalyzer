@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje rozszerzenia plikow w projekcie
- *
+ * @author Mateusz Stolarski
  */
 public class RozszerzeniaPlikow {
 

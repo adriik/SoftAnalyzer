@@ -2,6 +2,7 @@ package box;
 
 /**
  * Klasa katalog zawiera informacje o nazwie i sciezce danego katalogu
+ * @author Adrian Plichta
  */
 
 public class Katalog {

@@ -3,7 +3,7 @@ package classUpload;
 /**
  * 
  * Reprezentuje hashe plikow w projekcie
- *
+ * @author Mateusz Stolarski
  */
 public class HashePlikow {
 	/**

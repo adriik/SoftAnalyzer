@@ -18,6 +18,11 @@ import java.util.stream.Stream;
 
 /**
  * Klasa odzwierciedlajaca pobrany projekt od klienta, jej atrybuty przedstawiaja poszczegolne cechy(globalne) dla calego projektu
+ * @author Adrian Plichta
+ * @author Maciej Wyszyński
+ * @author Mateusz Stolarski
+ * @author Daniel Laskowski
+ * @author Michał Pruchniewski
  */
 public class Project {
 
@@ -38,6 +43,7 @@ public class Project {
 	public String paradygmat;
 	public Boolean wielowatkowosc;
 	public String jezykInterfejsu;
+	public Boolean czyWyczyszczony = false;
 
 	public ArrayList<String> listaCech = new ArrayList<String>();
 
@@ -144,11 +150,11 @@ public class Project {
 				"trelby", "tvj", "txt", "u3i", "unauth", "unx", "uof", "uot", "upd", "utf8", "utxt", "vct", "vnt", "vw",
 				"wbk", "webdoc", "wn", "wp", "wp4", "wp5", "wp6", "wp7", "wpa", "wpd", "wpl", "wps", "wpt", "wpw",
 				"wri", "wsd", "wtt", "wtx", "xbdoc", "xbplate", "xdl", "xwp", "xy", "xy3", "xyp", "xyw", "zabw", "zrtf",
-				"zw" };
+				"zw" , "cs"};
 		String[] multimedialneeRozszerzeniePlikow = { "jpeg", "jpg", "jpe", "jif", "jfif", "jfi", "jp2", "jpx", "jmp",
 				"mj2", "tif", "tiff", "png", "gif", "bmp", "dib", "svg", "svgz", "eps", "3gp", "aa", "aac", "aax",
 				"act", "aiff", "amr", "ape", "au", "awb", "dct", "dss", "dvf", "flac", "gsm", "iklax", "ivs", "m4a",
-				"m4b", "m4p", "mmf", "mp3", "mpc", "msv", "nsf", "ogg", "oga", "mogg", "opus", "ra", "rm", "raw", "sln",
+				"m4b", "m4p", "mmf", "mp3", "mpc", "msv", "nsf", "ogg", "oga", "mogg", "opus", "ra", "rm", "raw", 
 				"tta", "vox", "wav", "wma", "wv", "webm", "8svx", "3gp", "asf", "avi", "dvr-ms", "flv", "f4v", "f4p",
 				"f4a", "f4b", "iff", "mkv", "mj2", "mov", "qt", "mpg", "mpeg", "m2p", "ps", "ts", "tsv", "tsa", "mp4",
 				"m4a", "m4p", "m4b", "m4r", "m4v", "ogg", "ogv", "oga", "ogx", "ogm", "ogm", "spx", "opus", "rm" };
@@ -290,7 +296,7 @@ public class Project {
 	}
 	
 	/**
-	 * Metoda setliczbaZmiennychDanegoTypu() odpowiada za ustawienie wartosci zmiennej liczbaZmiennychDanegoTypu - lokalnej dla ka�dego pliku,
+	 * Metoda setliczbaZmiennychDanegoTypu() odpowiada za ustawienie wartosci zmiennej liczbaZmiennychDanegoTypu - lokalnej dla ka�dego pliku,
 	 * jako liczbe zmiennych takiego typu dla danego pliku
 	 */
 	private void setliczbaZmiennychDanegoTypu() {
@@ -342,7 +348,7 @@ public class Project {
 
 	/**
 	 * Metoda getSciezka() odpowiada za mozliwosc pobrania wartosci zmiennej sciezka - reprezentujacej lokalizacje projektu
-	 * @retunr metoda zwraca sciezke projektu
+	 * @return metoda zwraca sciezke projektu
 	 */
 	public String getSciezka() {
 		return sciezka;
@@ -385,7 +391,7 @@ public class Project {
 		String[] cStringThreads = { "pthread_t", "pthread_create", "pthread_cancel", "pthread_join" };
 		String[] cppStringThreads = { "std::thread", "thread(", "thread (" };
 		String[] csStringThreads = { "using System.Threading" };
-		String[] javaStringThreads = { "new Thread(", "new Thread (", "extends Thread", "" };
+		String[] javaStringThreads = { "new Thread(", "new Thread (", "extends Thread" };
 
 		long multiWatkowosc = 0;
 

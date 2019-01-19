@@ -2,6 +2,7 @@ package box;
 
 /**
  * Typ wyliczeniowy "Cechy" jest zbiorem cech
+ * @author Adrian Plichta
  */
 
 public enum Cechy {
