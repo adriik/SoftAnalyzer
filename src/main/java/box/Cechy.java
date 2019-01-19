@@ -1,5 +1,9 @@
 package box;
 
+/**
+ * Typ wyliczeniowy "Cechy" jest zbiorem cech
+ */
+
 public enum Cechy {
 	LiczbaAtrybutowProperty,
 	LiczbaMetodProperty,

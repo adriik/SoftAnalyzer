@@ -19,7 +19,9 @@ import org.apache.tika.language.detect.LanguageDetector;
 import org.apache.tika.language.detect.LanguageResult;
 import org.apache.velocity.shaded.commons.io.FilenameUtils;
 
-
+/**
+ * Klasa Plik s³u¿y do przechowywania i uzyskiwania informacji o cechach danego pliku
+ */
 
 public class Plik extends Katalog{
 
@@ -53,7 +55,9 @@ public class Plik extends Katalog{
 			this.setLiczbaDanychWejsciowych();
 		}
 	}
-	
+	/*
+	 * Metoda setMIMEType() s³u¿y do ustawienia identyfikatora MIME dla danego pliku
+	 */
 	private void setMIMEType() {
 		tika = TikaDetector.getInstance();
 		try {
@@ -64,10 +68,16 @@ public class Plik extends Katalog{
 		}
 	}
 
+	/**
+	 * Metoda setRozmiar() s³u¿y do ustawienia informacji o rozmiarze danego pliku
+	 */
 	private void setRozmiar() {
 		this.rozmiar = new File(this.sciezka).length();
 	}
 	
+	/**
+	 * Metoda setLiczbaLiniiKodu() s³uzy do ustawienia informacji o liczbie linii kodu wystêpuj¹cych w danym pliku
+	 */
 	private void setLiczbaLiniiKodu() {
 	
 		try {
@@ -82,7 +92,9 @@ public class Plik extends Katalog{
 		}
 		
 	}
-	
+	/**
+	 * Metoda setLiczbaZnakow() s³uzy do ustawienia informacji o liczbie znakow wystêpujacych w danym pliku
+	 */
 	private void setLiczbaZnakow() {
 		
 		try {
@@ -101,6 +113,9 @@ public class Plik extends Katalog{
 		
 	}
 	
+	/**
+	 * Metoda setJEzykInterfejsu() sluzy do uzyskania informacji o prefiks jezyka interfejsu (wedlug standardu ISO 639-1) danego pliku
+	 */
 	
 	private void setJezykInterfejsu() {
 		try {
@@ -147,6 +162,9 @@ public class Plik extends Katalog{
 		}
 	}
 	
+	/**
+	 * Metoda setHash() s³uzy do ustawienia informacji o hashu danego pliku
+	 */
 	
 	private void setHash() {
 		try {
@@ -156,11 +174,15 @@ public class Plik extends Katalog{
 			System.out.println("Cos nie tak przy wyliczaniu Hash");
 		}
 	}
-	
+	/**
+	 * Metoda setRozszerzenie() s³uzy do ustawienia informacji o rozszerzeniu danego pliku
+	 */
 	private void setRozszerzenie() {
 		rozszerzenie = FilenameUtils.getExtension(nazwa);
 	}
-	
+	/**
+	 * Metoda setWczytywaniePlikow() sluzy do ustawienia informacji o tym czy do danego pliku jest wczytywany inny plik
+	 */
 	private void setWczytywaniePlikow() {
 		
 		try {
@@ -194,7 +216,9 @@ public class Plik extends Katalog{
 		}
 		
 	}
-	
+	/**
+	 * Metoda setLiczbaDanychWejsciowych sluzy do ustawienia informacji o liczbie danych wejsciowych danego pliku
+	 */
 	private void setLiczbaDanychWejsciowych() {
 
 		try {
@@ -231,6 +255,9 @@ public class Plik extends Katalog{
 		
 	}
 	
+	/**
+	 * Metoda setZbiorBibliotek() sluzy do uzyskanie informacji o zbiorze bibliotek wykorzystywanych w danym pliku
+	 */
 	private void setZbiorBibliotek() {
 		
 		try {
@@ -279,6 +306,9 @@ public class Plik extends Katalog{
 			System.out.println("Cos nie tak przy sprawdzaniu zbioru bibliotek");
 		}
 	}
+	/**
+	 * Metoda setLiczbaAtrybutow() sluzy do ustawienia liczby atrybutow wystepujacych w danym pliku
+	 */
 	
 	private void setLiczbaAtrybutow() {
 		
