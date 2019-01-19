@@ -37,12 +37,21 @@ import classUpload.TypyZmiennych;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+/**
+ * Glowna klasa przedstawiajaca interfejsy wystawiane w WebService
+ */
 @WebService(targetNamespace = "http://webService/", portName = "ServiceSAPort", serviceName = "ServiceSAService")
 @Addressing(enabled = false, required = false)
 public class ServiceSA {
 	
 	Pack paczkaProjektow = new Pack();
-
+    
+	/**
+	 * Metoda przeslijPlik() zapisuje oraz wypakowuje podane archiwum z projektem pod odpowiednia sciezka na serwerze
+	 * oraz czyta plik XMI i sprawdza jakie cechy wybrano do porwnania dla tego projektu
+	 * @param link - parametrem wejsciowym jest link do archiwum projektu
+	 * @return metoda zwraca liste cech mozliwych do pobrania z serwisu dla podanego projektu
+	 */
 	@WebMethod(operationName = "przeslijPlik", action = "urn:PrzeslijPlik")
 	public ArrayList<String> przeslijPlik(@WebParam(name = "arg0") String link) {
 
@@ -126,6 +135,11 @@ public class ServiceSA {
 		return null;
 	}
 
+	/**
+	 * Metoda getLiczbaPlikow() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaPlikow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liczbe plikow w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaPlikow", action = "urn:GetLiczbaPlikow")
 	public int getLiczbaPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaPlikowProperty.name())) {
@@ -135,6 +149,11 @@ public class ServiceSA {
 		}
 	}
 
+	/**
+	 * Metoda getRozmiaryPlikowKodow() odpowiada za wyodrebnienie z projektu wartosci dla cechy RozmiaryPlikowKodow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca nazwe i rozmiar dla danych plikow w projekcie
+	 */
 	@WebMethod(operationName = "getRozmiaryPlikowKodow", action = "urn:GetRozmiaryPlikowKodow")
 	public LinkedList<RozmiaryPlikow> getRozmiaryPlikowKodow(@WebParam(name = "arg0") String nazwaProjektu) {
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.RozmiaryPlikowKodowZrodlowychProperty.name())) {
@@ -152,6 +171,11 @@ public class ServiceSA {
 		}
 	}
 
+	/**
+	 * Metoda getListaNazwPlikow() odpowiada za wyodrebnienie z projektu wartosci dla cechy ListaNazwPlikow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste nazw plikow w calym projekcie
+	 */
 	@WebMethod(operationName = "getListaNazwPlikow", action = "urn:GetListaNazwPlikow")
 	public ArrayList<String> getListaNazwPlikow(@WebParam(name = "arg0") String nazwaProjektu) {
 		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwPlikowIKatalogow.name())) {
@@ -165,6 +189,11 @@ public class ServiceSA {
 		}
 	}
 
+	/**
+	 * Metoda getListaNazwKatalogow() odpowiada za wyodrebnienie z projektu wartosci dla cechy ListaNazwKatalogow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste nazw katalogow w calym projekcie
+	 */
 	@WebMethod(operationName = "getListaNazwKatalogow", action = "urn:GetListaNazwKatalogow")
 	public ArrayList<String> getListaNazwKatalogow(@WebParam(name = "arg0") String nazwaProjektu) {
 		if (paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ListaNazwPlikowIKatalogow.name())) {
@@ -178,6 +207,11 @@ public class ServiceSA {
 		}
 	}
 	
+	/**
+	 * Metoda getLiczbaLiniiKodu() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaLiniiKodu
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca nazwe i liczbe linii dla danych plikow w projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaLiniiKodu", action = "urn:GetLiczbaLiniiKodu")
 	public LinkedList<LiczbaLiniiKodu> getLiczbaLiniiKodu(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaLiniiKoduProperty.name())) {
@@ -196,6 +230,11 @@ public class ServiceSA {
 		}
 	}
 	
+	/**
+	 * Metoda getSkrotyPlikow() odpowiada za wyodrebnienie z projektu wartosci dla cechy SkrotyPlikow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca nazwe i hash(skrot) dla danych plikow w projekcie
+	 */
 	@WebMethod(operationName = "getSkrotyPlikow", action = "urn:GetSkrotyPlikow")
 	public LinkedList<HashePlikow> getSkrotyPlikow(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.SkrotyPlikowProperty.name())) {
@@ -212,9 +251,13 @@ public class ServiceSA {
 		}else {
 			return null;
 		}
-}
+    }
 	
-
+	/**
+	 * Metoda getLiczbaPlikowDanegoRozszerzenia() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaPlikowDanegoRozszerzenia
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca rozszerzenie i liczbe plikow o takim rozszerzeniu w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaPlikowDanegoRozszerzenia", action = "urn:GetLiczbaPlikowDanegoRozszerzenia")
 	public LinkedList<RozszerzeniaPlikow> getLiczbaPlikowDanegoRozszerzenia(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaPlikowODanymRozszerzeniuProperty.name())) {
@@ -233,7 +276,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getLiczbaDanychWejsciowych() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaDanychWejsciowych
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liczbe odwolan do instrukcji, ktore sa uzywane do wprowadzania danych
+	 */
 	@WebMethod(operationName = "getLiczbaDanychWejsciowych", action = "urn:GetLiczbaDanychWejsciowych")
 	public int getLiczbaDanychWejsciowych(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaDanychWejsciowychProperty.name())) {
@@ -243,10 +290,11 @@ public class ServiceSA {
 		}
 	}
 	
-
-
-	
-
+	/**
+	 * Metoda getLiczbaPlikowDanegoTypu() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaPlikowDanegoTypu
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca typ i liczbe plikow o takim typie w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaPlikowDanegoTypu", action = "urn:GetLiczbaPlikowDanegoTypu")
 	public LinkedList<TypyPlikow> getLiczbaPlikowDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaPlikowDanegoTypuProperty.name())) {
@@ -264,7 +312,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getLiczbaAtrybutow() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaAtrybutow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liczbe atrybutow w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaAtrybutow", action = "urn:GetLiczbaAtrybutow")
 	public int getLiczbaAtrybutow(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaAtrybutowProperty.name())) {
@@ -274,7 +326,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getLiczbaMetod() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaMetod
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liczbe metod w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaMetod", action = "urn:GetLiczbaMetod")
 	public int getLiczbaMetod(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaMetodProperty.name())) {
@@ -285,7 +341,11 @@ public class ServiceSA {
 		
 	}
 	
-
+	/**
+	 * Metoda getLiczbaAtrybutowWKlasach() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaAtrybutowWKlasach
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca zawierajaca nazwe i liczbe atrybutow dla danych plikow w projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaAtrybutowWKlasach", action = "urn:GetLiczbaAtrybutowWKlasach")
 	public LinkedList<AtrybutyPlikow> getLiczbaAtrybutowWKlasach(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaAtrybutowWKlasach.name())) {
@@ -304,7 +364,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getZbiorBibliotek() odpowiada za wyodrebnienie z projektu wartosci dla cechy ZbiorBibliotek
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste zalaczonych do kodu bibliotek bez powtorzen w calym projekcie
+	 */
 	@WebMethod(operationName = "getZbiorBibliotek", action = "urn:GetZbiorBibliotek")
 	public ArrayList<String> getZbiorBibliotek(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ZbiorBibliotekProperty.name())) {
@@ -324,7 +388,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getJezykProgramowania() odpowiada za wyodrebnienie z projektu wartosci dla cechy JezykProgramowania
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca nazwe jezyka programowania(Java, C, C#, C++) dla projektu
+	 */
 	@WebMethod(operationName = "getJezykProgramowania", action = "urn:GetJezykProgramowania")
 	public String getJezykProgramowania(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.JezykProgramowaniaProperty.name())) {
@@ -334,7 +402,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getLiczbaZnakow() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaZnakow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liczbe znakow w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaZnakow", action = "urn:GetLiczbaZnakow")
 	public int getLiczbaZnakow(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null) {
@@ -344,7 +416,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getLiczbaZmiennychDanegoTypu() odpowiada za wyodrebnienie z projektu wartosci dla cechy LiczbaZmiennychDanegoTypu
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca liste uporzadkowana zawierajaca typ i liczbe zmiennych o takim typie w calym projekcie
+	 */
 	@WebMethod(operationName = "getLiczbaZmiennychDanegoTypu", action = "urn:GetLiczbaZmiennychDanegoTypu")
 	public LinkedList<TypyZmiennych> getLiczbaZmiennychDanegoTypu(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.LiczbaZmiennychDanegoTypuProperty.name())) {
@@ -363,7 +439,11 @@ public class ServiceSA {
 		}
 	}
 	
-	//Adam
+	/**
+	 * Metoda getParadygmat() odpowiada za wyodrebnienie z projektu wartosci dla cechy ParadygmatProgramowania
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca nazwe paradygmatu programowania(obiektowy, strukturalny) przewazajacego w calym projekcie
+	 */
 	@WebMethod(operationName = "getParadygmat", action = "urn:GetParadygmat")
 	public String getParadygmat(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ParadygmatProperty.name())) {
@@ -373,7 +453,11 @@ public class ServiceSA {
 		}
 	}
 	
-	//Adam
+	/**
+	 * Metoda getWykorzystanieWielowatkowosci() odpowiada za wyodrebnienie z projektu wartosci dla cechy WykorzystanieWielowatkowosci
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca informacje(true, false) czy w calym projekcie wystapilo wykorzystanie wielowatkowosci
+	 */
 	@WebMethod(operationName = "getWykorzystanieWielowatkowosci", action = "urn:GetWykorzystanieWielowatkowosci")
 	public Boolean getWykorzystanieWielowatkowosci(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.MechanizmWielowatkowosciProperty.name())) {
@@ -383,7 +467,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getMozliwosciWczytywaniaPlikow() odpowiada za wyodrebnienie z projektu wartosci dla cechy MozliwosciWczytywaniaPlikow
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca informacje(true, false) czy w calym projekcie wystapilo odwolanie do instrukcji, ktore sa uzywane do wprowadzania danych
+	 */
 	@WebMethod(operationName = "getMozliwosciWczytywaniaPlikow", action = "urn:GetMozliwosciWczytywaniaPlikow")
 	public Boolean getMozliwosciWczytywaniaPlikow(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.MozliwoscWczytaniaPlikowProperty.name())) {
@@ -402,7 +490,11 @@ public class ServiceSA {
 		}
 	}
 	
-
+	/**
+	 * Metoda getJezykInterfejsu() odpowiada za wyodrebnienie z projektu wartosci dla cechy JezykInterfejsu
+	 * @param nazwaProjektu - parametrem wejsciowym jest nazwa projektu
+	 * @return metoda zwraca prefiks jezyka interfejsu(wedlug standardu ISO 639-1, np. pl, en) przewazajacego w calym projekcie
+	 */
 	@WebMethod(operationName = "getJezykInterfejsu", action = "urn:GetJezykInterfejsu")
 	public String getJezykInterfejsu(@WebParam(name = "arg0") String nazwaProjektu){
 		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.JezykInterfejsuProperty.name())) {
