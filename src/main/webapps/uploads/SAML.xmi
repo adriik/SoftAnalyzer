@@ -199,7 +199,7 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghwYFEem9QKLYZSURpQ" name="LiczbaZnakowProperty" visibility="private"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiAYFEem9QKLYZSURpQ" name="ListaNazwPlikowIKatalogow" visibility="private"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgigYFEem9QKLYZSURpQ" name="LiczbaPlikowDanegoTypuProperty" visibility="private"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="MozliwoscWczytaniaPlikowProperty" visibility="private"/>      
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiwYFEem9QKLYZSURpQ" name="MozliwoscWczytywaniaPlikowProperty" visibility="private"/>      
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kghwYFEem9QKLYZSURpQ" name="LiczbaDanychWejsciowychProperty" visibility="private"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiAYFEem9QKLYZSURpQ" name="JezykInterfejsuProperty" visibility="private"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_M-kgiQYFEem9QKLYZSURpQ" name="LiczbaZmiennychDanegoTypuProperty" visibility="private"/>

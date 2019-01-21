@@ -18,7 +18,7 @@ public enum Cechy {
 	ListaNazwPlikowIKatalogow,
 	LiczbaPlikowODanymRozszerzeniuProperty,
 	LiczbaPlikowDanegoTypuProperty,
-	MozliwoscWczytaniaPlikowProperty,
+	MozliwoscWczytywaniaPlikowProperty,
 	LiczbaDanychWejsciowychProperty,
 	JezykInterfejsuProperty,
 	LiczbaZmiennychDanegoTypuProperty,

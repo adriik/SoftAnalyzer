@@ -1,6 +1,5 @@
 package webService;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -15,7 +14,6 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.soap.Addressing;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -78,7 +76,6 @@ public class ServiceSA {
 				ZipFile zipFile = new ZipFile(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
 				zipFile.extractAll(sciezka + "archiwum" + "/"
 						+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
-
 			} catch (ZipException e) {
 				e.printStackTrace();
 				System.out.println("Cos poszlo nie tak podczas wypakowania!");
@@ -110,26 +107,26 @@ public class ServiceSA {
 					}
 				}
 			}
-			new Thread(new Runnable() {
-	            @Override
-	            public void run() {
-	            	while(!projekt.czyWyczyszczony) {
-		            	try {
-		            		Thread.sleep(100000);
-							FileUtils.forceDelete(new File(projekt.getSciezka()));
-							FileUtils.forceDelete(new File(sciezka + "archiwum/" + wynik1[wynik1.length - 1]));
-							projekt.czyWyczyszczony = true;
-						} catch (IOException e) {
-							e.printStackTrace();
-							System.out.println("Blad podczas Thread");
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-							System.out.println("Błąd podczas sleepa");
-						}
-	            	}
-	            	System.out.println("Udało się usunąć");
-	            }
-	        }).start();
+//			new Thread(new Runnable() {
+//	            @Override
+//	            public void run() {
+//	            	while(!projekt.czyWyczyszczony) {
+//		            	try {
+//		            		Thread.sleep(100000);
+//							FileUtils.forceDelete(new File(projekt.getSciezka()));
+//							FileUtils.forceDelete(new File(sciezka + "archiwum/" + wynik1[wynik1.length - 1]));
+//							projekt.czyWyczyszczony = true;
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//							System.out.println("Blad podczas Thread");
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//							System.out.println("Błąd podczas sleepa");
+//						}
+//	            	}
+//	            	System.out.println("Udało się usunąć");
+//	            }
+//	        }).start();
 			
 			return projekt.listaCech;
 
@@ -478,7 +475,7 @@ public class ServiceSA {
 	 */
 	@WebMethod(operationName = "getMozliwosciWczytywaniaPlikow", action = "urn:GetMozliwosciWczytywaniaPlikow")
 	public Boolean getMozliwosciWczytywaniaPlikow(@WebParam(name = "arg0") String nazwaProjektu){
-		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.MozliwoscWczytaniaPlikowProperty.name())) {
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.MozliwoscWczytywaniaPlikowProperty.name())) {
 			boolean wczytywaniePlikow = false;
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
