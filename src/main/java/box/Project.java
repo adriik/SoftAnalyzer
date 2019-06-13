@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class Project {
 	 */
 	private void setListaNazwPlikow(String sciezka) {
 		listaPlikow = new ArrayList<Plik>();
-		System.out.println("Sciezka zla: " + sciezka);
+		//System.out.println("Sciezka zla: " + sciezka);
 		try (Stream<Path> paths = Files.walk(Paths.get(sciezka))) {
 			listaPlikow = (ArrayList<Plik>) paths.filter(Files::isRegularFile)
 					.map(p -> new Plik(
@@ -333,17 +334,17 @@ public class Project {
 				}
 			}
 		}
-		liczbaZmiennychDanegoTypu.put("BYTE: ",liczbaZmiennych[0] );
-		liczbaZmiennychDanegoTypu.put("SHORT: ",liczbaZmiennych[1] );
-		liczbaZmiennychDanegoTypu.put("INT: ",liczbaZmiennych[2] );
-		liczbaZmiennychDanegoTypu.put("LONG: ",liczbaZmiennych[3] );
-		liczbaZmiennychDanegoTypu.put("DOUBLE: ",liczbaZmiennych[4] );
-		liczbaZmiennychDanegoTypu.put("FLOAT: ",liczbaZmiennych[5] );
-		liczbaZmiennychDanegoTypu.put("STRING: ",liczbaZmiennych[6] );
-		liczbaZmiennychDanegoTypu.put("BOOLEAN: ",liczbaZmiennych[7] );
-		liczbaZmiennychDanegoTypu.put("BOOL: ",liczbaZmiennych[8] );
-		liczbaZmiennychDanegoTypu.put("CHAR: ",liczbaZmiennych[9] );
-		liczbaZmiennychDanegoTypu.put("DECIMAL: ",liczbaZmiennych[10] );
+		liczbaZmiennychDanegoTypu.put("BYTE",liczbaZmiennych[0] );
+		liczbaZmiennychDanegoTypu.put("SHORT",liczbaZmiennych[1] );
+		liczbaZmiennychDanegoTypu.put("INT",liczbaZmiennych[2] );
+		liczbaZmiennychDanegoTypu.put("LONG",liczbaZmiennych[3] );
+		liczbaZmiennychDanegoTypu.put("DOUBLE",liczbaZmiennych[4] );
+		liczbaZmiennychDanegoTypu.put("FLOAT",liczbaZmiennych[5] );
+		liczbaZmiennychDanegoTypu.put("STRING",liczbaZmiennych[6] );
+		liczbaZmiennychDanegoTypu.put("BOOLEAN",liczbaZmiennych[7] );
+		liczbaZmiennychDanegoTypu.put("BOOL",liczbaZmiennych[8] );
+		liczbaZmiennychDanegoTypu.put("CHAR",liczbaZmiennych[9] );
+		liczbaZmiennychDanegoTypu.put("DECIMAL",liczbaZmiennych[10] );
 	}
 
 	/**
@@ -646,7 +647,11 @@ public class Project {
 		liczbaAtrybutow = 0;
 
 		for (Plik plik : listaPlikow) {
-			liczbaAtrybutow = liczbaAtrybutow + plik.liczbaAtrybutow;
+			ArrayList<String> cRozszerzeniaPlikow = new ArrayList<String>(Arrays.asList("c", "h", "cpp", "cxx", "hxx", "cs", "java"));
+
+			if(cRozszerzeniaPlikow.contains(plik.rozszerzenie)) {
+				liczbaAtrybutow = liczbaAtrybutow + plik.liczbaAtrybutow;
+			}
 		}
 	}
 

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map.*;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +36,9 @@ public class Plik extends Katalog{
 	public String rozszerzenie;
 	public boolean wczytywaniePlikow = false;
 	public ArrayList<String> zbiorBibliotek = new ArrayList<String>();
+	public ArrayList<String> zbiorWykorzystywanychPlikow = new ArrayList<String>();
+	public ArrayList<String> zbiorWykorzystywanychAdresow = new ArrayList<String>();
+	public ArrayList<String> zbiorWykorzystywanychPortow = new ArrayList<String>();
 	public int liczbaAtrybutow = 0;
 	public int liczbaZnakow = 0;
 	public String jezykInterfejsu = "";
@@ -58,6 +61,10 @@ public class Plik extends Katalog{
 			this.setLiczbaZnakow();
 			this.setJezykInterfejsu();
 			this.setLiczbaDanychWejsciowych();
+			this.setZbiorWykorzystywanychPlikow();
+			this.setZbiorWykorzystywanychAdresow();
+			this.setZbiorWykorzystywanychPortow();
+
 		}
 	}
 	/*
@@ -284,7 +291,7 @@ public class Plik extends Katalog{
 			    	      Matcher matcher = pattern.matcher(line);
 			    	      while(matcher.find())
 			    	        {
-			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(0,matcher.group().split(" ")[1].length()-1));
+			    	    	  	zbiorBibliotek.add(matcher.group().replaceAll("\\s+"," ").split(" ")[1].substring(0,matcher.group().replaceAll("\\s+"," ").split(" ")[1].length()-1));
 			    	        }
 			    	  }
 			    	  else if (i==1) {
@@ -292,7 +299,12 @@ public class Plik extends Katalog{
 			    	      Matcher matcher = pattern.matcher(line);
 			    	      while(matcher.find())
 			    	        {
-			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(1,matcher.group().split(" ")[1].length()-1));
+			    	    	  	//System.out.println("Jakis Błąd: " + sciezka + " cosiek: " + matcher.group());
+			    	    	  	try {
+			    	    	  		zbiorBibliotek.add(matcher.group().replaceAll("\\s+"," ").split(" ")[1].substring(1,matcher.group().replaceAll("\\s+"," ").split(" ")[1].length()-1));
+			    	    	  	}catch(StringIndexOutOfBoundsException e) {
+			    	    	  		System.out.println("Pominąłem niektóre biblioteki");
+			    	    	  	}
 			    	        }
 			    	  }
 			    	  else {
@@ -300,7 +312,7 @@ public class Plik extends Katalog{
 			    	      Matcher matcher = pattern.matcher(line);
 			    	      while(matcher.find())
 			    	        {
-			    	    	  	zbiorBibliotek.add(matcher.group().split(" ")[1].substring(0,matcher.group().split(" ")[1].length()-1));
+			    	    	  	zbiorBibliotek.add(matcher.group().replaceAll("\\s+"," ").split(" ")[1].substring(0,matcher.group().replaceAll("\\s+"," ").split(" ")[1].length()-1));
 			    	        }
 			    	  }
 				}
@@ -311,6 +323,86 @@ public class Plik extends Katalog{
 			System.out.println("Cos nie tak przy sprawdzaniu zbioru bibliotek");
 		}
 	}
+	
+	private void setZbiorWykorzystywanychPlikow() {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+
+
+			while ((line=reader.readLine())!=null){
+
+				Pattern pattern = Pattern.compile("\\\"([a-zA-Z]:)?(~)?(\\\\\\\\[a-zA-Z0-9_.-]+)+\\\\\\\\?");
+				Matcher matcher = pattern.matcher(line);
+				while(matcher.find()) {
+					zbiorWykorzystywanychPlikow.add(matcher.group());
+		        }
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy sprawdzaniu zbioru WykorzystywanychPlikow");
+		}
+	}
+	
+	private void setZbiorWykorzystywanychAdresow() {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+			
+			while ((line=reader.readLine())!=null){
+		        Pattern pattern = Pattern.compile(
+		                "(((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}" // Domain name
+		                + "|"
+		                + "localhost" // localhost
+		                + "|"
+		                + "(([0-9]{1,3}\\.){3})[0-9]{1,3})" // Ip
+		                + ":"
+		                + "[0-9]{1,5}"); // Port
+
+				Matcher matcher = pattern.matcher(line);
+				while(matcher.find()) {
+						String adres = matcher.group().split(":")[0];
+				    	zbiorWykorzystywanychAdresow.add(adres);
+		        }
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy sprawdzaniu zbioru WykorzystywanychAdresow");
+		}
+	}
+	
+	private void setZbiorWykorzystywanychPortow() {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(sciezka));
+			String line;
+
+
+			while ((line=reader.readLine())!=null){
+		        Pattern pattern = Pattern.compile(
+		                "(((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}" // Domain name
+		                + "|"
+		                + "localhost" // localhost
+		                + "|"
+		                + "(([0-9]{1,3}\\.){3})[0-9]{1,3})" // Ip
+		                + ":"
+		                + "[0-9]{1,5}"); // Port
+
+				Matcher matcher = pattern.matcher(line);
+				while(matcher.find()) {
+					String adres = matcher.group();
+					//System.out.println("Wykrylem: " + matcher.group());
+					zbiorWykorzystywanychPortow.add(adres.split(":")[adres.split(":").length-1]);
+		        }
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Cos nie tak przy sprawdzaniu zbioru WykorzystywanychPortow");
+		}
+	}
+	
 	/**
 	 * Metoda setLiczbaAtrybutow() sluzy do ustawienia liczby atrybutow wystepujacych w danym pliku
 	 */
