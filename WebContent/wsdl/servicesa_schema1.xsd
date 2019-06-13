@@ -1,4 +1,4 @@
-<xs:schema xmlns:tns="http://webService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://webService/" version="1.0">
+<xs:schema xmlns:tns="http://webService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://webService/" version="1.0">
 
   <xs:element name="getJezykInterfejsu" type="tns:getJezykInterfejsu"/>
 
@@ -80,6 +80,18 @@
 
   <xs:element name="getZbiorBibliotekResponse" type="tns:getZbiorBibliotekResponse"/>
 
+  <xs:element name="getZbiorWykorzystywanychAdresow" type="tns:getZbiorWykorzystywanychAdresow"/>
+
+  <xs:element name="getZbiorWykorzystywanychAdresowResponse" type="tns:getZbiorWykorzystywanychAdresowResponse"/>
+
+  <xs:element name="getZbiorWykorzystywanychPlikow" type="tns:getZbiorWykorzystywanychPlikow"/>
+
+  <xs:element name="getZbiorWykorzystywanychPlikowResponse" type="tns:getZbiorWykorzystywanychPlikowResponse"/>
+
+  <xs:element name="getZbiorWykorzystywanychPortow" type="tns:getZbiorWykorzystywanychPortow"/>
+
+  <xs:element name="getZbiorWykorzystywanychPortowResponse" type="tns:getZbiorWykorzystywanychPortowResponse"/>
+
   <xs:element name="przeslijPlik" type="tns:przeslijPlik"/>
 
   <xs:element name="przeslijPlikResponse" type="tns:przeslijPlikResponse"/>
@@ -93,6 +105,128 @@
   <xs:complexType name="getListaNazwPlikowResponse">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLiczbaPlikowDanegoRozszerzenia">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLiczbaPlikowDanegoRozszerzeniaResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:rozszerzeniaPlikow"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="rozszerzeniaPlikow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="rozszerzenie" type="xs:string"/>
+      <xs:element name="liczba" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLiczbaZnakow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLiczbaZnakowResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getListaNazwKatalogow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getListaNazwKatalogowResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getZbiorWykorzystywanychPlikow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getZbiorWykorzystywanychPlikowResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="przeslijPlik">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="przeslijPlikResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLiczbaAtrybutow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLiczbaAtrybutowResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getZbiorBibliotek">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getZbiorBibliotekResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRozmiaryPlikowKodow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRozmiaryPlikowKodowResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:rozmiaryPlikow"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="rozmiaryPlikow">
+    <xs:sequence>
+      <xs:element name="rozmiar" type="xs:int"/>
+      <xs:element minOccurs="0" name="nazwa" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getJezykInterfejsu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getJezykInterfejsuResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -139,22 +273,15 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="getLiczbaPlikowDanegoRozszerzenia">
+  <xs:complexType name="getZbiorWykorzystywanychPortow">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="getLiczbaPlikowDanegoRozszerzeniaResponse">
+  <xs:complexType name="getZbiorWykorzystywanychPortowResponse">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:rozszerzeniaPlikow"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="rozszerzeniaPlikow">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="rozszerzenie" type="xs:string"/>
-      <xs:element name="liczba" type="xs:int"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -191,42 +318,6 @@
   <xs:complexType name="getMozliwosciWczytywaniaPlikowResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:boolean"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getLiczbaZnakow">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getLiczbaZnakowResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getListaNazwKatalogow">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getListaNazwKatalogowResponse">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="przeslijPlik">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="przeslijPlikResponse">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -273,30 +364,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="getLiczbaAtrybutow">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getLiczbaAtrybutowResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getZbiorBibliotek">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getZbiorBibliotekResponse">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
   <xs:complexType name="getLiczbaLiniiKodu">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:string"/>
@@ -335,22 +402,15 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="getRozmiaryPlikowKodow">
+  <xs:complexType name="getZbiorWykorzystywanychAdresow">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="getRozmiaryPlikowKodowResponse">
+  <xs:complexType name="getZbiorWykorzystywanychAdresowResponse">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:rozmiaryPlikow"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="rozmiaryPlikow">
-    <xs:sequence>
-      <xs:element name="rozmiar" type="xs:int"/>
-      <xs:element minOccurs="0" name="nazwa" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -370,18 +430,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="hash" type="xs:string"/>
       <xs:element minOccurs="0" name="nazwa" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getJezykInterfejsu">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getJezykInterfejsuResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 

@@ -21,16 +21,20 @@
     <wsdl:part name="parameters" element="tns:getListaNazwKatalogowResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getLiczbaAtrybutowWKlasachResponse">
-    <wsdl:part name="parameters" element="tns:getLiczbaAtrybutowWKlasachResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getJezykInterfejsuResponse">
     <wsdl:part name="parameters" element="tns:getJezykInterfejsuResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getLiczbaAtrybutowWKlasachResponse">
+    <wsdl:part name="parameters" element="tns:getLiczbaAtrybutowWKlasachResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getSkrotyPlikowResponse">
     <wsdl:part name="parameters" element="tns:getSkrotyPlikowResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getZbiorWykorzystywanychPlikowResponse">
+    <wsdl:part name="parameters" element="tns:getZbiorWykorzystywanychPlikowResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getLiczbaPlikowDanegoRozszerzenia">
@@ -47,6 +51,10 @@
   </wsdl:message>
   <wsdl:message name="getListaNazwKatalogow">
     <wsdl:part name="parameters" element="tns:getListaNazwKatalogow">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getZbiorWykorzystywanychPlikow">
+    <wsdl:part name="parameters" element="tns:getZbiorWykorzystywanychPlikow">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="przeslijPlik">
@@ -69,12 +77,12 @@
     <wsdl:part name="parameters" element="tns:getRozmiaryPlikowKodow">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getLiczbaDanychWejsciowychResponse">
-    <wsdl:part name="parameters" element="tns:getLiczbaDanychWejsciowychResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getJezykInterfejsu">
     <wsdl:part name="parameters" element="tns:getJezykInterfejsu">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLiczbaDanychWejsciowychResponse">
+    <wsdl:part name="parameters" element="tns:getLiczbaDanychWejsciowychResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getParadygmat">
@@ -85,12 +93,12 @@
     <wsdl:part name="parameters" element="tns:getWykorzystanieWielowatkowosci">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getLiczbaZmiennychDanegoTypu">
-    <wsdl:part name="parameters" element="tns:getLiczbaZmiennychDanegoTypu">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="przeslijPlikResponse">
     <wsdl:part name="parameters" element="tns:przeslijPlikResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLiczbaZmiennychDanegoTypu">
+    <wsdl:part name="parameters" element="tns:getLiczbaZmiennychDanegoTypu">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getListaNazwPlikowResponse">
@@ -103,6 +111,10 @@
   </wsdl:message>
   <wsdl:message name="getLiczbaZmiennychDanegoTypuResponse">
     <wsdl:part name="parameters" element="tns:getLiczbaZmiennychDanegoTypuResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getZbiorWykorzystywanychPortow">
+    <wsdl:part name="parameters" element="tns:getZbiorWykorzystywanychPortow">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getZbiorBibliotekResponse">
@@ -145,12 +157,20 @@
     <wsdl:part name="parameters" element="tns:getLiczbaMetodResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getZbiorWykorzystywanychAdresowResponse">
+    <wsdl:part name="parameters" element="tns:getZbiorWykorzystywanychAdresowResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getLiczbaLiniiKodu">
     <wsdl:part name="parameters" element="tns:getLiczbaLiniiKodu">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getLiczbaPlikowDanegoTypu">
     <wsdl:part name="parameters" element="tns:getLiczbaPlikowDanegoTypu">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getZbiorWykorzystywanychAdresow">
+    <wsdl:part name="parameters" element="tns:getZbiorWykorzystywanychAdresow">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getJezykProgramowaniaResponse">
@@ -169,6 +189,10 @@
     <wsdl:part name="parameters" element="tns:getWykorzystanieWielowatkowosciResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getZbiorWykorzystywanychPortowResponse">
+    <wsdl:part name="parameters" element="tns:getZbiorWykorzystywanychPortowResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getMozliwosciWczytywaniaPlikowResponse">
     <wsdl:part name="parameters" element="tns:getMozliwosciWczytywaniaPlikowResponse">
     </wsdl:part>
@@ -178,6 +202,60 @@
       <wsdl:input name="getListaNazwPlikow" message="tns:getListaNazwPlikow" wsam:Action="urn:GetListaNazwPlikow" wsaw:Action="urn:GetListaNazwPlikow">
     </wsdl:input>
       <wsdl:output name="getListaNazwPlikowResponse" message="tns:getListaNazwPlikowResponse" wsam:Action="http://webService/ServiceSA/getListaNazwPlikowResponse" wsaw:Action="http://webService/ServiceSA/getListaNazwPlikowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaPlikowDanegoRozszerzenia">
+      <wsdl:input name="getLiczbaPlikowDanegoRozszerzenia" message="tns:getLiczbaPlikowDanegoRozszerzenia" wsam:Action="urn:GetLiczbaPlikowDanegoRozszerzenia" wsaw:Action="urn:GetLiczbaPlikowDanegoRozszerzenia">
+    </wsdl:input>
+      <wsdl:output name="getLiczbaPlikowDanegoRozszerzeniaResponse" message="tns:getLiczbaPlikowDanegoRozszerzeniaResponse" wsam:Action="http://webService/ServiceSA/getLiczbaPlikowDanegoRozszerzeniaResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaPlikowDanegoRozszerzeniaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaZnakow">
+      <wsdl:input name="getLiczbaZnakow" message="tns:getLiczbaZnakow" wsam:Action="urn:GetLiczbaZnakow" wsaw:Action="urn:GetLiczbaZnakow">
+    </wsdl:input>
+      <wsdl:output name="getLiczbaZnakowResponse" message="tns:getLiczbaZnakowResponse" wsam:Action="http://webService/ServiceSA/getLiczbaZnakowResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaZnakowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListaNazwKatalogow">
+      <wsdl:input name="getListaNazwKatalogow" message="tns:getListaNazwKatalogow" wsam:Action="urn:GetListaNazwKatalogow" wsaw:Action="urn:GetListaNazwKatalogow">
+    </wsdl:input>
+      <wsdl:output name="getListaNazwKatalogowResponse" message="tns:getListaNazwKatalogowResponse" wsam:Action="http://webService/ServiceSA/getListaNazwKatalogowResponse" wsaw:Action="http://webService/ServiceSA/getListaNazwKatalogowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZbiorWykorzystywanychPlikow">
+      <wsdl:input name="getZbiorWykorzystywanychPlikow" message="tns:getZbiorWykorzystywanychPlikow" wsam:Action="urn:GetZbiorWykorzystywanychPlikow" wsaw:Action="urn:GetZbiorWykorzystywanychPlikow">
+    </wsdl:input>
+      <wsdl:output name="getZbiorWykorzystywanychPlikowResponse" message="tns:getZbiorWykorzystywanychPlikowResponse" wsam:Action="http://webService/ServiceSA/getZbiorWykorzystywanychPlikowResponse" wsaw:Action="http://webService/ServiceSA/getZbiorWykorzystywanychPlikowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="przeslijPlik">
+      <wsdl:input name="przeslijPlik" message="tns:przeslijPlik" wsam:Action="urn:PrzeslijPlik" wsaw:Action="urn:PrzeslijPlik">
+    </wsdl:input>
+      <wsdl:output name="przeslijPlikResponse" message="tns:przeslijPlikResponse" wsam:Action="http://webService/ServiceSA/przeslijPlikResponse" wsaw:Action="http://webService/ServiceSA/przeslijPlikResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaAtrybutow">
+      <wsdl:input name="getLiczbaAtrybutow" message="tns:getLiczbaAtrybutow" wsam:Action="urn:GetLiczbaAtrybutow" wsaw:Action="urn:GetLiczbaAtrybutow">
+    </wsdl:input>
+      <wsdl:output name="getLiczbaAtrybutowResponse" message="tns:getLiczbaAtrybutowResponse" wsam:Action="http://webService/ServiceSA/getLiczbaAtrybutowResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaAtrybutowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZbiorBibliotek">
+      <wsdl:input name="getZbiorBibliotek" message="tns:getZbiorBibliotek" wsam:Action="urn:GetZbiorBibliotek" wsaw:Action="urn:GetZbiorBibliotek">
+    </wsdl:input>
+      <wsdl:output name="getZbiorBibliotekResponse" message="tns:getZbiorBibliotekResponse" wsam:Action="http://webService/ServiceSA/getZbiorBibliotekResponse" wsaw:Action="http://webService/ServiceSA/getZbiorBibliotekResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRozmiaryPlikowKodow">
+      <wsdl:input name="getRozmiaryPlikowKodow" message="tns:getRozmiaryPlikowKodow" wsam:Action="urn:GetRozmiaryPlikowKodow" wsaw:Action="urn:GetRozmiaryPlikowKodow">
+    </wsdl:input>
+      <wsdl:output name="getRozmiaryPlikowKodowResponse" message="tns:getRozmiaryPlikowKodowResponse" wsam:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse" wsaw:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJezykInterfejsu">
+      <wsdl:input name="getJezykInterfejsu" message="tns:getJezykInterfejsu" wsam:Action="urn:GetJezykInterfejsu" wsaw:Action="urn:GetJezykInterfejsu">
+    </wsdl:input>
+      <wsdl:output name="getJezykInterfejsuResponse" message="tns:getJezykInterfejsuResponse" wsam:Action="http://webService/ServiceSA/getJezykInterfejsuResponse" wsaw:Action="http://webService/ServiceSA/getJezykInterfejsuResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getParadygmat">
@@ -198,10 +276,10 @@
       <wsdl:output name="getLiczbaZmiennychDanegoTypuResponse" message="tns:getLiczbaZmiennychDanegoTypuResponse" wsam:Action="http://webService/ServiceSA/getLiczbaZmiennychDanegoTypuResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaZmiennychDanegoTypuResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLiczbaPlikowDanegoRozszerzenia">
-      <wsdl:input name="getLiczbaPlikowDanegoRozszerzenia" message="tns:getLiczbaPlikowDanegoRozszerzenia" wsam:Action="urn:GetLiczbaPlikowDanegoRozszerzenia" wsaw:Action="urn:GetLiczbaPlikowDanegoRozszerzenia">
+    <wsdl:operation name="getZbiorWykorzystywanychPortow">
+      <wsdl:input name="getZbiorWykorzystywanychPortow" message="tns:getZbiorWykorzystywanychPortow" wsam:Action="urn:GetZbiorWykorzystywanychPortow" wsaw:Action="urn:GetZbiorWykorzystywanychPortow">
     </wsdl:input>
-      <wsdl:output name="getLiczbaPlikowDanegoRozszerzeniaResponse" message="tns:getLiczbaPlikowDanegoRozszerzeniaResponse" wsam:Action="http://webService/ServiceSA/getLiczbaPlikowDanegoRozszerzeniaResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaPlikowDanegoRozszerzeniaResponse">
+      <wsdl:output name="getZbiorWykorzystywanychPortowResponse" message="tns:getZbiorWykorzystywanychPortowResponse" wsam:Action="http://webService/ServiceSA/getZbiorWykorzystywanychPortowResponse" wsaw:Action="http://webService/ServiceSA/getZbiorWykorzystywanychPortowResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getLiczbaDanychWejsciowych">
@@ -222,24 +300,6 @@
       <wsdl:output name="getMozliwosciWczytywaniaPlikowResponse" message="tns:getMozliwosciWczytywaniaPlikowResponse" wsam:Action="http://webService/ServiceSA/getMozliwosciWczytywaniaPlikowResponse" wsaw:Action="http://webService/ServiceSA/getMozliwosciWczytywaniaPlikowResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLiczbaZnakow">
-      <wsdl:input name="getLiczbaZnakow" message="tns:getLiczbaZnakow" wsam:Action="urn:GetLiczbaZnakow" wsaw:Action="urn:GetLiczbaZnakow">
-    </wsdl:input>
-      <wsdl:output name="getLiczbaZnakowResponse" message="tns:getLiczbaZnakowResponse" wsam:Action="http://webService/ServiceSA/getLiczbaZnakowResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaZnakowResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getListaNazwKatalogow">
-      <wsdl:input name="getListaNazwKatalogow" message="tns:getListaNazwKatalogow" wsam:Action="urn:GetListaNazwKatalogow" wsaw:Action="urn:GetListaNazwKatalogow">
-    </wsdl:input>
-      <wsdl:output name="getListaNazwKatalogowResponse" message="tns:getListaNazwKatalogowResponse" wsam:Action="http://webService/ServiceSA/getListaNazwKatalogowResponse" wsaw:Action="http://webService/ServiceSA/getListaNazwKatalogowResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="przeslijPlik">
-      <wsdl:input name="przeslijPlik" message="tns:przeslijPlik" wsam:Action="urn:PrzeslijPlik" wsaw:Action="urn:PrzeslijPlik">
-    </wsdl:input>
-      <wsdl:output name="przeslijPlikResponse" message="tns:przeslijPlikResponse" wsam:Action="http://webService/ServiceSA/przeslijPlikResponse" wsaw:Action="http://webService/ServiceSA/przeslijPlikResponse">
-    </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getLiczbaMetod">
       <wsdl:input name="getLiczbaMetod" message="tns:getLiczbaMetod" wsam:Action="urn:GetLiczbaMetod" wsaw:Action="urn:GetLiczbaMetod">
     </wsdl:input>
@@ -258,18 +318,6 @@
       <wsdl:output name="getLiczbaAtrybutowWKlasachResponse" message="tns:getLiczbaAtrybutowWKlasachResponse" wsam:Action="http://webService/ServiceSA/getLiczbaAtrybutowWKlasachResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaAtrybutowWKlasachResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLiczbaAtrybutow">
-      <wsdl:input name="getLiczbaAtrybutow" message="tns:getLiczbaAtrybutow" wsam:Action="urn:GetLiczbaAtrybutow" wsaw:Action="urn:GetLiczbaAtrybutow">
-    </wsdl:input>
-      <wsdl:output name="getLiczbaAtrybutowResponse" message="tns:getLiczbaAtrybutowResponse" wsam:Action="http://webService/ServiceSA/getLiczbaAtrybutowResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaAtrybutowResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getZbiorBibliotek">
-      <wsdl:input name="getZbiorBibliotek" message="tns:getZbiorBibliotek" wsam:Action="urn:GetZbiorBibliotek" wsaw:Action="urn:GetZbiorBibliotek">
-    </wsdl:input>
-      <wsdl:output name="getZbiorBibliotekResponse" message="tns:getZbiorBibliotekResponse" wsam:Action="http://webService/ServiceSA/getZbiorBibliotekResponse" wsaw:Action="http://webService/ServiceSA/getZbiorBibliotekResponse">
-    </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getLiczbaLiniiKodu">
       <wsdl:input name="getLiczbaLiniiKodu" message="tns:getLiczbaLiniiKodu" wsam:Action="urn:GetLiczbaLiniiKodu" wsaw:Action="urn:GetLiczbaLiniiKodu">
     </wsdl:input>
@@ -282,22 +330,16 @@
       <wsdl:output name="getLiczbaPlikowDanegoTypuResponse" message="tns:getLiczbaPlikowDanegoTypuResponse" wsam:Action="http://webService/ServiceSA/getLiczbaPlikowDanegoTypuResponse" wsaw:Action="http://webService/ServiceSA/getLiczbaPlikowDanegoTypuResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getRozmiaryPlikowKodow">
-      <wsdl:input name="getRozmiaryPlikowKodow" message="tns:getRozmiaryPlikowKodow" wsam:Action="urn:GetRozmiaryPlikowKodow" wsaw:Action="urn:GetRozmiaryPlikowKodow">
+    <wsdl:operation name="getZbiorWykorzystywanychAdresow">
+      <wsdl:input name="getZbiorWykorzystywanychAdresow" message="tns:getZbiorWykorzystywanychAdresow" wsam:Action="urn:GetZbiorWykorzystywanychAdresow" wsaw:Action="urn:GetZbiorWykorzystywanychAdresow">
     </wsdl:input>
-      <wsdl:output name="getRozmiaryPlikowKodowResponse" message="tns:getRozmiaryPlikowKodowResponse" wsam:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse" wsaw:Action="http://webService/ServiceSA/getRozmiaryPlikowKodowResponse">
+      <wsdl:output name="getZbiorWykorzystywanychAdresowResponse" message="tns:getZbiorWykorzystywanychAdresowResponse" wsam:Action="http://webService/ServiceSA/getZbiorWykorzystywanychAdresowResponse" wsaw:Action="http://webService/ServiceSA/getZbiorWykorzystywanychAdresowResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getSkrotyPlikow">
       <wsdl:input name="getSkrotyPlikow" message="tns:getSkrotyPlikow" wsam:Action="urn:GetSkrotyPlikow" wsaw:Action="urn:GetSkrotyPlikow">
     </wsdl:input>
       <wsdl:output name="getSkrotyPlikowResponse" message="tns:getSkrotyPlikowResponse" wsam:Action="http://webService/ServiceSA/getSkrotyPlikowResponse" wsaw:Action="http://webService/ServiceSA/getSkrotyPlikowResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getJezykInterfejsu">
-      <wsdl:input name="getJezykInterfejsu" message="tns:getJezykInterfejsu" wsam:Action="urn:GetJezykInterfejsu" wsaw:Action="urn:GetJezykInterfejsu">
-    </wsdl:input>
-      <wsdl:output name="getJezykInterfejsuResponse" message="tns:getJezykInterfejsuResponse" wsam:Action="http://webService/ServiceSA/getJezykInterfejsuResponse" wsaw:Action="http://webService/ServiceSA/getJezykInterfejsuResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -311,6 +353,87 @@
         <soap12:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getListaNazwPlikowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaPlikowDanegoRozszerzenia">
+      <soap12:operation soapAction="urn:GetLiczbaPlikowDanegoRozszerzenia" style="document"/>
+      <wsdl:input name="getLiczbaPlikowDanegoRozszerzenia">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLiczbaPlikowDanegoRozszerzeniaResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaZnakow">
+      <soap12:operation soapAction="urn:GetLiczbaZnakow" style="document"/>
+      <wsdl:input name="getLiczbaZnakow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLiczbaZnakowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListaNazwKatalogow">
+      <soap12:operation soapAction="urn:GetListaNazwKatalogow" style="document"/>
+      <wsdl:input name="getListaNazwKatalogow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getListaNazwKatalogowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZbiorWykorzystywanychPlikow">
+      <soap12:operation soapAction="urn:GetZbiorWykorzystywanychPlikow" style="document"/>
+      <wsdl:input name="getZbiorWykorzystywanychPlikow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getZbiorWykorzystywanychPlikowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="przeslijPlik">
+      <soap12:operation soapAction="urn:PrzeslijPlik" style="document"/>
+      <wsdl:input name="przeslijPlik">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="przeslijPlikResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLiczbaAtrybutow">
+      <soap12:operation soapAction="urn:GetLiczbaAtrybutow" style="document"/>
+      <wsdl:input name="getLiczbaAtrybutow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLiczbaAtrybutowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZbiorBibliotek">
+      <soap12:operation soapAction="urn:GetZbiorBibliotek" style="document"/>
+      <wsdl:input name="getZbiorBibliotek">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getZbiorBibliotekResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRozmiaryPlikowKodow">
+      <soap12:operation soapAction="urn:GetRozmiaryPlikowKodow" style="document"/>
+      <wsdl:input name="getRozmiaryPlikowKodow">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRozmiaryPlikowKodowResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJezykInterfejsu">
+      <soap12:operation soapAction="urn:GetJezykInterfejsu" style="document"/>
+      <wsdl:input name="getJezykInterfejsu">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJezykInterfejsuResponse">
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -341,12 +464,12 @@
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLiczbaPlikowDanegoRozszerzenia">
-      <soap12:operation soapAction="urn:GetLiczbaPlikowDanegoRozszerzenia" style="document"/>
-      <wsdl:input name="getLiczbaPlikowDanegoRozszerzenia">
+    <wsdl:operation name="getZbiorWykorzystywanychPortow">
+      <soap12:operation soapAction="urn:GetZbiorWykorzystywanychPortow" style="document"/>
+      <wsdl:input name="getZbiorWykorzystywanychPortow">
         <soap12:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="getLiczbaPlikowDanegoRozszerzeniaResponse">
+      <wsdl:output name="getZbiorWykorzystywanychPortowResponse">
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -377,33 +500,6 @@
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLiczbaZnakow">
-      <soap12:operation soapAction="urn:GetLiczbaZnakow" style="document"/>
-      <wsdl:input name="getLiczbaZnakow">
-        <soap12:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getLiczbaZnakowResponse">
-        <soap12:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getListaNazwKatalogow">
-      <soap12:operation soapAction="urn:GetListaNazwKatalogow" style="document"/>
-      <wsdl:input name="getListaNazwKatalogow">
-        <soap12:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getListaNazwKatalogowResponse">
-        <soap12:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="przeslijPlik">
-      <soap12:operation soapAction="urn:PrzeslijPlik" style="document"/>
-      <wsdl:input name="przeslijPlik">
-        <soap12:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="przeslijPlikResponse">
-        <soap12:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getLiczbaMetod">
       <soap12:operation soapAction="urn:GetLiczbaMetod" style="document"/>
       <wsdl:input name="getLiczbaMetod">
@@ -431,24 +527,6 @@
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLiczbaAtrybutow">
-      <soap12:operation soapAction="urn:GetLiczbaAtrybutow" style="document"/>
-      <wsdl:input name="getLiczbaAtrybutow">
-        <soap12:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getLiczbaAtrybutowResponse">
-        <soap12:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getZbiorBibliotek">
-      <soap12:operation soapAction="urn:GetZbiorBibliotek" style="document"/>
-      <wsdl:input name="getZbiorBibliotek">
-        <soap12:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getZbiorBibliotekResponse">
-        <soap12:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getLiczbaLiniiKodu">
       <soap12:operation soapAction="urn:GetLiczbaLiniiKodu" style="document"/>
       <wsdl:input name="getLiczbaLiniiKodu">
@@ -467,12 +545,12 @@
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getRozmiaryPlikowKodow">
-      <soap12:operation soapAction="urn:GetRozmiaryPlikowKodow" style="document"/>
-      <wsdl:input name="getRozmiaryPlikowKodow">
+    <wsdl:operation name="getZbiorWykorzystywanychAdresow">
+      <soap12:operation soapAction="urn:GetZbiorWykorzystywanychAdresow" style="document"/>
+      <wsdl:input name="getZbiorWykorzystywanychAdresow">
         <soap12:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="getRozmiaryPlikowKodowResponse">
+      <wsdl:output name="getZbiorWykorzystywanychAdresowResponse">
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -482,15 +560,6 @@
         <soap12:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getSkrotyPlikowResponse">
-        <soap12:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getJezykInterfejsu">
-      <soap12:operation soapAction="urn:GetJezykInterfejsu" style="document"/>
-      <wsdl:input name="getJezykInterfejsu">
-        <soap12:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getJezykInterfejsuResponse">
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

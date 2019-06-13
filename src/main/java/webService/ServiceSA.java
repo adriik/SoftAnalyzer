@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,50 +64,51 @@ public class ServiceSA {
 
 			String sciezka = this.getClass().getClassLoader().getResource("").getPath().split("WEB-INF")[0]
 					.substring(1).replace("%20", " ");
-
-			URL website = new URL(link);
-			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-			System.out.println("Zapisalem projekt pod sciezka:\n" + sciezka + "archiwum/" + wynik1[wynik1.length - 1]); // pelna
-																														// sciezka
-			FileOutputStream fos = new FileOutputStream(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
-			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-			fos.close();
-
-			try {
-				ZipFile zipFile = new ZipFile(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
-				zipFile.extractAll(sciezka + "archiwum" + "/"
-						+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
-			} catch (ZipException e) {
-				e.printStackTrace();
-				System.out.println("Cos poszlo nie tak podczas wypakowania!");
-			}
+			if(!paczkaProjektow.contains(wynik1[wynik1.length - 1])) {
+				URL website = new URL(link);
+				ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+				System.out.println("Zapisalem projekt pod sciezka:\n" + sciezka + "archiwum/" + wynik1[wynik1.length - 1]); // pelna
 			
-			Project projekt = new Project(wynik1[wynik1.length - 1], sciezka + "archiwum/"
-					+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
-			paczkaProjektow.addProject(projekt); // projekt o nazwie XXXXX.zip
-
-			SAXReader reader = new SAXReader();
-			Document document = null;
-			try {
-				document = reader.read(sciezka + "uploads/SAML.xmi");
-			} catch (DocumentException e) {
-				System.out.println("Błąd podczas wczytywania pliku XMI");
-				e.printStackTrace();
-			}
-
-			List<Node> nodeList = document.selectNodes("//*[name() = 'ownedAttribute']");
-
-			for (Node node : nodeList) {
-
-				Element element = (Element) node;
-				for (Cechy st : Cechy.values()) {
-					if (element.attributeValue("name").equals(st.name())) {
-						projekt.listaCech.add(st.name());
-						System.out.println(st.name());
-						break;
+			
+				FileOutputStream fos = new FileOutputStream(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
+				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+				fos.close();
+	
+				try {
+					ZipFile zipFile = new ZipFile(sciezka + "archiwum/" + wynik1[wynik1.length - 1]);
+					zipFile.extractAll(sciezka + "archiwum" + "/"
+							+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
+				} catch (ZipException e) {
+					//e.printStackTrace();
+					System.out.println("Cos poszlo nie tak podczas wypakowania! - pominąłem niektóre pliki");
+				}
+				
+				Project projekt = new Project(wynik1[wynik1.length - 1], sciezka + "archiwum/"
+						+ wynik1[wynik1.length - 1].substring(0, wynik1[wynik1.length - 1].lastIndexOf('.')));
+				paczkaProjektow.addProject(projekt); // projekt o nazwie XXXXX.zip
+			
+				SAXReader reader = new SAXReader();
+				Document document = null;
+				try {
+					document = reader.read(sciezka + "uploads/SAML.xmi");
+				} catch (DocumentException e) {
+					System.out.println("Błąd podczas wczytywania pliku XMI");
+					e.printStackTrace();
+				}
+	
+				List<Node> nodeList = document.selectNodes("//*[name() = 'ownedAttribute']");
+	
+				for (Node node : nodeList) {
+	
+					Element element = (Element) node;
+					for (Cechy st : Cechy.values()) {
+						if (element.attributeValue("name").equals(st.name())) {
+							projekt.listaCech.add(st.name());
+							System.out.println(st.name());
+							break;
+						}
 					}
 				}
-			}
 //			new Thread(new Runnable() {
 //	            @Override
 //	            public void run() {
@@ -128,7 +130,11 @@ public class ServiceSA {
 //	            }
 //	        }).start();
 			
-			return projekt.listaCech;
+				return projekt.listaCech;
+			}else {
+				System.out.println("Był już taki projekt - zwróciłem wcześniejsze wyniki");
+				return paczkaProjektow.getProject(wynik1[wynik1.length - 1]).listaCech;
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -353,10 +359,14 @@ public class ServiceSA {
 			LinkedList<AtrybutyPlikow> lista = new LinkedList<AtrybutyPlikow>();
 			
 			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
-				AtrybutyPlikow ap = new AtrybutyPlikow();
-				ap.nazwa = plik.nazwa;
-				ap.liczba = plik.liczbaAtrybutow;
-				lista.add(ap);
+				ArrayList<String> cRozszerzeniaPlikow = new ArrayList<String>(Arrays.asList("c", "h", "cpp", "cxx", "hxx", "cs", "java"));
+
+				if(cRozszerzeniaPlikow.contains(plik.rozszerzenie)) {
+					AtrybutyPlikow ap = new AtrybutyPlikow();
+					ap.nazwa = plik.nazwa;
+					ap.liczba = plik.liczbaAtrybutow;
+					lista.add(ap);
+				}
 			}
 			System.out.println("Udalo sie");
 			return lista;
@@ -382,7 +392,63 @@ public class ServiceSA {
 						lista.add(s);
 		        }
 			}
-			System.out.println("Udalo sie");
+			return lista;
+		}else {
+			return null;
+		}
+	}
+	
+	@WebMethod(operationName = "getZbiorWykorzystywanychPlikow", action = "urn:GetZbiorWykorzystywanychPlikow")
+	public ArrayList<String> getZbiorWykorzystywanychPlikow(@WebParam(name = "arg0") String nazwaProjektu){
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ZbiorBibliotekProperty.name())) {
+			ArrayList<String> lista = new ArrayList<String>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				for(String s : plik.zbiorWykorzystywanychPlikow)
+		        {
+					if (!lista.contains(s)) 
+						lista.add(s);
+		        }
+			}
+
+			return lista;
+		}else {
+			return null;
+		}
+	}
+	
+	@WebMethod(operationName = "getZbiorWykorzystywanychAdresow", action = "urn:GetZbiorWykorzystywanychAdresow")
+	public ArrayList<String> getZbiorWykorzystywanychAdresow(@WebParam(name = "arg0") String nazwaProjektu){
+		
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ZbiorBibliotekProperty.name())) {
+			ArrayList<String> lista = new ArrayList<String>();
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				for(String s : plik.zbiorWykorzystywanychAdresow)
+		        {
+					if (!lista.contains(s))
+						lista.add(s);
+		        }
+			}
+
+			return lista;
+		}else {
+			return null;
+		}
+	}
+	
+	@WebMethod(operationName = "getZbiorWykorzystywanychPortow", action = "urn:GetZbiorWykorzystywanychPortow")
+	public ArrayList<String> getZbiorWykorzystywanychPortow(@WebParam(name = "arg0") String nazwaProjektu){
+		if(paczkaProjektow.getProject(nazwaProjektu) != null && paczkaProjektow.getProject(nazwaProjektu).listaCech.contains(Cechy.ZbiorBibliotekProperty.name())) {
+			ArrayList<String> lista = new ArrayList<String>();
+			
+			for (Plik plik : paczkaProjektow.getProject(nazwaProjektu).listaPlikow) {
+				for(String s : plik.zbiorWykorzystywanychPortow)
+		        {
+					if (!lista.contains(s)) 
+						lista.add(s);
+		        }
+			}
+
 			return lista;
 		}else {
 			return null;

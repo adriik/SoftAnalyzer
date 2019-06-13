@@ -46,4 +46,13 @@ public class Pack {
 			}
 		}
 	}
+	
+	public Boolean contains(String nazwa) {
+		for (Project project : projectsList) {
+			if(project.getNazwa().equals(nazwa)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
